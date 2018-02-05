@@ -1,0 +1,20 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code>
+            <ol>       
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %>
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+                <li>case "<%=schemaName%>_<%=tableName%>_list_jTable":</li>
+                    <li>    $data["Result"]="OK";</li>
+                    <li>    $data["Records"]=$this->db-><%=funcName%>List();</li>
+                    <li>    $data["TotalRecordCount"]=$this->db-><%=funcName%>Count();</li>
+                    <li>    echo json_encode($data);</li>
+                <li>break;</li>
+<% } %>                 
+            </ol>
+        </code>    
+      </pre> 
+</script>
+

@@ -1,0 +1,58 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+<ol>
+    <li>$allowedFields = [];                                                                                            </li>
+    <li>switch ($action) {</li>
+    <li>        case "lookup_jTable":</li>
+    <li>            $pkeyId = (isset($_POST["id"]))</li>
+    <li>                    ?addslashes(trim($_POST["id"]))</li>
+    <li>                    :die("Id not present");</li>
+    <li>            </li>
+    <li>            $tableName = (isset($_POST["tableName"]))</li>
+    <li>                    ?addslashes(trim($_POST["tableName"]))</li>
+    <li>                    :die("table not present");</li>
+    <li>            
+    <li>            $schemaName = (isset($_POST["schemaName"]))</li>
+    <li>                    ?addslashes(trim($_POST["schemaName"]))</li>
+    <li>                    :die("schema not present");</li>
+    <li>            
+    <li>            $fieldName = (isset($_POST["fieldName"]))</li>
+    <li>                    ?addslashes(trim($_POST["fieldName"]))</li>
+    <li>                    :die("schema not present");</li>
+    <li>            </li>
+    <li>            $key = "{$schemaName},{$tableName},{$fieldName}";</li>
+    <li>            </li>
+    <li>            if (key_exists($key, $allowedFields)){</li>
+    <li>                $data["Result"]="OK";</li>
+    <li>                $data["Records"] = $this->db->getJTableLookupOptions($schemaName,$tableName,$fieldName,$pkeyId);</li>
+    <li>            }else{</li>
+    <li>                $data["Result"]="ERROR";</li>
+    <li>                $data["Message"]="Selecting this field is not allowed";</li>
+    <li>            }</li>
+    <li>            echo json_encode($data);</li>
+<li></li>
+    <li>            break;</li>
+    <li>        </li>
+    <li>    }</li>
+<li>-----------------------------------------------------------------------------------------------------------------</li>
+        
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+      var schemaName=selectedTables[i].schema;              
+      var tableName=selectedTables[i].table;                
+      var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,false); 
+      for ( var j = 0; j < allAttribs.length; j++ ) { 
+            var fieldName = allAttribs[j]; 
+            var fieldId=schemaName+","+tableName+","+fieldName ;
+            %><li>$allowedFields[]="<%=fieldId%>";</li><%
+      } 
+    }
+ %>
+    
+
+  
+</ol>
+   </code>
+    </pre>
+ </script>

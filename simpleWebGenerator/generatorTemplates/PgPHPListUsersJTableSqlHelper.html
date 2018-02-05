@@ -1,0 +1,56 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code class="sql php">
+<ol>
+<%
+    for ( var i = 0; i < selectedTables.length; i++ ) { 
+       var schemaName = selectedTables[i].schema;              
+       var tableName = selectedTables[i].table;   
+       var fieldNames = generator.getTableFieldNamesArr(schemaName,tableName,false);
+       
+       var userFields = genericHelper.getIntersectionItemsOfUniqueArray(userFieldNamesAllowed,fieldNames);
+       if (userFields != null && userFields.length>0){
+            %><li>#<%=schemaName%>.<%=tableName%></li><%
+            for (var j = 0; j < userFields.length ; j++){
+                %><li>      <%=userFields%>= <%="'"%>{$this->userId}<%="'"%></li><%
+            }
+       }else{
+            var fKeyNames = generator.getFKeyNames(schemaName,tableName);
+            if (fKeyNames == null || fKeyNames.length===0) continue;
+            
+            for (var j = 0; j < fKeyNames.length ; j++){
+                var fKeyName = fKeyNames[j];
+                
+                var srcTableSch = generator.getFKeySrcTable(schemaName,tableName,fKeyName);
+                var srcTableFieldNames = generator.getTableFieldNamesArr(srcTableSch.schema, srcTableSch.table, false);
+                 
+                var userFieldsInSrcTable = genericHelper.getIntersectionItemsOfUniqueArray(userFieldNamesAllowed,srcTableFieldNames);
+                
+                var sqlMask = "( (#fKeyFields#) in ( select #pKeyFields# from #srcTable# where #userField# = {$this->userId} ))";
+
+                if (userFieldsInSrcTable != null && userFieldsInSrcTable.length>0){
+                    %><li>#<%=schemaName%>.<%=tableName%> </li><%
+                    for (var k = 0;  k < userFieldsInSrcTable.length ; k++){
+                        var userField = userFieldsInSrcTable[k];
+                        var fKeyFieldsSrc = generator.getFKeyFieldNames(schemaName,tableName,fKeyName,true);
+                        var fKeyFieldsDest = generator.getFKeyFieldNames(schemaName,tableName,fKeyName,false);
+                        var sql = sqlMask;
+                            sql = sql.replace("#fKeyFields#",fKeyFieldsDest.join(","));
+                            sql = sql.replace("#pKeyFields#",fKeyFieldsSrc.join(","));
+                            sql = sql.replace("#srcTable#", srcTableSch.schema+"."+srcTableSch.table );
+                            sql = sql.replace("#userField#", userField );
+                        %><li>     <%=sql%> </li><%
+                    }
+                } 
+                
+            }
+            
+       }
+    } 
+%>
+</ol>
+   </code>
+    </pre>
+ </script>
+
+ 

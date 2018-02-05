@@ -1,0 +1,43 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code lang="sql">
+            <ol>       
+<%
+
+
+
+%>
+
+
+<ol>        
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;     
+       var pkeyFields = generator.getPkeyFieldNames(schemaName, tableName);
+       var fields = generator.getTableFieldNamesArr(schemaName, tableName, true);
+       var fieldIds = new Array();
+           fieldIds = fieldIds.concat(pkeyFields);
+%>
+
+<li>CREATE OR REPLACE FUNCTION <%=schemaName%>_<%=tableName%>_delete (p_<%=pkeyFields[0]%> integer) RETURNS varchar AS</li>
+<li>$body$</li>
+<li>BEGIN</li>
+<li>	delete from <%=schemaName%>.<%=tableName%></li>
+<li>	where <%=pkeyFields[0]%>=:p_<%=pkeyFields[0]%>; </li>
+<li>  	return &apos;Successfully deleted&apos;;</li>
+<li>END;</li>
+<li>$body$</li>
+<li>LANGUAGE &apos;plpgsql&apos;</li>
+<li>VOLATILE </li>
+<li>SECURITY INVOKER</li>
+<li>COST 100;</li>
+
+ 
+<% } %>
+</ol>
+
+            </ol>
+        </code>    
+      </pre> 
+</script>

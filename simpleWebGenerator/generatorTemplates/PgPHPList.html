@@ -1,0 +1,20 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code>
+            <ol>       
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %>
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     console.log(schemaName+'.'+tableName);%>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+                <li>case "<%=schemaName%>_<%=tableName%>_list":</li>
+                    <li>   //if (!defined(APP_NAME)) die ("application not set");</li>
+                    <li>    $data["data"]=$this->db-><%=funcName%>List();</li>
+                    <li>    echo json_encode($data);</li>
+                <li>break;</li>
+<% } %>                 
+            </ol>
+        </code>    
+      </pre> 
+</script>
+

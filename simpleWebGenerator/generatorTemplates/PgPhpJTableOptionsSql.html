@@ -1,0 +1,33 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+        <code class="hljs  php">
+           <ol
+                <li>class ProjectSql{</li>
+                <li>    var $db=new DatabaseConnection();</li>
+
+<%
+  var lookupTableNames = generator.getLookupTableNames();
+  for ( var i = 0; i < lookupTableNames.length; i++ ) {    
+        var tableObj = lookupTableNames[i];
+        var tableName = tableObj.table;
+        var schemaName = tableObj.schema;
+        var funcName = generator.getFunctionName(schemaName,tableName,false);   
+        var pKey = generator.getPkeyFieldNames(schemaName,tableName)[0];
+        var lookupField = generator.getFirstVarcharField(schemaName,tableName);
+        if (lookupField == null ) lookupField = generator.getLookupFields(schemaName,tableName)[0];
+       %> 
+        <li>public function <%=funcName%>OptionsJTable(){</li> 
+        <li>    $sql="select <%=pKey%> as  \\&quot;Value\\&quot;</li>
+        <li>         , <%=lookupField%> as \\"DisplayText\\"   </li>
+        <li>         from  <%=schemaName%>.<%=tableName%>";</li>
+        <li>    $this->db->setQuery($sql);</li>
+        <li>    return $this->db->sql2matrix();</li>
+        <li>}</li>
+        <% 
+   }
+%>               
+           <li>}</li>
+           </ol>
+        </code>
+    </pre>
+</script>

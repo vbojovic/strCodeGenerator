@@ -1,0 +1,58 @@
+<script id="funcList-template" type="text/x-handlebars-template">
+    {{#each functions}}
+        <li class='funcClass' data-key='{{funcName}}'><a data-key='{{funcName}}'>{{name}}</a></li>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+
+    //TODO argumente moram naknadno ugnjezdit po potrebi
+
+    
+    $(document).ready(function() {
+        $("#searchFunctions").change(function(){
+                var funcListTemplate = Handlebars.compile($("#funcList-template").html());
+               //console.log(generator.getFunctionList());
+
+               var kwds = $("#searchFunctions").val();
+               $("#funcListUl").html(funcListTemplate(generator.getFunctionListByKeywords(kwds))); 
+               //$("#funcListUl").html(funcListTemplate(generator.getFunctionList())); 
+               //TODO moram napravit da se reagira na search botun. al zasad to moze cekat
+               $("#funcListUl").unbind('click');
+               $("#funcListUl").find("li").each(function(index,el){
+                    //console.log( index + ": " + $( this ).text() );
+                    $( el ).unbind('click');
+                    $( el ).click(function(){
+                       var tablesSchemas = uiHelper.getCheckedCheckboxTexts('tablesUl');
+                       var functionTitle =  $( el ).text();
+                       var functionKey = $(el).attr('data-key');
+                       var func = generator.getFunctionDataByKey(functionKey);
+                       //console.log(tablesSchemas);
+                       //console.log(functionKey);
+                       generator.setSelectedTableNamesBySchTbl(tablesSchemas);
+                       /*
+                       switch(func.method){
+                           case "tStr":
+                               break;
+                           case "str":
+                               break;
+                           case "tmp":
+                               break;
+                       }
+                       if (func.method == 'str'){
+                           generator.generateCodeD(functionKey,tablesSchemas,'templateDiv');
+                       }else { if()
+                       */
+                       $('#templateDiv').html('');
+                       $('#codeDiv').html('');
+                       generator.generateCode(functionKey,tablesSchemas,'templateDiv');
+
+                       $('pre code').each(function(i, e) {hljs.highlightBlock(e)});  
+                       //generator.generateCodeDirect(functionKey,tablesSchemas,'templateDiv');
+                       //generator izminit da uzima tablice drugacije
+                    });
+               });    
+        });
+       $("#searchFunctions").change();
+    });
+</script>

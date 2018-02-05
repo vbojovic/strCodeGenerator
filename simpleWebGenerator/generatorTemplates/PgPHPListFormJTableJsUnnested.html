@@ -1,0 +1,148 @@
+<!--
+forma mora zatrazit json i javit gresku ukoliko do nje dodje.
+ukoliko nema greske taj json treba  popunit polja koji morau imat IDove prema shemi-tablici-polju
+treba provbjerit za svako polje je li kompozitni constraint ili jednostavni.
+forma mora bit napravljena vamo, a punot se aktivnoscu ispod koja ce se desit na klik neki koji ovdi mora bit definiran
+ista stavar mora vridit i za EDIT.
+
+za svako polje mroam stavit labele kod viewa, a onda omogucit edit ili delete ili print
+-->
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol>
+<li>&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;                                               </li>
+<li>    &lt;meta charset=&quot;utf-8&quot;&gt;                                                                                                  </li>
+<li>    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;                                                         </li>
+<li>    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;                                          </li>
+<li>    &lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;                                                                          </li>
+<li>    &lt;meta name=&quot;author&quot; content=&quot;&quot;&gt;                                                                               </li>
+<li>    &lt;link href=&quot;js/jtable.2.4.0/themes/metro/green/jtable.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;  </li>
+<li>    &lt;script src=&quot;../cssJs/jquery.js&quot;&gt;&lt;/script&gt;                                                                        </li>
+<li>    &lt;script src=&quot;./js/jquery-ui-1.11.0/jquery-ui.min.js&quot;&gt;&lt;/script&gt;                                                    </li>
+<li>    &lt;script src=&quot;js/jtable.2.4.0/jquery.jtable.js&quot;&gt;&lt;/script&gt;                                                          </li>
+<li>--------------------------------------</li>
+   
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;                
+       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+%>
+    <li>    &lt;script id=&quot;<%=funcName%>List-template&quot; type=&quot;text/x-handlebars-template&quot;&gt;</li>
+    <li>        &lt;div id=&quot;<%=funcName%>TableContainer&quot;&gt;&lt;/div&gt;</li>
+    <li>    &lt;/script&gt;</li>
+<% 
+    } 
+%>
+
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;                
+       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+       var actionName = generator.getFunctionName(schemaName,tableName,true);               
+       var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,false); 
+       var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName); %>
+
+<li>        $(document).ready(function () {</li>
+<li>         $('#<%=funcName%>TableContainer').jtable({          </li>
+<li>           title: "<%=funcName%> List",               </li>
+<li>           paging: true, //Enable paging              </li>
+<li>           sorting: true, //Enable sorting            </li>
+<li>           defaultSorting: "<%=allAttribs[0]%> ASC",      </li>
+<li>           openChildAsAccordion: true,   </li>
+<li>           actions: {                                                                               </li>
+<li>               listAction: "./main.php?a=<%=actionName%>_list_jTable",                 </li>
+<li>               deleteAction: "./main.php?a=<%=actionName%>_delete_jTable",                </li>
+<li>               updateAction: "./main.php?a=<%=actionName%>_update_jTable",             </li>
+<li>               createAction: "./main.php?a=<%=actionName%>_insert_jTable"                    </li>
+<li>           },                                                                                       </li>
+<li>           fields: {    </li>            
+    
+     <%
+         
+         for ( var j = 0; j < allAttribs.length; j++ ) { 
+               var fieldName = allAttribs[j]; 
+               var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); 
+               var fieldId="FIELD_"+schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+fieldName.toUpperCase() ;
+               var isPartOfPkey =  $.inArray(fieldName, attribsInPkey) > -1; 
+               var isPartOfFKey = generator.isFieldPartOfFKey(schemaName,tableName, fieldName);
+               if (isPartOfPkey == true){
+                    %><li>               <%=fieldName%>:{ key : true , create: false, edit: false, list: false},</li><%
+               }else if (isPartOfFKey==false){
+                    %><li>               <%=fieldName%>:{ title: LANG["<%=fieldId%>"] ,  <%
+                    switch (fieldDataType){
+                        case "varchar" :
+                            %> width:"20%"<%
+                        break;
+                        case "integer" :
+                            %> width:"20%"<%
+                        break;
+                        case "double" :
+                            %> width:"20%"<%
+                        break;
+                        case "bool" :
+                            %> width:"12%",type: "checkbox"<%
+                        break;
+                        case "date" :
+                            %> width:"30%", type: "date", displayFormat: "yy-mm-dd"<%
+                        break;
+                        case "timestamp" :
+                            %> width:"30%", type: "date", displayFormat: "yy-mm-dd"<%
+                        break;
+                    }
+                    %>},</li><%
+               }else if (isPartOfFKey==true) {
+               
+                    var srcTable = generator.getFKeySrcTableByField(schemaName,tableName,fieldName);
+                    var isSrcTableLookupTable =generator.isLookupTable(srcTable.schema,srcTable.table);
+                    var srcTableName = srcTable.schema.toUpperCase()+"_"+srcTable.table.toUpperCase();
+                    var funcName = srcTable.schema.toLowerCase()+"_"+srcTable.table.toLowerCase();
+                    if (isSrcTableLookupTable == true) {
+                        %><li>              <%=fieldName%>:{ title: LANG["<%=fieldId%>"] ,width : "20%" , options: "main.php?a=<%=funcName%>_options_jTable"  },</li><% 
+                    }else{
+                        %><li>              <%=fieldName%>:{ key: true,create: false, edit: false, list: false  },</li><% 
+                    }
+                    
+               }
+         } 
+         
+         
+    %>
+    
+    
+<li>           }    </li>       
+    
+<li>         }); </li>
+ 
+<li>             $("#<%=funcName%>TableContainer").jtable("load");</li>
+        
+<li>        }); </li>    
+
+<% } %>    
+  
+  
+ 
+</ol>
+           
+   </code>
+    </pre>
+ </script>
+
+<script type="text/html" id="user_tmpl1">
+      <pre>
+       <code>
+            <ol>       
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %>
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+                <li>case "<%=schemaName%>_<%=tableName%>_list_jTable":</li>
+                <li>break;</li>
+<% } %>                 
+            </ol>
+        </code>    
+      </pre> 
+</script>
+

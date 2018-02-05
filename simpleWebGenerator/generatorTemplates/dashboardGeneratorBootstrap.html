@@ -1,0 +1,70 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs javascript xml">
+           <ol>
+
+               <li>&lt;ul class=&quot;nav nav-sidebar&quot;&gt;</li>
+              <li>&lt;li&gt;&lt;a id=&quot;DASHBOARD_MENU_ITEM&quot;&gt;DASHBOARD_MENU_ITEM&lt;/a&gt;&lt;/li&gt;</li>
+              <li>&lt;ul&gt;</li>
+               
+<%        for (var j=0 ; j<searchableSections.length; j++){ %>               
+               <li>&lt;div class=&quot;row placeholders&quot;&gt;</li>
+            
+               
+       
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>  
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+<%     var menuTitle=schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+searchableSections[j].toUpperCase();              %>
+<%     var menuDescr=schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+searchableSections[j].toUpperCase()+"_DESCRIPTION";              %>
+<%            var sectionName =genericHelper.capitalizeFirstLetter(genericHelper.getFunctionName('',searchableSections[j],false)); %>
+    <%  if (i%4 ==0 ){%>
+        <% if (i!=0) { %>
+            <li> &lt;/div&gt; </li>
+        <% } %>
+        <li> &lt;div class=&quot;row placeholders&quot;&gt;</li>
+    <% }%>
+    
+<%   var classId = "DASHBOARD_MENU_ITEM_"+menuTitle; %>
+    <li>         &lt;div class=&quot;col-xs-6 col-sm-3 placeholder <%=classId%>&quot;&gt;</li>
+    <li>          &lt;img alt=&quot;200x200&quot; class=&quot;img-responsive <%=classId%>&quot; src=&quot;cssJs/blue.svg&quot; id=&quot;<%=classId%>&quot;&gt;</li>
+    <li>          &lt;h4 class="<%=classId%>"&gt;<%=menuTitle %>&lt;/h4&gt;</li>
+    <li>          &lt;span class=&quot;text-muted <%=classId%>&quot;&gt;<%=menuDescr%>&lt;/span&gt;</li>
+    <li>        &lt;/div&gt;</li>
+<%        } %>
+
+<% } %>              
+
+
+<li>&lt;script type=&quot;text/javascript&quot;&gt;</li>
+
+               <li>$(document).ready(function() {           </li>
+               <li>         $("#DASHBOARD_MENU_ITEM").click(function(){ </li>
+               <li>             $("#mainDiv").load("dashboard.html"); </li>
+               <li>        }); </li>
+               
+               
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %>                
+<%        var tableName=selectedTables[i].table;                %>      
+<%        var schemaName=selectedTables[i].schema;              %>
+<%        for (var j=0 ; j<searchableSections.length; j++){ %>                   
+<%           var sectionName =genericHelper.capitalizeFirstLetter(genericHelper.getFunctionName('',searchableSections[j],false)); %>
+<%           var menuTitle=schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+searchableSections[j].toUpperCase();              %>    
+<%           var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+<%           var classId = "DASHBOARD_MENU_ITEM_"+menuTitle; %>               
+    <li>    $(".<%=classId%>").click(function(){ </li>
+    <li>        $("#mainDiv").html(<%=funcName%><%=sectionName%>Template());   </li>
+    <li>    }); </li>
+<%        } %>               
+<% } %>                       
+               
+                <li>});     </li>
+                <li>&lt;/script&gt;</li>
+           </ol>
+           
+        </code>    
+      </pre> 
+</script>
+
+

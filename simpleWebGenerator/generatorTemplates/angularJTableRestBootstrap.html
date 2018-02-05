@@ -1,0 +1,542 @@
+<script type="text/html" id="user_tmpl">
+<!--    <button type="button" class="copy btn btn-success">1</button>
+    <button type="button" class="copy btn btn-success">2</button>-->
+    <pre>
+       <code lang="html css javascript js">
+       
+<ol> 
+        <li>&lt;head></li>
+        <li>&lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot; type=&quot;text/javascript&quot;>&lt;/script></li>
+        <li>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js">&lt;/script></li>
+        <li>&lt;link href=&quot;bootstrap3state.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/></li>
+        <li>&lt;link href=&quot;bootstrap3stateRadio.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/></li>
+        <li>&lt;link href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; integrity=&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot; crossorigin=&quot;anonymous&quot;/></li>
+        <li>&lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"  crossorigin="anonymous">&lt;/script></li>
+        <li>&lt;script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js" type="text/javascript">&lt;/script></li>
+        <li>&lt;script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js" type="text/javascript">&lt;/script></li>
+        <li>&lt;link href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/></li>
+        <li>&lt;script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js">&lt;/script></li>
+
+        <li>&lt;script type="text/javascript">  </li>
+        <li>var app = angular.module(&apos;myApp&apos;,[]);</li>
+        <li>&lt;/script></li>
+    <li>&lt;/head></li>
+    <li>&lt;body ng-app="myApp"></li>
+<% 
+ /*<script type="text/javascript">*/
+        var code = [];
+        for (var i = 0; i < selectedTables.length; i++) {
+            var schemaName = selectedTables[i].schema;
+            var tableName = selectedTables[i].table;
+            var schTable = schemaName + genericHelper.capitalizeFirstLetter(tableName);
+            var SchTable = genericHelper.capitalizeFirstLetter(schemaName) 
+                         + genericHelper.capitalizeFirstLetter(tableName);
+                 
+            var line = "&lt;div class=&quot;container "+schTable+"Container&quot; ng-controller=&quot;"+schTable+"Controller&quot; ng-show=&quot;visible&quot;>";
+            line = line.replace(/schTable/g, schTable);
+            code.push(line);
+            code.push("&lt;div class=&quot;filtering&quot; ng-show=&quot;includeFilters&quot;>");
+            /* console.log(line); */
+            var fields = generator.getTableFields(schemaName, tableName, true);
+            for (var j = 0; j < fields.length; j++) {
+                var field = fields[j];
+                if (generator.isUserField(field.fieldName))
+                    continue;
+                var isFk = generator.isFieldPartOfFKey(schemaName, tableName, field.fieldName);
+                var gType = field.genericDataType.trim();
+                var types = generator.genericDataTypes;
+                var name = field.fieldName.trim();                
+                if (isFk) {
+                    var foreignTable = generator.getFKeySrcTableByField(schemaName, tableName, name);
+                    var FTable = genericHelper.capitaliseFirstLetter(foreignTable.schema)
+                               + genericHelper.capitaliseFirstLetter(foreignTable.table) ;
+                        
+                    var quotedValue = (gType == types.str)
+                        ? generator.doubleQuoteStrEntity("{{x.Value}}")
+                        : "{{x.Value}}";
+                    code.push("&lt;div class=&quot;dropdown&quot;>");
+                    code.push("&lt;button class=&quot;btn btn-default dropdown-toggle&quot; type=&quot;button&quot; id=&quot;" + name + "&quot; data-toggle=&quot;dropdown&quot;>"+name);
+                    code.push("&lt;span class=&quot;caret&quot;>&lt;/span>&lt;/button>");
+                    code.push("&lt;ul class=&quot;dropdown-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;" + name + "&quot;>");
+                    code.push("&lt;li role=&quot;presentation&quot;>&lt;a role=&quot;menuitem&quot; ng-click=&quot;setter(&apos;" + name + "&apos;,null)&quot; tabindex=&quot;-1&quot; href=&quot;#&quot;>----&lt;/a>&lt;/li>");
+                    code.push("&lt;li ng-repeat=&quot;x in " + name + "s&quot; role=&quot;presentation&quot;>&lt;a role=&quot;menuitem&quot; ng-click=&quot;setter(&apos;" + name + "&apos;," + quotedValue + ")&quot; tabindex=&quot;-1&quot; href=&quot;#&quot;>{{x.DisplayText}}&lt;/a>&lt;/li>");
+                    code.push("&lt;/ul>");
+                    code.push("&lt;/div>");
+                } else {
+                    var numArr = types.getNumbers();
+                    if (numArr.indexOf(gType)>-1){
+                        code.push("&lt;label for=&quot;" + name + "From&quot; class=&quot;sr-only&quot;>" + name + " from&lt;/label>");
+                        code.push("&lt;p>");
+                        code.push("    &lt;label for=&quot;" + name + "&quot;>" + name + " range:&lt;/label>");
+                        code.push("    &lt;input type=&quot;text&quot; id=&quot;" + name + "&quot; readonly style=&quot;border:0; color:#f6931f; font-weight:bold;&quot;>");
+                        code.push("&lt;/p>");
+                        code.push("&lt;div id=&quot;slider-range" + name + "&quot;>&lt;/div>");
+                    } else if (gType==types.date || gType==types.tstamp){
+                        code.push("&lt;p>&nbsp;&lt;/p>");
+                        code.push("&lt;p>");
+                        code.push("    &lt;label for=&quot;" + name + "From&quot;>" + name + " From&lt;/label>");
+                        code.push("    &lt;input type=&quot;text&quot; id=&quot;" + name + "From&quot; name=&quot;" + name + "From&quot;>");
+                        code.push("    &lt;label for=&quot;" + name + "To&quot;>to&lt;/label>");
+                        code.push("    &lt;input type=&quot;text&quot; id=&quot;" + name + "To&quot; name=&quot;" + name + "To&quot;>");
+                        code.push("&lt;/p>");
+                    } else if (types.getTexts().indexOf(gType)>-1){
+                        if (name == 'pass' || name=='password'){
+                            code.push("&lt;p>");
+                                code.push("&lt;div class=&quot;form-group row&quot;>");
+                                  code.push("&lt;label for=&quot;"+name+"&quot; class=&quot;col-2 col-form-label&quot;>"+name+"&lt;/label>");
+                                  code.push("&lt;div class=&quot;col-10&quot;>");
+                                    code.push("&lt;input class=&quot;form-control&quot; type=&quot;password&quot;  ng-model=&quot;"+name+"&quot;  id=&quot;"+name+"&quot;>");
+                                  code.push("&lt;/div>");
+                                code.push("&lt;/div>");
+                            code.push("&lt;/p>");
+                        }else{
+                            code.push("&lt;p>");
+                                code.push("&lt;div class=&quot;form-group row&quot;>");
+                                  code.push("&lt;label for=&quot;"+name+"&quot; class=&quot;col-2 col-form-label&quot;>"+name+"&lt;/label>");
+                                  code.push("&lt;div class=&quot;col-10&quot;>");
+                                    code.push("&lt;input class=&quot;form-control&quot; type=&quot;text&quot;  ng-model=&quot;"+name+"&quot;  id=&quot;"+name+"&quot;>");
+                                  code.push("&lt;/div>");
+                                code.push("&lt;/div>");
+                            code.push("&lt;/p>");
+                        }
+                        /*
+                        code.push("&lt;p>");
+                        code.push("&lt;label for=&quot;"+name+"&quot;>"+name+"&lt;/label>");
+                        code.push("&lt;/p>");
+                        code.push("&lt;p>");
+                        code.push("&lt;input type=&quot;text&quot; id=&quot;"+name+"&quot; class=&quot;form-control&quot;   name=&quot;"+name+"&quot; ng-model=&quot;"+name+"&quot;> ");
+                        code.push("&lt;/p>");*/
+                    } else if (gType==types.time){
+                        code.push("&lt;div id=&quot;time-range&quot;>");
+                        code.push("    &lt;p>Time Range: &lt;span class=&quot;slider-time&quot;>9:00 AM&lt;/span> - &lt;span class=&quot;slider-time2&quot;>5:00 PM&lt;/span>");
+                        code.push("    &lt;/p>");
+                        code.push("    &lt;div class=&quot;sliders_step1&quot;>");
+                        code.push("        &lt;div id=&quot;" + name + "&quot;>&lt;/div>");
+                        code.push("    &lt;/div>");
+                        code.push("&lt;/div>"); 
+                    } else if (gType==types.boolean){ /*https://css-tricks.com/indeterminate-checkboxes/*/
+                        code.push("&lt;p>");
+                        code.push("&lt;div class=&quot;btn-group&quot; data-toggle=&quot;buttons&quot;>");
+                        code.push("    &lt;label>" + name + "&lt;/label>");
+                        code.push("    &lt;label class=&quot;btn btn-success active&quot;>");
+                        code.push("        &lt;input type=&quot;radio&quot; name=&quot;"+name+"&quot;  ng-model=&quot;"+name+"&quot; value=&quot;1&quot; id=&quot;"+name+"&quot; autocomplete=&quot;off&quot; >");
+                        code.push("        &lt;span class=&quot;glyphicon glyphicon-ok&quot;>&lt;/span>");
+                        code.push("    &lt;/label>");
+                        code.push("    &lt;label class=&quot;btn  btn-gray&quot;>");
+                        code.push("        &lt;input type=&quot;radio&quot; name=&quot;"+name+"&quot;  ng-model=&quot;"+name+"&quot; value=&quot;&quot;  id=&quot;"+name+"&quot; autocomplete=&quot;off&quot; checked>");
+                        code.push("        &lt;span class=&quot;glyphicon glyphicon-minus&quot;>&lt;/span>");
+                        code.push("    &lt;/label>");
+                        code.push("    &lt;label class=&quot;btn btn-danger&quot;>");
+                        code.push("        &lt;input type=&quot;radio&quot; name=&quot;"+name+"&quot;  ng-model=&quot;"+name+"&quot; value=&quot;0&quot;  id=&quot;"+name+"&quot; autocomplete=&quot;off&quot;>");
+                        code.push("        &lt;span class=&quot;glyphicon glyphicon-remove&quot;>&lt;/span>");
+                        code.push("    &lt;/label>");
+                        code.push("&lt;/div>");
+                        code.push("&lt;/p>");
+                    } else {
+                        console.log("GTYPE ERROR"+name+" "+gType);
+                    }
+                }
+
+                /*code.push(fields[j].fieldName);*/
+            }
+                code.push("&lt;button id=&quot;LoadRecordsButton&quot; ng-click=&quot;filterClick()&quot;>Search</button>");
+            
+            code.push("&lt;/div>");
+            code.push("&lt;div class=&quot;"+schTable+"JTDiv&quot;>&lt;/div>");
+            code.push("&lt;/div>");
+            code.push("\n");
+        }
+        
+        for (var i = 0; i < code.length; i++) {
+            %> <li> <%= code[i] %></li><%
+        }
+
+%>
+        </ol>
+    </code>
+
+    <code lang="html css javascript js">   
+        <ol>
+<%
+        code=[];
+        for (var i = 0; i < selectedTables.length; i++) {
+            code.push("/*-------------------------------------------------------------"+selectedTables[i].table+"Controller.js-------------------------------------------------------------------------------*/");
+            var schemaName = selectedTables[i].schema;
+            var tableName = selectedTables[i].table;
+            var schTable = schemaName + genericHelper.capitalizeFirstLetter(tableName);   
+            var SchTable = genericHelper.capitalizeFirstLetter(schemaName) + genericHelper.capitalizeFirstLetter(tableName);  
+            /*
+                var isFk = generator.isFieldPartOfFKey(schemaName, tableName, field.fieldName);
+                var gType = field.genericDataType.trim();
+                var types = generator.genericDataTypes;
+                var name = field.fieldName;                
+                if (isFk) {
+                    var foreignTable = generator.getFKeySrcTable(schemaName, tableName, name);
+                    var setterName = generator.getSetterName(name);
+                  */  
+            code.push("app.controller(&quot;"+schTable+"Controller&quot;, [&quot;$scope&quot;, &quot;$rootScope&quot;, &quot;$http&quot;, &quot;$window&quot;, function ($scope, $rootScope, $http, $window) {");
+                code.push("\t$scope.visible = false;");
+                code.push("\t$scope.debug = false;");
+                code.push("\t$scope.includeFilters = true;");       
+                code.push("\t$scope.data = {};");   
+                code.push("\t$scope.statistics = {};");  
+                
+                var fields = generator.getTableFields(schemaName, tableName, true);
+                
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    if (generator.isUserField(field.fieldName))
+                        continue;
+                    code.push("\t$scope."+field.fieldName+"=null;");
+                    if (generator.isFieldPartOfFKey(schemaName,tableName,field.fieldName)){
+                        code.push("\t$scope."+field.fieldName+"s=[];");
+                    }else {
+                        if (generator.isFieldNumeric(schemaName,tableName,field.fieldName) || generator.isFieldDateOrTime(schemaName,tableName,field.fieldName)){
+                            code.push("\t$scope."+field.fieldName+"$min=null;");
+                            code.push("\t$scope."+field.fieldName+"$max=null;");
+                        }
+                    }
+                }
+                
+                code.push("         $scope.setter=function(varName,value){");
+                code.push("             $scope[varName]=value;");
+                code.push("         };");
+                code.push("        $scope.$watch(&quot;visible&quot;, function () {");
+                code.push("            if ($scope.visible == false)");
+                code.push("                return;");
+                code.push("            $scope.init();");
+                code.push("        });");    
+                
+                code.push("        $scope.hide = function () {");
+                code.push("            if ($scope.visible == true)");
+                code.push("                $scope.visible = false;");
+                code.push("        };");
+                
+                code.push("        $scope.unhide = function () {");
+                code.push("            if ($scope.visible == false)");
+                code.push("                $scope.visible = true;");
+                code.push("        };");
+                
+                code.push("        $scope.$on(&quot;unhide"+SchTable+"Controller&quot;, function (event, data) {");
+                code.push("            if ($scope.debug) {");
+                code.push("                console.log(&quot;-------------------&quot;);");
+                code.push("                console.log(&quot;"+SchTable+"Controller: UNHIDE&quot;);");
+                code.push("            }");
+                code.push("            $scope.unhide();");
+                code.push("        });");
+                
+                code.push("        $scope.$on(&quot;hide"+SchTable+"Controller&quot;, function (event, data) {");
+                code.push("            if ($scope.debug) {");
+                code.push("                console.log(&quot;-------------------&quot;);");
+                code.push("                console.log(&quot;"+SchTable+"Controller: HIDE&quot;);");
+                code.push("            }");
+                code.push("            $scope.hide();");
+                code.push("        });");
+                
+                /*
+                var hasNums = generator.tableHasNumericFields(schemaName, tableName,true);
+                var hasDates = generator.tableHasDateFields(schemaName, tableName,true);
+                if (){
+                    console.log('BOGARETI ovaj ima numerika');
+                }
+                */
+                code.push("$scope.init = function () {");
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    if (generator.isUserField(field.fieldName))
+                        continue;
+                    var isFk = generator.isFieldPartOfFKey(schemaName, tableName, field.fieldName);
+                    var gType = field.genericDataType.trim();
+                    var types = generator.genericDataTypes;
+                    var name = field.fieldName;   
+                    if (isFk){
+                        var foreignTable = generator.getFKeySrcTableByField(schemaName, tableName, name);
+                        var FTable = genericHelper.capitaliseFirstLetter(foreignTable.schema)
+                                    +genericHelper.capitaliseFirstLetter(foreignTable.table) ;
+                        var foreignTableSchemaName=foreignTable.schema+"."+foreignTable.table;
+/*                        code.push("$scope.load"+FTable+"();");*/
+                        code.push("$scope.genericLoader(&apos;"+name+"&apos;,$rootScope.svcUrl+&apos;/"+foreignTableSchemaName+"/&apos;);");
+                    }else{
+                        if (types.getDates().indexOf(gType)>-1){
+                            code.push("$scope.initDateRanges(dateFromSelector,dateToSelector,$scope,fromVar,toVar);");
+                        }
+                    }
+                }
+                code.push("};");
+                
+                code.push("$scope.statLoader=function(varNames,url){");
+                code.push("    var postData={};");
+                code.push("    for (var i = 0; i < varNames.length; i++){");
+                code.push("         postData[varNames[i]+\"$min\"]=1;");
+                code.push("         postData[varNames[i]+\"$max\"]=1;");
+                code.push("         postData[varNames[i]+\"$cnt\"]=1;");
+                code.push("    }");
+                code.push("    var obj={");
+                code.push("        url: url,");
+                code.push("        type: &quot;GET&quot;,");
+                code.push("        dataType: &quot;json&quot;,");
+                code.push("        data: postData,");
+                code.push("        headers: {&quot;Authorization&quot;: $rootScope.getToken()},");
+                code.push("        success: function (data) {");
+                code.push("            $scope.statistics=data;");
+                code.push("            $scope.statistics.changed=1;");
+                code.push("        },");
+                code.push("        error: $scope.showMsg(true,&quot;Error loading statistics!&quot;)");
+                code.push("    };");
+                code.push("    $.ajax(obj);");
+                code.push("};");
+                
+                code.push("$scope.genericLoader=function(varName,url){");
+                code.push("    var postData={};");
+                code.push("    var obj={");
+                code.push("        url: url,");
+                code.push("        type: &quot;GET&quot;,");
+                code.push("        dataType: &quot;json&quot;,");
+                code.push("        data: postData,");
+                code.push("        headers: {&quot;Authorization&quot;: $rootScope.getToken()},");
+                code.push("        success: function (data) {");
+                code.push("            if (data[varName]!=undefined) { $scope[varName]=data;}");
+                code.push("            else { ");
+                code.push("                 $scope[varName+\"$min\"]=data[varName+\"$min\"];");
+                code.push("                 $scope[varName+\"$max\"]=data[varName+\"$max\"];");
+                code.push("            } ");
+                code.push("        },");
+                code.push("        error: $scope.showMsg(true,&quot;Error loading data!&quot;)");
+                code.push("    };");
+                code.push("    $.ajax(obj);");
+                code.push("};");
+                
+                
+                code.push("$scope.filterClick=function(){");
+                    /* TODO ovdi triban pokupit polja koja su u JS-u generirana ako ih ima, 
+                     * a trba ih i u htmlu prosljedit angularu da posil nema zajebancije*/
+                    
+                code.push("       var data = $scope.getJTableDefinition();");
+                code.push("       $(\".expensesContainer\")");
+                code.push("         .find(\".jtableClass\")");
+                code.push("         .jtable(data);");
+               
+                code.push("        var getData = {");
+                
+
+/* TODO ovdi triban ubacit polja From , TO i ostale iz skopa*/
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    if (generator.isUserField(field.fieldName))
+                        continue;
+                    var gType = field.genericDataType.trim();
+                    var types = generator.genericDataTypes;
+                    var name = field.fieldName;   
+                    code.push("             \""+name+"\":$scope."+name+",");
+                }
+
+                code.push("        };");
+                code.push("       $(\".expensesContainer\")");
+                code.push("               .find(\".jtableClass\")");
+                code.push("               .jtable(\"load\", getData);     ");               
+                code.push("};");
+                
+                code.push("$scope.getJTableDefinition=function(){");
+                     var schemaName=selectedTables[i].schema;              
+                     var tableName=selectedTables[i].table;                
+                     var funcName = generator.getFunctionName(schemaName,tableName,false); 
+                     var tableTitle = "LIST_TABLE_NAME_"+generator.getFunctionName(schemaName,tableName,true).toUpperCase(); 
+
+                     var actionName = generator.getFunctionName(schemaName,tableName,true);               
+                     var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,false); 
+                     var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName);  
+             
+                     code.push("\tvar tableData={");
+                    code.push("\t\ttitle: $rootScope.LANG[\""+tableTitle+"\"],");
+                    code.push("\t\tpaging: true, //Enable paging            ");
+                    code.push("\t\tsorting: true, //Enable sorting             ");
+                    code.push("\t\tdefaultSorting: \""+allAttribs[0]+" ASC\",  ");
+                    code.push("\t\topenChildAsAccordion: true,");
+                    code.push("actions: {            ");
+                    code.push("    listAction: \"./main.php?a=<%=actionName%>_list_jTable\",    ");
+                    code.push("    deleteAction: \"./main.php?a=<%=actionName%>_delete_jTable\",     ");
+                    code.push("    updateAction: \"./main.php?a=<%=actionName%>_update_jTable\",     ");
+                    code.push("    createAction: \"./main.php?a=<%=actionName%>_insert_jTable\"    ");
+                    code.push("},");
+                    code.push("fields: { ");  
+
+                              /* //TODO jtable goes here */
+
+                     
+                     
+                     code.push("\t}");
+                     code.push("};");
+                     code.push("\treturn tableData;");
+                code.push("};");
+                
+  
+
+
+/*
+ * moran provjerit ima li ikakvih DATE polja jer ako ima, tada moran drugacije postupit
+ * 
+ */
+            code.push("//TODO moran provjerit ima li ikakvih DATE polja jer ako ima, tada moran drugacije postupit");
+            code.push("}]);");
+            code.push("\n");
+            
+        }
+                
+        /*
+        var html = code.join("\n");
+        html=generator.entityDecode(html);
+        html=generator.beautifyHtml(html);
+                console.log(html);
+
+        code=html.split("\n");
+*/
+        for (var i = 0; i < code.length; i++) {
+            %> <li> <%= code[i] %></li><%
+        }
+        code=[];
+%>
+        </ol>
+    </code>
+
+    <code lang="html css javascript js">   
+        <ol>
+<%
+        code=[];
+        for (var i = 0; i < selectedTables.length; i++) {
+            var schemaName = selectedTables[i].schema;
+            var tableName = selectedTables[i].table;
+            var schTable = schemaName + genericHelper.capitalizeFirstLetter(tableName);
+            var SchTable = genericHelper.capitalizeFirstLetter(schemaName) 
+                         + genericHelper.capitalizeFirstLetter(tableName);
+                 
+            code.push("&lt;div class=&quot;container "+schTable+"CrudContainer&quot; ng-controller=&quot;"+schTable+"CrudController&quot; ng-show=&quot;visible&quot;>");
+            
+            code.push("&lt;/div>");
+        }
+
+
+        for (var i = 0; i < code.length; i++) {
+            %> <li> <%= code[i] %></li><%
+        }
+        code=[];
+%>
+</ol>
+    </code>
+    
+    <code lang="html css javascript js">   
+        <ol>
+<%
+        code=[];
+        for (var i = 0; i < selectedTables.length; i++) {
+            code.push("/*-------------------------------------------------------------"+selectedTables[i].table+"CrudController.js-------------------------------------------------------------------------------*/");
+            
+            var schemaName = selectedTables[i].schema;
+            var tableName = selectedTables[i].table;
+            var schTable = schemaName + genericHelper.capitalizeFirstLetter(tableName);
+            var SchTable = genericHelper.capitalizeFirstLetter(schemaName) 
+                         + genericHelper.capitalizeFirstLetter(tableName);
+                 
+            code.push("app.controller(&quot;"+schTable+"CrudController&quot;, [&quot;$scope&quot;, &quot;$rootScope&quot;, &quot;$http&quot;, &quot;$window&quot;, function ($scope, $rootScope, $http, $window) {");
+                code.push("\t$scope.visible = false;");
+                code.push("\t$scope.readOnly = false;");
+                code.push("\t$scope.isEdit = false;");
+                code.push("\t$scope.debug = false;");
+                code.push("\t$scope.data = {};");   
+                
+                var fields = generator.getTableFields(schemaName, tableName, true);
+                
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    if (generator.isUserField(field.fieldName))
+                        continue;
+                    code.push("\t$scope."+field.fieldName+"=null;");
+                    if (generator.isFieldPartOfFKey(schemaName,tableName,field)){
+                        code.push("\t$scope."+field.fieldName+"s=[];");
+                    }
+                }
+                
+                code.push("         $scope.setter=function(varName,value){");
+                code.push("             $scope[varName]=value;");
+                code.push("         };");
+                code.push("        $scope.$watch(&quot;visible&quot;, function () {");
+                code.push("            if ($scope.visible == false)");
+                code.push("                return;");
+                code.push("            $scope.init();");
+                code.push("        });");    
+                
+                code.push("        $scope.hide = function () {");
+                code.push("            if ($scope.visible == true)");
+                code.push("                $scope.visible = false;");
+                code.push("        };");
+                
+                code.push("        $scope.unhide = function () {");
+                code.push("            if ($scope.visible == false)");
+                code.push("                $scope.visible = true;");
+                code.push("        };");
+                
+                code.push("        $scope.$on(&quot;unhide"+SchTable+"CrudController&quot;, function (event, data) {");
+                code.push("            if ($scope.debug) {");
+                code.push("                console.log(&quot;-------------------&quot;);");
+                code.push("                console.log(&quot;"+SchTable+"Controller: UNHIDE&quot;);");
+                code.push("            }");
+                code.push("            $scope.unhide();");
+                code.push("        });");
+                
+                code.push("        $scope.$on(&quot;hide"+SchTable+"CrudController&quot;, function (event, data) {");
+                code.push("            if ($scope.debug) {");
+                code.push("                console.log(&quot;-------------------&quot;);");
+                code.push("                console.log(&quot;"+SchTable+"CrudController: HIDE&quot;);");
+                code.push("            }");
+                code.push("            $scope.hide();");
+                code.push("        });");
+                code.push("}]);");
+        }
+
+
+        for (var i = 0; i < code.length; i++) {
+            %> <li> <%= code[i] %></li><%
+        }
+        code=[];
+%>
+</ol>
+    </code>    
+    <code>  
+    <ol>
+            <%
+           code.push("var $rootScope.LANG={");
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema.toUpperCase();               
+       var tableName=selectedTables[i].table.toUpperCase();                             
+       var vars = new Array();  
+          vars.push(schemaName+"_"+tableName+"_MENU_ITEM") ; 
+          vars.push("DASHBOARD_MENU_ITEM_"+schemaName+"_"+tableName);    
+          vars.push("LIST_TABLE_NAME_"+schemaName+"_"+tableName);   
+          
+          vars.push(schemaName+"_"+tableName+"_LIST"); 
+          vars.push(schemaName+"_"+tableName+"_LIST_DESCRIPTION"); 
+
+       var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),false);   
+       for ( var j = 0; j < allAttribs.length; j++ ) {  
+             var fieldName = allAttribs[j].toUpperCase();  
+             var fieldId="FIELD_"+schemaName+"_"+tableName+"_"+fieldName ; 
+             vars.push(fieldId); 
+       }  
+       for ( var j = 0; j < vars.length; j++ ) {            
+          var  langVar = vars[j]; 
+          
+          var transl = genericHelper.capitalizeFirstAndDecapitalizeRest(langVar,"_");
+          code.push("\t"+langVar+":\""+transl+"\",");
+       }  
+    } 
+    code.push("}");
+
+        for (var i = 0; i < code.length; i++) {
+            %> <li> <%= code[i] %></li><%
+        }     
+  
+  %>
+
+    </ol>
+    </code>    
+</pre>
+</script>

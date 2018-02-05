@@ -1,0 +1,43 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol  >   
+    <li>$action="log_in";</li>    
+    <li>if ( isset($_POST["a"]) ) { $action= $_POST["a"] ; } </li>
+    <li> switch ($action) {</li>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%      var schemaName=selectedTables[i].schema;              %>
+<%      var tableName=selectedTables[i].table;                %>
+    <li>	case "<%=schemaName%>_<%=tableName%>_delete":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_delete.php" );              </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_switch":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_switch.php" );              </li>
+    <li>	break;                                                                   </li>    
+    <li>	case "<%=schemaName%>_<%=tableName%>_insert":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_insert.php" );              </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_update":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_update.php" );              </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_view":                              </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_view.php" );    </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_select":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_select.php" );  </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_search":                            </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_search.php" );              </li>
+    <li>	break;                                                                   </li>
+    <li>	case "<%=schemaName%>_<%=tableName%>_advanced_search":                   </li>
+    <li>		require ("actions/<%=schemaName%>_<%=tableName%>_advanced_search.php" );     </li>
+    <li>	break;     </li>
+
+<% } %>
+<li>}</li>
+</ol>
+           
+   </code>
+    </pre>
+ </script>

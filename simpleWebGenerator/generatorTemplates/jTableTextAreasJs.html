@@ -1,0 +1,45 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs javascript">
+           <ol>
+           
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema ;               
+       var tableName=selectedTables[i].table;      
+        %>       
+        <li>###############<%=schemaName%>.<%=tableName%>###########################</li> 
+        <%
+       var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,true);   
+       for ( var j = 0; j < allAttribs.length; j++ ) {  
+            var fieldName = allAttribs[j];
+            var fieldData = generator.getFieldData(schemaName,tableName,fieldName);
+            var fieldType = generator.getFieldGenericDataType(schemaName,tableName,fieldName);
+            var langVarName = "FIELD_"+schemaName+"_"+tableName+"_"+fieldName;
+                langVarName = langVarName.toUpperCase();
+            if (  ((fieldType === "varchar") &&  (fieldData.size>50 || fieldData.size==0)) || (fieldType ==='text')){
+
+                %>
+                    <li> <%=fieldName%>: {title: LANG["<%=langVarName%>"], width: "50%", edit: true, create: true, list: false,</li>
+                    <li>      input: function(data) {</li>
+                    <li>          var val = (typeof data.value == "undefined") ? "" : data.value;</li>
+                    <li>          var html= "&lt;textarea name='<%=fieldName%>' style=\x27width:200px\x27 &gt;" + val + "&lt;/textarea&gt;";</li>
+                    <li>          return html.replace(/\\\x27/g,\x27\x22\x27);  </li>
+                    <li>      },</li>
+                    <li>  },</li>
+                <%
+            }
+       }  
+    } 
+    
+    
+  %>
+ 
+           
+           
+           </ol>
+        </code>    
+      </pre> 
+</script>
+
+

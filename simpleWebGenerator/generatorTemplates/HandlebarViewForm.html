@@ -1,0 +1,38 @@
+<!--
+forma mora zatrazit json i javit gresku ukoliko do nje dodje.
+ukoliko nema greske taj json treba  popunit polja koji morau imat IDove prema shemi-tablici-polju
+treba provbjerit za svako polje je li kompozitni constraint ili jednostavni.
+forma mora bit napravljena vamo, a punot se aktivnoscu ispod koja ce se desit na klik neki koji ovdi mora bit definiran
+ista stavar mora vridit i za EDIT.
+
+za svako polje mroam stavit labele kod viewa, a onda omogucit edit ili delete ili print
+-->
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>                
+    <li>&lt;script id=&quot;<%=funcName%>View-template&quot; type=&quot;text/x-handlebars-template&quot;&gt;</li>
+<%     var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,false); %>
+<%      for ( var j = 0; j < allAttribs.length; j++ ) { %>
+<%           var fieldName = allAttribs[j]; %>
+<%           var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); %>
+<%           var fieldId="FIELD_"+schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+fieldName.toUpperCase() ;%>
+<li> &lt;h4&gt;&lt;span class=&quot;translate&quot;&gt;<%=fieldId%>&lt;/span&gt;&lt;span class=&quot;label label-primary&quot;>{{<%=fieldName%>}}&lt;/span&gt;&lt;/h4&gt;</li>
+<%      } %>
+    
+    <li>&lt;/script&gt;</li>
+
+<% } %>    
+  
+  
+ 
+</ol>
+           
+   </code>
+    </pre>
+ </script>

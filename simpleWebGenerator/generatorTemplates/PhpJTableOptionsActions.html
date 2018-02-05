@@ -1,0 +1,31 @@
+<script type="text/html" id="user_tmpl">
+<!-- 
+    mroam imat kod updejta i ID i sva ostala polja . neautoinkrementirajuci i PKey polja
+    ona koja se automatski psotavljaju mine trebaju
+-->
+    <pre>
+       <code>
+        <ol> 
+            <li>&lt;?php</li>
+<li>    if (! defined(APP_NAME)) { die  ("Application not loaded"); ></li>            
+<li>    switch ($action) {  </li>
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;    
+%>       
+<li>	case "<%=schemaName%>_<%=tableName%>_options_jTable":           </li>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>            
+            <li>    $data[&quot;Result&quot;]="OK";   </li>
+            <li>    $data[&quot;Options&quot;]=$this->db-><%=funcName%>OptionsJTable();     </li>
+            <li>    echo json_encode($data);     </li>
+<li>	break;                                                                   </li>
+<% }       %>
+<li>    }  </li>
+<li>?&gt;</li>
+            
+        </ol>
+           
+   </code>
+    </pre>
+ </script>

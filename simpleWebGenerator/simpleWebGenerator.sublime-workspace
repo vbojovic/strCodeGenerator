@@ -1,0 +1,582 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"is",
+				"isLookupStr"
+			],
+			[
+				"schem",
+				"schemaName"
+			],
+			[
+				"getSq",
+				"getSqlFieldFormattedByTypeWithAlias"
+			],
+			[
+				"alias",
+				"aliasedFieldName"
+			],
+			[
+				"sch",
+				"schemaName"
+			],
+			[
+				"fie",
+				"field"
+			],
+			[
+				"fiel",
+				"fieldName"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"user",
+				"userFilters"
+			],
+			[
+				"userF",
+				"userFiltersJoined"
+			],
+			[
+				"sc",
+				"schemaName"
+			],
+			[
+				"fke",
+				"fkey"
+			],
+			[
+				"pke",
+				"getPkeyFieldNames"
+			],
+			[
+				"Gener",
+				"genericHelper"
+			],
+			[
+				"ke",
+				"keys"
+			],
+			[
+				"arr",
+				"array	$… = array (…)"
+			],
+			[
+				"Arr",
+				"array"
+			],
+			[
+				"sql2",
+				"sql2row"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"apia",
+				"apiary_name"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"mar",
+				"matrix"
+			],
+			[
+				"api",
+				"apiary_name"
+			],
+			[
+				"parent",
+				"parent_id"
+			],
+			[
+				"_u",
+				"_uiHelper"
+			],
+			[
+				"acti",
+				"_actionName"
+			],
+			[
+				"th",
+				"this"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "jsCss/generator.js",
+			"settings":
+			{
+				"buffer_size": 54996,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "generatorTemplates/Pg2PgDynAttrib.html",
+			"settings":
+			{
+				"buffer_size": 2729,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "generatorTemplates/JTableAttribViewActionsJs.html",
+			"settings":
+			{
+				"buffer_size": 1350,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "generatorTemplates/PgPHPGetWithLookupUsers.html",
+			"settings":
+			{
+				"buffer_size": 5610,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "jsCss/genericHelper.js",
+			"settings":
+			{
+				"buffer_size": 7190,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"entit",
+				"StringEncode: HTML Entitize"
+			],
+			[
+				"ent",
+				"StringEncode: HTML Entitize"
+			],
+			[
+				"html",
+				"StringEncode: HTML Entitize"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/Pg2PgWH.html",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPCountSql.html",
+		"/home/ezop/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPGetWithLookupUsers.html",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPListSqlJTable.html",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPGetWithLookup.html",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPGet.html",
+		"/home/ezop/web/svastara/ezop/strCodegen/simpleWebGenerator/generatorTemplates/PgPHPGetJoined.html",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/movement/drawRelocation.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/Views/Shared/_layout.php",
+		"/home/ezop/web/beezare/db/beezare.dmp.razlike.txt",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/index.php",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/test/test.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/movement/swarmsRelocation.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/templates/swarmsScript.html",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/test/test.sql",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/templates/swarmsRelocation.html",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/templates/swarmsRelocationPlot.php",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/movement/swarmsMergeSplit.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/tables/tableList.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/translations/hr.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/translations/en.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/fragments/dashboard_admin_micro.html",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/fragments/dashboard_micro.html",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/dashboard_micro.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/dashBoard.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/dashboard_admin_micro.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/leftMenuInit.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/leftMenu.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/sqlClass.php",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/uiHelper.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/cssJs/translations/logic.js",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/dbClass.php",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/funcHelper.php",
+		"/home/ezop/web/beezare/projekt/BeezareDashboard/trunk/authClass.php"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ieldNames",
+			"getFieldNames",
+			"getFieldNam",
+			"getSqlFieldFormattedByTypeWithAlias",
+			"%",
+			"%',",
+			">        var $img = $('<img src='img/VIEW.png' title=' ",
+			"g' ",
+			"VIEW",
+			"(*&^%$)",
+			" $('<",
+			"= ",
+			"\"",
+			"%",
+			"'",
+			" '",
+			"g",
+			"getSqlFieldFormattedByType",
+			"phpKeyVarsInStr",
+			"getTableFieldNamesWithAliasesArr",
+			"getFieldData",
+			"fieldName",
+			"isFieldDateOrTime",
+			"lookup",
+			"user",
+			"getFKeyFieldNames",
+			"fkey",
+			"fkeyNames",
+			"e.getF",
+			".getF",
+			"getF",
+			"generic",
+			"prefix",
+			"getPkeyFieldNames",
+			"getTableFieldNamesWithAliasesArr",
+			"dupl",
+			"uniq",
+			"<%",
+			"%>",
+			"dataTy",
+			"relocatio",
+			"liste",
+			"draw",
+			"DrawRelocation",
+			"\"Dashboard menu item public ",
+			"\"Field public ",
+			" list description\"",
+			" menu item\"",
+			"Dashboard public ",
+			"List table name public ",
+			": \"Public ",
+			": \"public",
+			" menu item",
+			"look",
+			"hives_parents",
+			"MOVEMENT_MENU_ITEM",
+			"actionName",
+			"postReorganization",
+			"FIELD_PUBLIC_HIVES_QUEENS_COLOR_CODE",
+			"hives_queens",
+			"jquery",
+			"resizeImage"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"\"",
+			" \"",
+			"",
+			": \"",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "jsCss/generator.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 54996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42121,
+								42121
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 182.0,
+						"translation.y": 23907.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "generatorTemplates/Pg2PgDynAttrib.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 420.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "generatorTemplates/JTableAttribViewActionsJs.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1350,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								435,
+								435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "generatorTemplates/PgPHPGetWithLookupUsers.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3306,
+								3306
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 112.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "jsCss/genericHelper.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1057,
+								1057
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 611.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "simpleWebGenerator.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

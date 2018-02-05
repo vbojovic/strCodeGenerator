@@ -1,0 +1,42 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code>
+            <ol>       
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) { 
+       var schemaName=selectedTables[i].schema; 
+       var tableName=selectedTables[i].table; 
+       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+       var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName);   
+       var phpArgsPkey = genericHelper.joinArrayWithPRefixes(attribsInPkey, '$', ',');  
+%>
+                <li>case "<%=schemaName%>_<%=tableName%>_delete_jTable":</li>
+                <li>    $allOk = true;</li>
+                
+
+<%      for ( var j = 0; j < attribsInPkey.length; j++ ) { 
+            var fieldName = attribsInPkey[j];   
+            var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); %>
+            <li>    if (isset($_POST[&quot;<%=fieldName%>&quot;])){</li>
+            <li>         $<%=fieldName%> = $_POST[&quot;<%=fieldName%>&quot;];</li>
+<%                      var antiInjector = generator.genericDataType2PhpInject(fieldDataType,fieldName); %>
+            <li>         $<%=fieldName%> = <%=antiInjector%>;</li> 
+            <li>    }else{</li> 
+            <li>        $allOk = false;</li> 
+            <li>    }</li> 
+<%      } %>     
+                    <li>    if ($allOk == true){</li>
+                    <li>        $data["Result"]="OK";</li>
+                    <li>        $this->db-><%=funcName%>Delete(<%=phpArgsPkey%>);</li>
+                    <li>    }else{</li>
+                    <li>        $data["Result"]="ERROR";</li> 
+                    <li>        $data["Message"]="Check your input data!";</li> 
+                    <li>    }</li> 
+                    <li>    echo json_encode($data);</li>
+                <li>break;</li>
+<%  } %>                 
+            </ol>
+        </code>    
+      </pre> 
+</script>
+

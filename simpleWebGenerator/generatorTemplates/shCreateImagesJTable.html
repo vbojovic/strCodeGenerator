@@ -1,0 +1,25 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs sh">
+           <ol>
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema.toUpperCase();               
+       var tableName=selectedTables[i].table.toUpperCase();                             
+       var vars = new Array();  
+          vars.push(schemaName+"_"+tableName+"_LIST.jpg"); 
+          vars.push(schemaName+"_"+tableName+".png"); 
+
+       for ( var j = 0; j < vars.length; j++ ) {            
+          var  fName = vars[j]; 
+             %> <li>      touch "<%=fName%>";</li><%
+       }  
+  } 
+  
+  %>
+           </ol>
+        </code>    
+      </pre> 
+</script>
+
+

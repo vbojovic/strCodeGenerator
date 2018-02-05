@@ -1,0 +1,26 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol  >       
+    <li> N/A !!!!!!!!!</li>
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;     
+       var pkeyFields = generator.getPkeyFieldNames(schemaName, tableName);
+       var fields = generator.getTableFieldNamesArr(schemaName, tableName, true);
+       var fieldIds = new Array();
+           fieldIds = fieldIds.concat(pkeyFields);
+        
+
+%>
+
+<li>          create table <%=schemaName%>.<%=tableName%>_fact  ( </li>
+<li>           ); </li>
+<% } %>
+</ol>
+           
+   </code>
+    </pre>
+ </script>

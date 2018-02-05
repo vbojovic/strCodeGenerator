@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/popper.min.js"></script>
+        <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>-->
+        <link href="bootstrap3state.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap3stateRadio.css" rel="stylesheet" type="text/css"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="[ row ]">
+                <h2>Fancy Bootstrap Checkboxes that work with <a href="https://bootswatch.com/" target="_blank">Bootswatch</a></h2>
+                <p>My latest project needed some checkboxes that worked very nicely with bootswatch. Use the Theme picker above here to check out what the checkboxes look like in the different themes.</p>
+            </div>
+            <div class="[ col-xs-12 col-sm-6 ]">
+                <h3>Standard Checkboxes</h3><hr />
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
+                            Default Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                            Primary Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-success" id="fancy-checkbox-success" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-success" class="[ btn btn-success ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-success" class="[ btn btn-default active ]">
+                            Success Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-info" class="[ btn btn-info ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-info" class="[ btn btn-default active ]">
+                            Info Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-warning" id="fancy-checkbox-warning" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-warning" class="[ btn btn-warning ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-warning" class="[ btn btn-default active ]">
+                            Warning Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-danger" id="fancy-checkbox-danger" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-danger" class="[ btn btn-danger ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-danger" class="[ btn btn-default active ]">
+                            Danger Checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="[ col-xs-12 col-sm-6 ]">
+                <h3>Custom Icons Checkboxes</h3><hr />
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-default-custom-icons" id="fancy-checkbox-default-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-default-custom-icons" class="[ btn btn-default ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-default-custom-icons" class="[ btn btn-default active ]">
+                            Default Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-primary-custom-icons" id="fancy-checkbox-primary-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-primary-custom-icons" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-primary-custom-icons" class="[ btn btn-default active ]">
+                            Primary Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-success-custom-icons" id="fancy-checkbox-success-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-success-custom-icons" class="[ btn btn-success ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-success-custom-icons" class="[ btn btn-default active ]">
+                            Success Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-info-custom-icons" id="fancy-checkbox-info-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-info-custom-icons" class="[ btn btn-info ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-info-custom-icons" class="[ btn btn-default active ]">
+                            Info Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-warning-custom-icons" id="fancy-checkbox-warning-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-warning-custom-icons" class="[ btn btn-warning ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-warning-custom-icons" class="[ btn btn-default active ]">
+                            Warning Checkbox
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-danger-custom-icons" id="fancy-checkbox-danger-custom-icons" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-danger-custom-icons" class="[ btn btn-danger ]">
+                            <span class="[ glyphicon glyphicon-plus ]"></span>
+                            <span class="[ glyphicon glyphicon-minus ]"></span>
+                        </label>
+                        <label for="fancy-checkbox-danger-custom-icons" class="[ btn btn-default active ]">
+                            Danger Checkbox
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1 class="text-center">Checkbox/Radio - CSS Only</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="well well-sm text-center">
+
+                <h3>Checkbox</h3>
+
+                <div class="btn-group" data-toggle="buttons">
+
+                    <label class="btn btn-success active">
+                        <input type="checkbox" autocomplete="off" checked>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-primary">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+
+                    <label class="btn btn-info">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+
+                    <label class="btn btn-default">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+
+                    <label class="btn btn-warning">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+
+                    <label class="btn btn-danger" id="chk1">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>			
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="container">			
+
+            <div class="well well-sm text-center">
+
+                <h3>Radio</h3>
+
+                <div class="btn-group" data-toggle="buttons">
+
+                    <label class="btn btn-success active">
+                        <input type="radio" name="options" id="option2" autocomplete="off" chacked>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option1" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-info">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="container">			
+
+            <div class="well well-sm text-center">
+
+                <h3>Radio</h3>
+
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-success active">
+                        <input type="radio" name="options" id="option2" autocomplete="off" chacked>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+                    <label class="btn  btn-gray">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+
+
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </label>
+                </div>
+
+
+            </div>
+
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#chk1').prop("indeterminate",true);
+            });
+        </script>
+    </body>
+</html>

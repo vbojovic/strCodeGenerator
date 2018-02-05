@@ -1,0 +1,45 @@
+<script id="loadTables-template" type="text/x-handlebars-template">
+    {{#each data}}
+    <div class="checkbox">
+        <label>
+          <input type="checkbox" value="{{schema}}.{{table}}" checked>{{schema}}.{{table}}</input>
+        </label>
+      </div>
+    {{/each}} 
+    
+</script>
+
+<script type="text/javascript">
+    var loadTables;
+    $(document).ready(function() {
+        var loadTablesTemplate = Handlebars.compile($("#loadTables-template").html());
+        //TODO moram pokupit objekt i iterirat kroz njega pa ubacivat livo sa checkboxovima
+        loadTables = function(){
+           if (generator.getDbModel() == null) return;
+            
+            var tables =  {
+                'data' : generator.extractTables()
+            };
+            
+            $('#tablesUl').html(loadTablesTemplate(tables));
+            
+            uiHelper.checkAllRegister('tablesUl','checkAllTables');
+            uiHelper.unCheckAllRegister('tablesUl','uncheckAllTables');
+            uiHelper.invertCheckboxesRegister('tablesUl','invertCheckedTables');
+        }
+;
+console.log(loadTables);
+        
+        $('#clearTablesA').click(function(){
+            generator.setDbModel(null);
+            $('#tablesUl').html('');
+        });
+        
+        // ');
+    });
+</script>
+
+
+
+
+ 

@@ -1,0 +1,41 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+<ol>
+        
+<% 
+    var recordQuantity=100;
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+      var schemaName=selectedTables[i].schema;              
+      var tableName=selectedTables[i].table;                
+      var nonPkeyAttribs =generator.getTableFieldNamesArr(schemaName,tableName,true); 
+      var sqlPrefix = "insert into "+schemaName+"."+tableName+"("+nonPkeyAttribs.join(",")+") values(";
+      for (var q=1 ; q< recordQuantity; q++){
+        var sql = sqlPrefix;
+        var dataRow = new Array();
+        for ( var j = 0; j < nonPkeyAttribs.length; j++ ) { 
+              var fieldName = nonPkeyAttribs[j]; 
+              var fieldId=schemaName+","+tableName+","+fieldName ;
+              var genericFieldType = generator.getFieldData(schemaName,tableName, fieldName);
+              if (generator.isFieldBoolean(schemaName,tableName,fieldName)===true){
+                    dataRow.push( (q % 2===0)? true : false );
+              }else if (generator.isFieldDateOrTime(schemaName,tableName, fieldName)){
+                    dataRow.push( "now()" );
+              }else if (generator.isFieldTextual(schemaName,tableName, fieldName)){
+                    dataRow.push("'"+fieldName+ q*(i+1)+j+1+"'" );
+              }else if (generator.isFieldNumeric(schemaName,tableName, fieldName)){
+                    dataRow.push(  q*(i+1)+j+1);
+              }else{
+                    console.log("wrong field type "+schemaName+"."+tableName+"."+fieldName+":"+genericFieldType);
+              }
+        } 
+        sql+=dataRow.join(",");
+        sql+=")";
+        %><li><%=sql%>;</li><%
+      }
+    }
+ %>
+</ol>
+   </code>
+    </pre>
+ </script>

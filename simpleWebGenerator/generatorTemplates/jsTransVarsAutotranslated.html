@@ -1,0 +1,43 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs javascript">
+           <ol>
+           <li>var LANG={</li>
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema.toUpperCase();               
+       var tableName=selectedTables[i].table.toUpperCase();                             
+       var vars = new Array();  
+          vars.push(schemaName+"_"+tableName+"_MENU_ITEM") ; 
+          vars.push("DASHBOARD_MENU_ITEM_"+schemaName+"_"+tableName);    
+          vars.push("LIST_TABLE_NAME_"+schemaName+"_"+tableName);   
+          
+          vars.push(schemaName+"_"+tableName+"_LIST"); 
+          vars.push(schemaName+"_"+tableName+"_LIST_DESCRIPTION"); 
+
+       var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),false);   
+       for ( var j = 0; j < allAttribs.length; j++ ) {  
+             var fieldName = allAttribs[j].toUpperCase();  
+             var fieldId="FIELD_"+schemaName+"_"+tableName+"_"+fieldName ; 
+             vars.push(fieldId); 
+       }  
+       for ( var j = 0; j < vars.length; j++ ) {            
+          var  langVar = vars[j]; 
+          
+          var transl = genericHelper.capitalizeFirstAndDecapitalizeRest(langVar,"_");
+             %> <li>      <%=langVar%>:"<%=transl%>",</li><%
+       }  
+    } 
+  
+  %>
+
+           
+<li>}</li>
+           
+           
+           </ol>
+        </code>    
+      </pre> 
+</script>
+
+

@@ -1,0 +1,22 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol  >        
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<li>   $fileName="<%=schemaName%>_<%=tableName%>"; </li>
+<li>       $sufixes = Array("delete","insert","update","view","select","search","switch","advanced_search"); </li>
+<li>       foreach ($sufixes as $sufix) {                                </li>
+<li>           $fName = "<%=schemaName%>_<%=tableName%>_{$sufix}.php";     </li>
+<li>           if (file_exists($fName)) unlink($fName);                  </li>
+<li>       }                                                             </li>
+
+<% } %>
+<li>}</li>
+</ol>
+           
+   </code>
+    </pre>
+ </script>

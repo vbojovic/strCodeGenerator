@@ -1,0 +1,149 @@
+ 
+
+
+<head>         
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>        
+        <link href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>         
+        <link href="bootstrap3state.css" rel="stylesheet" type="text/css"/>         
+        <link href="bootstrap3stateRadio.css" rel="stylesheet" type="text/css"/>         
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>         
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"  crossorigin="anonymous"></script>         
+    
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js" type="text/javascript"></script>
+     
+        <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js'></script>-->
+
+
+    <script src="../../jsCss/dl/jquery-3.2.1.min.js" type="text/javascript"></script>        
+    <link href="../../jsCss/dl/jquery-ui.css" rel="stylesheet">
+
+    <script src="../../jsCss/dl/angular.min.js"></script>         
+    <link href="bootstrap3state.css" rel="stylesheet" type="text/css"/>         
+    <link href="bootstrap3stateRadio.css" rel="stylesheet" type="text/css"/>         
+    <link href="../../jsCss/dl/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>         
+    <script src="../../jsCss/dl/bootstrap.min.js"  crossorigin="anonymous"></script>         
+
+    <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js" type="text/javascript"></script>-->
+
+    <script src='../../jsCss/dl/jquery-ui.min.js'></script>
+
+
+
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+    </script>     
+    <script src="users.js" type="text/javascript"></script>
+    <script src="init.js" type="text/javascript"></script>
+</head>     
+
+
+
+<body ng-app="myApp">
+
+    <div class="container publicAuth_userContainer" ng-controller="publicAuth_userController" ng-show="visible">
+
+        <div class="filtering" ng-show="includeFilters">
+
+            <p>
+
+            <div class="form-group row">
+
+                <label for="pass" class="col-2 col-form-label">pass</label>
+
+                <div class="col-10">
+
+                    <input class="form-control" type="password"  ng-model="pass"  id="pass">
+
+                </div>
+
+            </div>
+
+            </p>
+
+            <p>
+
+            <div class="form-group row">
+
+                <label for="token" class="col-2 col-form-label">token</label>
+
+                <div class="col-10">
+
+                    <input class="form-control" type="text"  ng-model="token"  id="token">
+
+                </div>
+
+            </div>
+
+            </p>
+
+            <p>
+
+            <div class="form-group row">
+
+                <label for="email" class="col-2 col-form-label">email</label>
+
+                <div class="col-10">
+
+                    <input class="form-control" type="text"  ng-model="email"  id="email">
+
+                </div>
+
+            </div>
+
+            </p>
+
+            <label for="access_timeFrom" class="sr-only">access_time from</label>
+
+            <p>
+
+                <label for="access_time">access_time range:</label>
+
+                <input type="text" id="access_time" readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+            </p>
+
+            <div id="slider-rangeaccess_time"></div>
+
+            <p>
+
+            <div class="form-group row">
+
+                <label for="full_name" class="col-2 col-form-label">full_name</label>
+
+                <div class="col-10">
+
+                    <input class="form-control" type="text"  ng-model="full_name"  id="full_name">
+
+                </div>
+
+            </div>
+
+            </p>
+
+            <div class="dropdown">
+
+                <button class="btn btn-default dropdown-toggle" type="button" id="role_id" data-toggle="dropdown">role_id
+
+                    <span class="caret"></span></button>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="role_id">
+
+                    <li role="presentation"><a role="menuitem" ng-click="setter('role_id', null)" tabindex="-1" href="#">----</a></li>
+
+                    <li ng-repeat="x in role_ids" role="presentation"><a role="menuitem" ng-click="setter('role_id',{{x.Value}})" tabindex="-1" href="#">{{x.DisplayText}}</a></li>
+
+                </ul>
+
+            </div>
+
+            <button id="LoadRecordsButton" ng-click="filterClick()">Search
+
+        </div>
+
+        <div class="publicAuth_userJTDiv"></div>
+
+    </div>
+</body>
+</html>

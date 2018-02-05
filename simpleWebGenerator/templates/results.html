@@ -1,0 +1,55 @@
+<script id="results-template" type="text/x-handlebars-template">
+    {{#if data.header}}
+        <div class="row">
+            <div class="col-sm-4"> 
+               <div class="panel panel-primary">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">{{data.desc}} | {{data.file}}</h3>
+                 </div>
+                 <div class="panel-body">
+                     <pre class="prettyprint">{{data.header}}</pre>>
+                 </div>
+               </div>
+             </div>
+        </div>
+    {{/if}}
+    {{#each data}}
+        <div class="row">
+            <div class="col-sm-4"> 
+               <div class="panel panel-primary">
+                 <div class="panel-body">
+                     <pre class="prettyprint">{{data.code}}</pre>>
+                 </div>
+               </div>
+             </div>
+        </div>
+    {{/each}}
+    {{#if data.footer}}
+        <div class="row">
+            <div class="col-sm-4"> 
+               <div class="panel panel-primary">
+                 <div class="panel-body">
+                     <pre class="prettyprint">{{data.footer}}</pre>>
+                 </div>
+               </div>
+             </div>
+        </div>
+    {{/if}}
+</script>
+
+<script type="text/javascript">
+    var resultsTemplate;
+    var showResults;
+    $(document).ready(function() {
+        var resultsTemplate = Handlebars.compile($("#results-template").html());
+        showResults=function(dataArr){
+            
+            resultsTemplate(dataArr);
+        }    
+            //$('#tablesUl').html(loadTablesTemplate(tables));
+        
+    });
+</script>
+
+
+

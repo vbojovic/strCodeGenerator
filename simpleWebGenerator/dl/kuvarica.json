@@ -1,0 +1,1022 @@
+{
+	"@type" : "com.manuga.helpers.databases.dbModels.DatabaseModel",
+	"schemas" : {
+		"@type" : "java.util.ArrayList",
+		"@items" : [{
+				"@type" : "com.manuga.helpers.databases.dbModels.DatabaseSchema",
+				"schemaName" : "kuvarica",
+				"comment" : "u cilju je napravit stranicu di ce useri unosit recepte\r\nza svaki recept ce se mco nac slican ili onaj koji potpuno po sastojcima odgovara tom receptu\r\nmoc ce se trayit i recept kojem je duzina spremanja jednaka.\r\n\r\nmalo istrayit ovo podrucje jer je moguce pojava paralelnih radnji.treba ih nekako odvojit.",
+				"DDL" : "N/A",
+				"tables" : {
+					"@type" : "java.util.ArrayList",
+					"@items" : [{
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseTable",
+							"isRecursive" : false,
+							"parentPath" : null,
+							"fields" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "id",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 3,
+										"precision" : -1,
+										"tableOrder" : 1,
+										"isNullable" : false,
+										"defaultValue" : null,
+										"inPrimaryKey" : true
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "jedinica",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 2,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}
+								]
+							},
+							"Name" : "jedinice",
+							"DDL" : "table DDL not set",
+							"foreignKeys" : {
+								"@type" : "java.util.ArrayList"
+							},
+							"primaryKey" : {
+								"isPrimary" : true,
+								"isForeign" : false,
+								"isUnique" : true,
+								"fields" : {
+									"@type" : "java.util.ArrayList",
+									"@items" : [{
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "varchar",
+											"genericDataType" : "varchar",
+											"dimensionCount" : 0,
+											"size" : 3,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : null,
+											"inPrimaryKey" : true
+										}, {
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "varchar",
+											"genericDataType" : "varchar",
+											"dimensionCount" : 0,
+											"size" : 3,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : null,
+											"inPrimaryKey" : true
+										}
+									]
+								},
+								"name" : "jedinica_pkey"
+							},
+							"indices" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseIndex",
+										"DDL" : "N/A",
+										"isParallel" : false,
+										"indexType" : "N/A",
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 3,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "jedinica_pkey"
+									}
+								]
+							},
+							"uniqueKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseKey",
+										"isPrimary" : true,
+										"isForeign" : false,
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 3,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : true
+												}, {
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 3,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "jedinica_pkey"
+									}
+								]
+							}
+						}, {
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseTable",
+							"isRecursive" : false,
+							"parentPath" : null,
+							"fields" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 1,
+										"isNullable" : false,
+										"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+										"inPrimaryKey" : true
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "recept_id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 2,
+										"isNullable" : false,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "sastojak_id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 3,
+										"isNullable" : false,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "kolicina",
+										"fieldType" : "numeric",
+										"genericDataType" : "double",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : 10,
+										"tableOrder" : 4,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "jedinica_id",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 3,
+										"precision" : -1,
+										"tableOrder" : 5,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "komentar",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 6,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "redoslijed",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 7,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "trajanje_min",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 8,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}
+								]
+							},
+							"Name" : "postupak",
+							"DDL" : "table DDL not set",
+							"foreignKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseForeignKey",
+										"referencingTable" : {
+											"table" : "recepti",
+											"database" : null,
+											"schema" : "kuvarica",
+											"view" : null,
+											"function" : null,
+											"procedure" : null,
+											"sequence" : null,
+											"field" : null
+										},
+										"referencingFields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"isPrimary" : false,
+										"isForeign" : true,
+										"isUnique" : false,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "recept_id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 2,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "recepti_sastojci_fk"
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseForeignKey",
+										"referencingTable" : {
+											"table" : "sastojci",
+											"database" : null,
+											"schema" : "kuvarica",
+											"view" : null,
+											"function" : null,
+											"procedure" : null,
+											"sequence" : null,
+											"field" : null
+										},
+										"referencingFields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"isPrimary" : false,
+										"isForeign" : true,
+										"isUnique" : false,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "sastojak_id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 3,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "recepti_sastojci_fk1"
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseForeignKey",
+										"referencingTable" : {
+											"table" : "jedinice",
+											"database" : null,
+											"schema" : "kuvarica",
+											"view" : null,
+											"function" : null,
+											"procedure" : null,
+											"sequence" : null,
+											"field" : null
+										},
+										"referencingFields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 3,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"isPrimary" : false,
+										"isForeign" : true,
+										"isUnique" : false,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "jedinica_id",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 3,
+													"precision" : -1,
+													"tableOrder" : 5,
+													"isNullable" : true,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "recepti_sastojci_fk2"
+									}
+								]
+							},
+							"primaryKey" : {
+								"isPrimary" : true,
+								"isForeign" : false,
+								"isUnique" : true,
+								"fields" : {
+									"@type" : "java.util.ArrayList",
+									"@items" : [{
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}, {
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}
+									]
+								},
+								"name" : "recepti_sastojci_pkey"
+							},
+							"indices" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseIndex",
+										"DDL" : "N/A",
+										"isParallel" : false,
+										"indexType" : "N/A",
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "recepti_sastojci_pkey"
+									}
+								]
+							},
+							"uniqueKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseKey",
+										"isPrimary" : true,
+										"isForeign" : false,
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}, {
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "recepti_sastojci_pkey"
+									}
+								]
+							}
+						}, {
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseTable",
+							"isRecursive" : false,
+							"parentPath" : null,
+							"fields" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 1,
+										"isNullable" : false,
+										"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+										"inPrimaryKey" : true
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "naziv",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 2,
+										"isNullable" : false,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "slika",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 3,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "ukupno_minuta",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 4,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "opis",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 5,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "user_id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 6,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "izvor",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 7,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}
+								]
+							},
+							"Name" : "recepti",
+							"DDL" : "table DDL not set",
+							"foreignKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseForeignKey",
+										"referencingTable" : {
+											"table" : "users",
+											"database" : null,
+											"schema" : "public",
+											"view" : null,
+											"function" : null,
+											"procedure" : null,
+											"sequence" : null,
+											"field" : null
+										},
+										"referencingFields" : {
+											"@type" : "java.util.ArrayList"
+										},
+										"isPrimary" : false,
+										"isForeign" : true,
+										"isUnique" : false,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "user_id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 6,
+													"isNullable" : true,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "recepti_fk"
+									}
+								]
+							},
+							"primaryKey" : {
+								"isPrimary" : true,
+								"isForeign" : false,
+								"isUnique" : true,
+								"fields" : {
+									"@type" : "java.util.ArrayList",
+									"@items" : [{
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}, {
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}
+									]
+								},
+								"name" : "recepti_pkey"
+							},
+							"indices" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseIndex",
+										"DDL" : "N/A",
+										"isParallel" : false,
+										"indexType" : "N/A",
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "recepti_pkey"
+									}
+								]
+							},
+							"uniqueKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseKey",
+										"isPrimary" : true,
+										"isForeign" : false,
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}, {
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.recepti_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "recepti_pkey"
+									}
+								]
+							}
+						}, {
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseTable",
+							"isRecursive" : false,
+							"parentPath" : null,
+							"fields" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "id",
+										"fieldType" : "int4",
+										"genericDataType" : "integer",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 1,
+										"isNullable" : false,
+										"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+										"inPrimaryKey" : true
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "sastojak_postupak",
+										"fieldType" : "varchar",
+										"genericDataType" : "varchar",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 2,
+										"isNullable" : false,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+										"fieldName" : "sastojak",
+										"fieldType" : "bool",
+										"genericDataType" : "bool",
+										"dimensionCount" : 0,
+										"size" : 0,
+										"precision" : -1,
+										"tableOrder" : 3,
+										"isNullable" : true,
+										"defaultValue" : null,
+										"inPrimaryKey" : false
+									}
+								]
+							},
+							"Name" : "sastojci",
+							"DDL" : "table DDL not set",
+							"foreignKeys" : {
+								"@type" : "java.util.ArrayList"
+							},
+							"primaryKey" : {
+								"isPrimary" : true,
+								"isForeign" : false,
+								"isUnique" : true,
+								"fields" : {
+									"@type" : "java.util.ArrayList",
+									"@items" : [{
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}, {
+											"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+											"fieldName" : "id",
+											"fieldType" : "int4",
+											"genericDataType" : "integer",
+											"dimensionCount" : 0,
+											"size" : 0,
+											"precision" : -1,
+											"tableOrder" : 1,
+											"isNullable" : false,
+											"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+											"inPrimaryKey" : true
+										}
+									]
+								},
+								"name" : "sastojci_pkey"
+							},
+							"indices" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseIndex",
+										"DDL" : "N/A",
+										"isParallel" : false,
+										"indexType" : "N/A",
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "sastojci_pkey"
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseIndex",
+										"DDL" : "N/A",
+										"isParallel" : false,
+										"indexType" : "N/A",
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "sastojak_postupak",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 2,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "sastojci_sastojak_key"
+									}
+								]
+							},
+							"uniqueKeys" : {
+								"@type" : "java.util.ArrayList",
+								"@items" : [{
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseKey",
+										"isPrimary" : false,
+										"isForeign" : false,
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "sastojak_postupak",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 2,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}, {
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "sastojak_postupak",
+													"fieldType" : "varchar",
+													"genericDataType" : "varchar",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 2,
+													"isNullable" : false,
+													"defaultValue" : null,
+													"inPrimaryKey" : false
+												}
+											]
+										},
+										"name" : "sastojci_sastojak_key"
+									}, {
+										"@type" : "com.manuga.helpers.databases.dbModels.DatabaseKey",
+										"isPrimary" : true,
+										"isForeign" : false,
+										"isUnique" : true,
+										"fields" : {
+											"@type" : "java.util.ArrayList",
+											"@items" : [{
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}, {
+													"@type" : "com.manuga.helpers.databases.dbModels.DatabaseField",
+													"fieldName" : "id",
+													"fieldType" : "int4",
+													"genericDataType" : "integer",
+													"dimensionCount" : 0,
+													"size" : 0,
+													"precision" : -1,
+													"tableOrder" : 1,
+													"isNullable" : false,
+													"defaultValue" : "nextval('kuvarica.sastojci_id_seq'::regclass)",
+													"inPrimaryKey" : true
+												}
+											]
+										},
+										"name" : "sastojci_pkey"
+									}
+								]
+							}
+						}
+					]
+				},
+				"functions" : {
+					"@type" : "java.util.ArrayList"
+				},
+				"views" : {
+					"@type" : "java.util.ArrayList"
+				},
+				"procedures" : {
+					"@type" : "java.util.ArrayList"
+				},
+				"sequences" : {
+					"@type" : "java.util.ArrayList",
+					"@items" : [{
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseSequence",
+							"name" : "recepti_id_seq",
+							"cycle" : false,
+							"increment" : 0,
+							"minvalue" : 0,
+							"maxvalue" : 0,
+							"DDL" : "N/A",
+							"comment" : ""
+						}, {
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseSequence",
+							"name" : "recepti_sastojci_id_seq",
+							"cycle" : false,
+							"increment" : 0,
+							"minvalue" : 0,
+							"maxvalue" : 0,
+							"DDL" : "N/A",
+							"comment" : ""
+						}, {
+							"@type" : "com.manuga.helpers.databases.dbModels.DatabaseSequence",
+							"name" : "sastojci_id_seq",
+							"cycle" : false,
+							"increment" : 0,
+							"minvalue" : 0,
+							"maxvalue" : 0,
+							"DDL" : "N/A",
+							"comment" : ""
+						}
+					]
+				}
+			}
+		]
+	},
+	"name" : null,
+	"DDL" : ""
+}

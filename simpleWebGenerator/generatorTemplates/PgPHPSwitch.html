@@ -1,0 +1,41 @@
+<script type="text/html" id="user_tmpl">
+<!-- 
+    mroam imat kod updejta i ID i sva ostala polja . neautoinkrementirajuci i PKey polja
+    ona koja se automatski psotavljaju mine trebaju
+-->
+    <pre>
+       <code>
+           
+<ol  >       
+    <li>class ProjectSql{</li>
+    <li>    var $db=new DatabaseConnection();</li>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName); %>
+<%     var attribsInPkeyJoined=attribsInPkey.join(','); %>
+<%     var phpArgsPkey = genericHelper.joinArrayWithPRefixes(attribsInPkey, '$', ','); %>
+<%     var phpVars = genericHelper.joinArrayWithPRefixes(attribsInPkey, '{$', '},')+'}"'; %>
+<%     var phpKeyVarsInStr = genericHelper.joinArrayWithGlues(attribsInPkey, '\'{$', '}\''  ,  ',');   %>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+<%     var booleanFieldsNotInPk = generator.getBooleanFieldsNamesNotInPk(schemaName,tableName); %>
+<%     if (booleanFieldsNotInPk.length >0 ) {%>
+<%          for ( var j = 0; j < booleanFieldsNotInPk.length; j++ ) {           %> 
+<%               var fieldName =  genericHelper.capitalizeFirstLetter(booleanFieldsNotInPk[j]);          %> 
+<%               var fieldFuncName=generator.getFunctionName('',fieldName,false); %>
+<li>public function <%=funcName%>Switch<%=fieldFuncName%>(<%=phpArgsPkey%>){     </li>
+<li>    $sql="UPDATE   <%=schemaName%>.<%=tableName %></li>
+<li>        SET <%=fieldName%> = not <%=fieldName%>    </li>
+<li>        WHERE   (<%=attribsInPkeyJoined %>)            </li>
+<li>        IN      (<%=phpKeyVarsInStr%>)";              </li>
+<li>   $this->db->setAndExecQuery($sql);               </li>
+<li>}                                                      </li>
+<%          } %>
+<%     } %>
+<% } %>
+<li>}</li>
+</ol>
+           
+   </code>
+    </pre>
+ </script>

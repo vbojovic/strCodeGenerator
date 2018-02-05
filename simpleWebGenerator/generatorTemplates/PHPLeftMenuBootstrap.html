@@ -1,0 +1,52 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs xml javascript">
+             <ol>
+           <li> &lt;script type=&quot;text/javascript&quot; src=&quot;js/handlebars.js&quot;&gt;&lt;/script&gt;</li>
+           
+           
+            <li> &lt;div class=&quot;col-sm-3 col-md-2 sidebar&quot;&gt;</li>
+              <li> &lt;ul class=&quot;nav nav-sidebar&quot;&gt;</li>
+
+
+              <li>  &lt;div class=&quot;col-sm-3 col-md-2 sidebar&quot;&gt;                                             </li>
+              <li>      &lt;ul class=&quot;nav nav-sidebar&quot;&gt;                                                    </li>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>              
+<%     var menuTitle=schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_MENU_ITEM";                %>  
+              <li>        &lt;li&gt;&lt;a id=&quot;<%=menuTitle%>&quot;&gt;<%=menuTitle%>&lt;/a&gt;&lt;/li&gt;          </li>
+<% } %>
+              <li>      &lt;/ul&gt;                                                                                     </li>
+              <li>   &lt;/div&gt;                                                                                       </li>
+             <li> &lt;/ul&gt;</li>
+
+           <li> &lt;/div&gt;</li>
+
+          <li>&lt;script type=&quot;text/javascript&quot;&gt;</li>
+              $(document).ready(function(){
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {            
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;                            
+       var menuTitle=schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_MENU_ITEM";                 
+       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+       var sectionName = genericHelper.capitalizeFirstLetter(genericHelper.getFunctionName('',"List",false));
+            %> 
+                <li>        $(&quot;#<%=menuTitle%>&quot;).click(function(){ </li> 
+                <li>            var htmlContent = <%=funcName%><%=sectionName%>Template(); </li> 
+                <li>            $(&quot;#mainDiv&quot;).html(htmlContent);</li> 
+                <li>            <%=funcName%>JTableDefineAndShow();</li>
+                <li>        });</li>
+            <%
+              
+   } 
+%>              
+              });
+              <li> &lt;/script&gt;</li>
+       </ol>
+        </code>    
+      </pre> 
+</script>
+
+

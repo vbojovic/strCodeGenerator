@@ -1,0 +1,33 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+         <code lang="sql">
+            <ol> 
+                <%
+                    for ( var i = 0; i < selectedTables.length; i++ ) {           
+                        var schemaName=selectedTables[i].schema;              
+                        var tableName=selectedTables[i].table;   
+                        var seqs = generator.getSequenceNamesAndFieldsFromPkey(schemaName, tableName);
+                        if (seqs != null && seqs.length>0){
+                            for (var j = 0 ; j < seqs.length ; j++){
+                                var seqName = seqs[j].sequence;
+                                var fieldName = seqs[j].fieldName;
+                                
+                                %>
+                                <!--
+                                <li>#select max(<%=fieldName%>)+1 from <%=schemaName%>.<%=tableName%>;</li>
+                                <li>#ALTER SEQUENCE <%=seqName%> RESTART WITH ?;</li>
+                                -->
+                                <li>SELECT setval('<%=seqName%>', (SELECT max(<%=fieldName%>) FROM <%=schemaName%>.<%=tableName%>));</li>
+                                <%
+
+                            }
+                        
+                        }
+                    }
+                %>
+               
+
+            </ol>
+         </code>
+    </pre>
+</script>

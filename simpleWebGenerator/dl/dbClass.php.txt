@@ -1,0 +1,161 @@
+<?php
+
+error_reporting(9);
+class DbClass {
+    var $login;
+    var $pass;
+    var $dbName;
+    var $server;
+    var $query;
+    var $tbPrefix = "";
+    var $limit = 30;
+    var $offset;
+    var $languageId=0;
+    var $connection;
+    var $page =0;
+    /*
+     * koji kurac tocno funkcija radi? jel dodaje
+     */
+    public function getWhereFArr($fieldArr,$srcStr){
+        $srcArr=split(' ',$srcStr);
+        $operator='';
+        $sql='';
+        for ($x=0;$x<count($srcArr);$x++){
+            if ($x<>0) $operator='AND';
+            $sql.=" $operator (";
+                $operatorF='';
+                for ($y=0;$y<count($fieldArr);$y++){
+                    if ($y<>0) $operatorF=' OR ';
+                    $sql.=" $operatorF (".$fieldArr[$y]." ~* '".$srcArr[$x]."')";
+                }
+            $sql.=" )";
+        }
+        return "($sql)";
+    }
+
+    public function connect(){ 
+        $dsn = "host=$this->server port=5432 dbname=$this->dbName user=$this->login  password=$this->pass options='--client_encoding=UTF8'"; 
+        $this->connection = pg_pconnect($dsn);
+    }
+    public function isConnected(){
+    	return ($this->connection == null)?false:true;
+    }
+    public function disconnect(){
+        pg_close($this->connection);
+    }
+    public function getOffset(){
+        return $this->page*$this->limit+1;
+    }
+    public function setAndExecQuery($sql){
+        $this->setQuery($sql);
+        $this->sqlExec();
+    }
+    public function setQuery($sql){
+    	$this->query=$sql;
+        $this->query = str_replace('#tb#', $this->tbPrefix.".", $this->query);
+        AuthClass::log($this->query);
+    }
+    public function getQuery(){
+        return $this->query;
+    }
+
+
+    
+    public function switch_field($table,$ID_field,$ID_value,$field){
+        $sql="update  #tb#$table
+              set     $field=not($field)
+              where   $ID_field=$ID_value";
+        return $sql;
+    }
+    
+    public function sqlTextFieldsSearchAND($fields,$searchStr){
+        $words=split(" ",$searchStr);
+        $f=0;
+        $sql="";
+        if ($searchStr<>""){
+            $sql=" AND ";
+            foreach ($fields as $field){
+                $w=0;
+                $sql.=($f>0)?" OR ( ":"( " ;
+                foreach ($words as $word){
+                  $sql.=($w>0)?" AND  ":" ";
+                  $sql.=$field." like ".'"%'.$word.'%"';
+                  $w++;
+                }
+                $sql.=" ) ";
+                $f++;
+            }
+        }
+        return $sql;
+    }
+    public function setListing(){
+        $this->query.=" limit $this->limit offset $this->offset";
+    }
+    public function switchBooleanField($table,$field,$pkField,$idVal){
+    	$sql = "update #tb#$table set $field = not($field) where $pkField = $idVal";
+    	$this->setQuery($sql);
+    	$this->exec();
+    }
+    public function sql2matrix(){
+        //echo $this->query;
+        $result = pg_query($this->query);
+        $matrix = array();
+        while ($row = pg_fetch_assoc($result)){
+            $matrix[]=$row;
+        }
+        return $matrix;
+    }
+    public function sqlExec(){
+        //echo $this->query;
+        try {
+            pg_query($this->query);
+        } catch (Exception $exc) {
+            echo $this->query;
+        }         
+    }
+    public function exec(){
+        $this->sqlExec();
+    }
+    public function sql2row(){
+        //echo $this->query;
+        //TODO tu san sta, nece da mi radi logiranje!
+        $result = pg_query($this->query); 
+        //$row = pg_fetch_array($result);
+        $row = pg_fetch_assoc($result);
+        //print_r($row);
+        return $row;
+    }
+    public function sql2col(){
+        $result = pg_query($this->query);
+        $matrix = array();
+        while ($row = pg_fetch_assoc($result)){
+       //while ($row = pg_fetch_array($result)){
+            $matrix[]=$row[0];
+        }
+        return $matrix;     
+    }
+    public static function arrayEmpty($arr){
+        return (!isset($arr) ||$arr == null || count($arr)==0);
+    }
+    public function sql2str(){
+        $arr = $this->sql2row();
+        //print_r($arr);
+        if (DbClass::arrayEmpty($arr)) return null;
+        return (String)reset($arr);
+    }
+
+    public function getJTableLookupOptions($schemaName,$tableName,$fieldName,$pkeyId){
+        $schemaName = trim($schemaName);
+        $tableName  = trim($tableName);
+        $fieldName  = trim($fieldName);
+        $sql = "select {$fieldName} as \"DisplayText\"  "
+        . " , $pkeyId as \"Value\" "
+        . " from {$schemaName}.{$tableName} ";
+        
+        $this->db->setQuery($sql);
+        return $this->db->sql2matrix();
+    }
+    
+}
+
+?>

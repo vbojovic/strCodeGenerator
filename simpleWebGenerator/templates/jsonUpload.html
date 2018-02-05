@@ -1,0 +1,41 @@
+
+<script id="jsonUpload-template" type="text/x-handlebars-template">
+    <h1 class="page-header">JSON database structure</h1>
+    <textarea id="jsonText" class="form-control" rows="10">{{jsonText.str}}</textarea>
+    <a role="button" class="btn btn-primary btn-lg" id="clearJsonBtn">Clear</a>
+    <a role="button" class="btn btn-primary btn-lg" id="submitJsonBtn">Submit</a>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('#jsonUploadA').click(function(){
+                var jsonText={ 'str' : ''};
+                var jsonUploadTemplate = Handlebars.compile($("#jsonUpload-template").html());
+                jsonText.str = (generator.getDbModel() != null) ? JSON.stringify( generator.getDbModel() ) : '';
+                $('#settingsDiv').html(jsonUploadTemplate(jsonText));
+
+                $('#submitJsonBtn').click(function(){
+                    //ovde moram spremit u globalnu var vridnost i pokrenit proces punjenja tablica
+                    var jsonText = $('#jsonText').val();
+                    if (jsonText == '') return;
+                    //jsonText=jsonText.replace("@items","items");
+                    generator.setDbModel(jsonText)
+                    //JSON_DATA = JSON.parse(jsonText);
+                    //console.log('parsiran tekst od jsona '+jsonText);
+                    //$('#loadTablesA').click();
+                    loadTables();
+                    $('#settingsDiv').html('');
+
+                });
+
+                $('#clearJsonBtn').click(function(){
+                    $('#jsonText').text('');
+                    $('#jsonText').val('');
+                    $('#jsonText').html('');
+                });                
+                
+            });
+            
+
+    });
+</script>

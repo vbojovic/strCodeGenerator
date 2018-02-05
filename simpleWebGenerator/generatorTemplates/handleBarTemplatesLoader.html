@@ -1,0 +1,29 @@
+<script type="text/html" id="user_tmpl">
+      <pre>
+       <code class="hljs javascript">
+           <ol>
+               <li>&lt;script type=&quot;text/javascript&quot;&gt;    </li>
+            
+               <li>$(document).ready(function() {           </li>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>              
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+<%        for (var j=0 ; j<allSections.length; j++){ %>
+<%            var sectionName =genericHelper.capitalizeFirstLetter(genericHelper.getFunctionName('',allSections[j],false)); %>
+            <li>    var <%=funcName%><%=sectionName%>Template= Handlebars.compile($("#<%=funcName%><%=sectionName%>-template").html().replace("&lt; /script&gt;","&lt;/script&gt;"));</li> 
+
+<%        } %>
+
+<% } %>              
+
+                <li>});     </li>
+    
+                <li> &lt;/script&gt; </li>
+           </ol>
+           
+        </code>    
+      </pre> 
+</script>
+
+

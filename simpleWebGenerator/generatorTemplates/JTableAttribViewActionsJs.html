@@ -1,0 +1,29 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+            <ol>       
+            <%    
+             for ( var i = 0; i < selectedTables.length; i++ ) {    
+                  var schemaName=selectedTables[i].schema;              
+                  var tableName=selectedTables[i].table;                
+
+                  var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName);      
+                  var funcName = genericHelper.getFunctionName(schemaName,tableName,false);
+               %>
+                  <li>VIEW:{ width: "5%", sorting: false, edit: false, create: false, </li>
+                  <li>    display: function(tableData) {</li>
+                  <li>        var $img = $(&quot;&lt;img src=&#039;img/VIEW.png&#039; /&gt;&quot; );</li>
+                  <li>        $img.click(function() { </li>
+                  <li>        new AttribTableAjax(null,&#039;.recordInfoTable&#039;,true,true,tableData.record.<%=attribsInPkey[0]%>,&#039;<%=funcName%>&#039;,&#039;main.php?a=get_joined_jtable&#039;);</li>
+                   
+                      <li>        });</li>
+                    <li>        return $img;</li>
+                    <li>    }</li>
+                    <li>},</li>
+                <% 
+             }
+            %>               
+            </ol>
+   </code>
+    </pre>
+ </script>

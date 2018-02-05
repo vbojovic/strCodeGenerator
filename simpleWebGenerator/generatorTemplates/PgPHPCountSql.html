@@ -1,0 +1,29 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol  >       
+    <li>class ProjectSql{</li>
+    <li>    var $db=new DatabaseConnection();</li>
+<% 
+    for ( var i = 0; i < selectedTables.length; i++ ) {           
+       var schemaName=selectedTables[i].schema;              
+       var tableName=selectedTables[i].table;                
+       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+       
+%>
+
+<li>public function <%=funcName%>Count(){     </li>
+<li>    $sql="select count(1) </li>
+<li>          from <%=schemaName%>.<%=tableName%>   ";</li>
+<li>    $this->db->setQuery($sql);</li>
+<li>    return (int)$this->db->sql2str();</li>
+<li>}                                                      </li>
+
+<% } %>
+<li>}</li>
+</ol>
+           
+   </code>
+    </pre>
+ </script>

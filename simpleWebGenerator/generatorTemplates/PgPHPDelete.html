@@ -1,0 +1,32 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+       <code>
+           
+<ol  >       
+    <li>class ProjectSql{</li>
+    <li>    var $db=new DatabaseConnection();</li>
+<% for ( var i = 0; i < selectedTables.length; i++ ) {           %> 
+<%     var schemaName=selectedTables[i].schema;              %>
+<%     var tableName=selectedTables[i].table;                %>
+<%     var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName); %>
+<%     var attribsInPkeyJoined=attribsInPkey.join(','); %>
+<%     var phpArgs = genericHelper.joinArrayWithPRefixes(attribsInPkey, '$', ','); %>
+<%     var phpVars = genericHelper.joinArrayWithPRefixes(attribsInPkey, '{$', '},')+'}"'; %>
+<%     var phpVarsInStr = genericHelper.joinArrayWithGlues(attribsInPkey, '\'{$', '}\''  ,  ',');   %>
+<%     var funcName = generator.getFunctionName(schemaName,tableName,false); %>
+
+<li>public function <%=funcName%>Delete(<%=phpArgs%>){     </li>
+<li>    $sql="DELETE FROM <%=schemaName%>.<%=tableName%>   </li>
+<li>        WHERE                                         </li>
+<li>            (<%=attribsInPkeyJoined %>)            </li>
+<li>        IN              </li>
+<li>        (<%=phpVarsInStr%>)";                               </li>
+<li>    $this->setAndExecQuery($sql);</li>
+<li>}                                                      </li>
+<% } %>
+<li>}</li>
+</ol>
+           
+   </code>
+    </pre>
+ </script>
