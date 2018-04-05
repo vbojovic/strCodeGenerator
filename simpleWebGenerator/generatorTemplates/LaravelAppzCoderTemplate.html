@@ -1,0 +1,41 @@
+<script type="text/html" id="user_tmpl">
+    <pre>
+
+<%
+    for (var i = 0; i < selectedTables.length; i++) {
+        var code={};
+        var schemaName = selectedTables[i].schema;
+        var tableName = selectedTables[i].table;
+        var fields = generator.getTableFields(schemaName, tableName, true); 
+%>
+       <code lang="html javascript js json"> 
+<ol> 
+    <li>/*     <%=tableName%> */</li>
+<%
+        code.fields=[];
+        code.tableName=tableName;
+        for (var j = 0; j < fields.length; j++) {
+            var field = fields[j];
+            
+            code.fields.push({
+                name: field.fieldName ,
+                type: field.fieldType
+            });           
+        }   
+        
+        code.foreign_keys=[];
+        
+        var code2 = JSON.stringify(code).replace(/,/g,",\n").split("\n");   
+        
+        for (var x = 0; x < code2.length; x++) {
+            %> <li> <%= code2[x] %></li><%
+        }
+%>
+</ol>
+    </code>
+<%
+
+    }
+%>
+</pre>
+</script>
