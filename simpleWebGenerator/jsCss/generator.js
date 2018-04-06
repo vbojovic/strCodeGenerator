@@ -17,6 +17,7 @@ var Generator = (function () {
 
     Generator.prototype.loadDefultFunctions = function () {
         _functions = new Array();
+        _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "LaravelAppzCoderTemplate", funcName: "LaravelAppzCoderTemplate"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgWH", funcName: "Pg2PgWH"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgDynAttrib", funcName: "Pg2PgDynAttrib"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'js', name: "JTable attrib view actions ", funcName: "JTableAttribViewActionsJs"});

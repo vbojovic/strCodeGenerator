@@ -49,17 +49,18 @@ public class Helper {
 		
 		return settings;
 	}
-	public static DatabaseSettings toptalSettings() {
+	public static DatabaseSettings vmSettingsMysql() {
 		DatabaseSettings settings = new DatabaseSettings();
-		settings.setDataBaseType(DatabaseTypeEnum.postgres);
-		settings.setLogin("toptal");
-		settings.setPass("toptal");
-		settings.setHost("127.0.0.1");
-		settings.setPort(5432);
-		settings.setDataBase("toptal");
-		settings.setSchema("public");
+		settings.setDataBaseType(DatabaseTypeEnum.mysql);
+		settings.setLogin("rosada");
+		settings.setPass("rosada");
+		settings.setHost("192.168.0.211");
+		settings.setPort(3306);
+		settings.setDataBase("rosada");
+
 		return settings;
 	}
+
 
  
 }
