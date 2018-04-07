@@ -282,7 +282,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 
                     fkey.setReferencingTablePath(new DatabasePath(srcShema, srcTable));
             }
-            fkey.setFields(getDestFieldNames(dbPath.schema,fkeyName));
+            fkey.setFields(this.getDestFieldNames(dbPath.schema, dbPath.table,fkeyName));
 
             fKeys.add(fkey);
         }
@@ -299,11 +299,23 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
         }
         return fields;
     }
-    private List<DatabaseField> getDestFieldNames(String schema, String fkeyName) throws Exception {
-        List<String> fieldNames = this.getForeignKeysFields(schema,fkeyName,false);
-        List<DatabaseField> fields = new ArrayList<DatabaseField>();
-        for (String fieldName : fieldNames){
-            String table = getForeignKeyDestinationTable(schema,fkeyName);
+    private List<DatabaseField> getDestFieldNames(String schema, String table, String fkeyName) throws Exception {
+	    String sql = String.format(" SELECT REFERENCED_COLUMN_NAME\n" +
+            "FROM\n" +
+            "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+            "WHERE\n" +
+                "  REFERENCED_TABLE_SCHEMA = '%s' AND\n" +
+                "  REFERENCED_TABLE = '%s' AND\n" +
+            "  CONSTRAINT_NAME = '%s' " , schema,table,fkeyName);
+        ResultSet rows;
+        List<DatabaseField> fields = new ArrayList<DatabaseField>();;
+        try{
+            rows = m_DataBase.sql2resultSet(sql);
+        } catch (Exception e){
+            return fields;
+        }
+        while (rows.next()) {
+            String fieldName = rows.getString("REFERENCED_COLUMN_NAME");
             DatabaseField field = this.getFieldData(schema,table,fieldName);
             fields.add(field);
         }
@@ -599,7 +611,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
     }
 
     private boolean isConstraintPkey(String schema, String constraintName) throws Exception {
-        return constraintName.equalsIgnoreCase("primary");
+        return (boolean) constraintName.equalsIgnoreCase("primary");
     }
     @Override
     public List<String> getPkeyFields(String schema, String table) throws Exception {
@@ -652,7 +664,8 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
             " FROM\n" +
             "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
             " WHERE\n"+
-            " TABLE_NAME ='%s' " +
+            " REFERENCED_TABLE_SCHEMA is not null"+
+            " AND TABLE_NAME ='%s' " +
             " AND  CONSTRAINT_SCHEMA = '%s' ",table,schema);
 
         List<String> fkeys = GenericHelper.resultSetToList(m_DataBase.sql2resultSet(sql));
@@ -839,25 +852,33 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
         if (this.isConstraintPkey(schema,fKeyName)) throw new Exception("Primary key is supplied");
         String sql="";
         if (sourceTable){
-            //ovaj upit vraca ime tablice iz koje uzimam kljuc i koja je kolona u kljucu
-            sql = "select column_name " +
-                " from information_schema.constraint_column_usage  " +
-                " where table_catalog='DB' " +
-                " and   constraint_name='fKey' " +
-                " and  table_schema='SCH'";
-            sql = sql.replace("DB",dbName)
-                    .replace("SCH",schema)
-                    .replace("fKey", fKeyName)   ;
+            sql=String.format("SELECT \n" +
+                    "  COLUMN_NAME\n" +
+                    "FROM\n" +
+                    "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+                    "WHERE\n" +
+                    "  TABLE_SCHEMA = '%s' AND\n" +
+                    "  CONSTRAINT_NAME = '%s'",schema,fKeyName);
         }else{
-            sql=String.format(
-                " select column_name \n" +
-                " from information_schema.key_column_usage\n" +
-                " where constraint_name='%s'\n" +
-                " and constraint_schema='%s'\n" +
-                " and constraint_catalog='%s'" +
-                " order by position_in_unique_constraint",
-                fKeyName,schema,m_DataBase.getSettings().getDataBase()
-            );
+            sql=String.format("SELECT \n" +
+                    "  COLUMN_NAME\n" +
+                    "FROM\n" +
+                    "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+                    "WHERE\n" +
+                    "  REFERENCED_TABLE_SCHEMA = '%s' AND\n" +
+                    "  CONSTRAINT_NAME = '%s' " +
+                    "order by position_in_unique_constraint,ORDINAL_POSITION",schema,fKeyName);
+
+//            sql=String.format(
+//                " select column_name \n" +
+//                " from information_schema.key_column_usage\n" +
+//                " where constraint_name='%s'\n" +
+//                " and constraint_schema='%s'\n" +
+//                " and constraint_catalog='%s'" +
+//                " order by position_in_unique_constraint",
+//                fKeyName,schema,m_DataBase.getSettings().getDataBase()
+//            );
+//            m_DataBase.getSettings().getDataBase()
         }
         List<String> columns = GenericHelper.resultSetToList(m_DataBase.sql2resultSet(sql));
         return columns;
@@ -865,31 +886,17 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 
     @Override
     public String getForeignKeySourceTableName(String destSchemaName, String fKeyName) throws Exception {
-        String sql = String.format("" +
-                " select " +
-                " r2.relname as src_table " +
-                //"r1.relname as  dest_table,n.nspname as dest_schema,\n" +
-                //"r2.relname as src_table,n2.nspname as  src_schema,conname \n" +
-                " \n" +
-                " from\n" +
-                " pg_constraint  c\n" +
-                " inner join pg_namespace n\n" +
-                " on n.oid = c.connamespace\n" +
-                " \n" +
-                " inner join pg_class r1 \n" +
-                " on r1.oid = c.conrelid\n" +
-                " inner join pg_class r2 \n" +
-                " on r2.oid = c.confrelid\n" +
-                " \n" +
-                " inner join pg_namespace n2\n" +
-                " on n2.oid = r2.relnamespace\n" +
-                " \n" +
-                " where contype='f' " +
-                " and conname='%s' " +
-                " and n.nspname='%s' ",fKeyName,destSchemaName);
-        return m_DataBase.sql2string(sql);  //To change body of implemented methods use File | Settings | File Templates.
+        if (this.isConstraintPkey(destSchemaName,fKeyName)) return null;
+        String sql = String.format(
+                "  SELECT \n" +
+                "  distinct TABLE_NAME \n" +
+                "FROM\n" +
+                "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+                "WHERE\n" +
+                "  REFERENCED_TABLE_SCHEMA = '%s' AND\n" +
+                "  CONSTRAINT_NAME = '%s'; ",destSchemaName,fKeyName);
+        return m_DataBase.sql2string(sql);
     }
-
 
     private DatabaseFunction getFunctionData(String schema, String functionName) throws SQLException {
         String sql="";
