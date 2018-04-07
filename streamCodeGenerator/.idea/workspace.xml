@@ -108,23 +108,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModelTester.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ModelTester.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="51" column="29" lean-forward="true" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="44" />
+            <state relative-caret-position="323">
+              <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
               <folding>
-                <marker date="1522967823111" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
+                <marker date="1523099935819" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MysqlDbElementReader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MysqlDbElementReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="648" column="24" lean-forward="false" selection-start-line="648" selection-start-column="24" selection-end-line="648" selection-end-column="24" />
+            <state relative-caret-position="184">
+              <caret line="284" column="0" lean-forward="false" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -142,6 +142,8 @@
       <find>loadFromDatabase</find>
       <find>PgDbElementReader\</find>
       <find>reader</find>
+      <find>isConstraintPkey</find>
+      <find>isKeySelfReferencing</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -168,9 +170,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/pgModelReaderTests.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/Helper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqDb.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" />
       </list>
     </option>
   </component>
@@ -980,18 +982,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 21h 13m 09s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 21h 14m 18s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 21h 17m 09s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 21h 17m 31s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 21h 29m 54s.xml">
       <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
     </history-entry>
@@ -1010,9 +1000,22 @@
     <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 22h 02m 55s.xml">
       <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 23h 52m 57s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.06 at 23h 57m 55s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.07 at 00h 20m 40s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.07 at 13h 17m 10s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-1" width="1924" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1021,11 +1024,11 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4898178" sideWeight="0.20106383" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31939977" sideWeight="0.14202128" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21968085" sideWeight="0.67799354" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.4978701" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31939977" sideWeight="0.86170214" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4898178" sideWeight="0.7989362" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31939977" sideWeight="0.8579787" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4898178" sideWeight="0.7989362" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20265958" sideWeight="0.67799354" order="1" side_tool="false" content_ui="combo" />
@@ -1108,7 +1111,7 @@
         <state relative-caret-position="0">
           <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <marker date="1522967823111" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
+            <marker date="1523099935819" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -1378,7 +1381,7 @@
         <state relative-caret-position="177">
           <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
           <folding>
-            <element signature="e#7229#7230#0" expanded="true" />
+            <element signature="e#7229#7230#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1388,8 +1391,8 @@
         <state relative-caret-position="169">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#1192#1342#0" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1192#1342#0" expanded="false" />
+            <element signature="e#1341#1342#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1472,21 +1475,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="51" column="29" lean-forward="true" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="44" />
-          <folding>
-            <marker date="1522967823111" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
-          </folding>
+        <state relative-caret-position="184">
+          <caret line="284" column="0" lean-forward="false" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="648" column="24" lean-forward="false" selection-start-line="648" selection-start-column="24" selection-end-line="648" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="323">
+          <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+          <folding>
+            <marker date="1523099935819" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
+          </folding>
         </state>
       </provider>
     </entry>

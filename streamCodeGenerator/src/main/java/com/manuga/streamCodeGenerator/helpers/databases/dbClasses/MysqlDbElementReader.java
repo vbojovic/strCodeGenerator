@@ -599,30 +599,20 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
     }
 
     private boolean isConstraintPkey(String schema, String constraintName) throws Exception {
-        String sql ="select count(1) as cnt " +
-                " from pg_constraint c              " +
-                " inner join pg_namespace n         " +
-                " on n.oid = c.connamespace         " +
-                " inner join pg_class r             " +
-                " on r.oid=c.conrelid               " +
-                " where contype='p'                 " +
-                " and nspname='sch'            " +
-                " and  c.conname::varchar='CONSTR'               " ;
-        sql = sql.replace("sch",schema).replace("CONSTR",constraintName);
-        return (Integer.parseInt(m_DataBase.sql2string(sql))>0);
+        return constraintName.equalsIgnoreCase("primary");
     }
     @Override
     public List<String> getPkeyFields(String schema, String table) throws Exception {
         String pkeyName = getPkey(schema,table);
-        String sql = "select column_name                   "+
-                " from information_schema.key_column_usage  "+
-                " where constraint_catalog='DB'             "+
-                " and constraint_schema='schName'           "+
-                " and constraint_name like 'pkey'           "+
-                " order by ordinal_position                 ";
-        sql=sql.replace("DB",this.getM_DataBase().getSettings().getDataBase())
-                .replace("schName",schema)
-                .replace("pkey",pkeyName);
+        String sql = String.format("SELECT \n" +
+                "  COLUMN_NAME as `column_name`\n" +
+                "FROM\n" +
+                "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+                "WHERE\n" +
+                " CONSTRAINT_NAME like 'PRIMARY' "+
+                "  AND TABLE_SCHEMA = '%s' \n" +
+                "  AND TABLE_NAME = '%s'",schema,table);
+
 
         ResultSet rows = m_DataBase.sql2resultSet(sql);
         List<String> pkeyFields = new ArrayList<String>();
@@ -656,17 +646,15 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 
     @Override
     public List<String> getForeignKeys(String schema, String table) throws Exception {
-        String sql ="select c.conname::varchar as fkey " +
-                " from pg_constraint c              " +
-                " inner join pg_namespace n         " +
-                " on n.oid = c.connamespace         " +
-                " inner join pg_class r             " +
-                " on r.oid=c.conrelid               " +
-                " where contype='f'                 " +
-                " and nspname='sch'            " +
-                " and relname='tbl'               " ;
-        sql = sql.replace("sch", schema)
-                .replace("tbl",table);
+        String sql = String.format(
+            " SELECT \n" +
+            "  distinct CONSTRAINT_NAME\n" +
+            " FROM\n" +
+            "  INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n" +
+            " WHERE\n"+
+            " TABLE_NAME ='%s' " +
+            " AND  CONSTRAINT_SCHEMA = '%s' ",table,schema);
+
         List<String> fkeys = GenericHelper.resultSetToList(m_DataBase.sql2resultSet(sql));
         return fkeys;
     }
@@ -844,12 +832,6 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
             if (srcTable.equalsIgnoreCase(this.getForeignKeyDestinationTable(schemaName,key))) return true;
         }
         return false;
-    }
-    public boolean isKeySelfReferencing(String schemaName,String keyName) throws Exception {
-        if (this.isConstraintPkey(schemaName,keyName)) return false;
-        String dTable = this.getForeignKeyDestinationTable(schemaName, keyName) ;
-        String sTable = this.getForeignKeySourceTableName(schemaName, keyName) ;
-        return dTable.equalsIgnoreCase(sTable);
     }
     @Override
     public List<String> getForeignKeysFields(String schema, String fKeyName, boolean sourceTable) throws Exception {

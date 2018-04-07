@@ -48,7 +48,7 @@ public class ModelTester {
 		DatabaseModel dbm = new DatabaseModel();
 		dbm.loadFromXml(importFileName);
 	}
-	@Test
+//	@Test
 	public void testMysqlInnerModelExportAll() throws Exception {
 		MysqDb db = new MysqDb();
 		//db.setSettings(Helper.homeSettings());
