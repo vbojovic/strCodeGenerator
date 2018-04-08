@@ -67,9 +67,10 @@ public interface IDbElementReader {
     public abstract List<String> getIndices(String schema, String table) throws  Exception;
 
 
-    public abstract List<String> getForeignKeys(String schema, String table) throws  Exception;
+    public abstract List<String> getForeignKeys(DatabasePath path/*String schema, String table*/) throws  Exception;
 
-    public abstract DatabaseIndex getIndex(String schemaName, String indexName) throws Exception;
+//    public abstract DatabaseIndex getIndex(String schemaName, String tableName, String indexName) throws Exception;
+    public abstract DatabaseIndex getIndex(DatabasePath path) throws Exception;
     public abstract List<String> getForeignKeysFields(String schema, String fKeyName, boolean sourceTable) throws  Exception;
     public abstract String getForeignKeySourceTableName(String schemaName, String fKeyName) throws  Exception;
 
@@ -78,5 +79,6 @@ public interface IDbElementReader {
     public abstract int getFollowConstraintsToOtherSchemasDepth() ;
     public abstract List<DatabaseFunction> getFunctions(String schema) throws Exception;
 
-    List<String> getIndexFields(String indexSchema, String indexName) throws Exception;
+//    List<String> getIndexFields(String indexSchema, String indexName) throws Exception;
+    List<String> getIndexFields(DatabasePath path) throws Exception;
 }

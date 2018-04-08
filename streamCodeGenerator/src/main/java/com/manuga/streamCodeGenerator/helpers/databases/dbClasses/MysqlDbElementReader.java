@@ -236,7 +236,9 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
                 dbKey.setIsUnique(true);
             }
             if  (type.equalsIgnoreCase("u"))   {
-                keyFields = getIndexFields(dbPath.schema,key);
+                DatabasePath path = (DatabasePath)dbPath.duplicate();
+                path.index = key;
+                keyFields = getIndexFields(path);
                 dbKey.setIsUnique(true);
             }
             if  (type.equalsIgnoreCase("f"))   {
@@ -264,7 +266,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 	public List<DatabaseForeignKey> readForeignKeys(DatabasePath dbPath)
 			throws Exception {
         if (dbPath.schema.isEmpty() || dbPath.table.isEmpty()) throw  new Exception("Path not complete");
-        List<String> fKeyNames =  this.getForeignKeys(dbPath.schema,dbPath.table);
+        List<String> fKeyNames =  this.getForeignKeys(dbPath);
         List<DatabaseForeignKey> fKeys = new ArrayList<DatabaseForeignKey>();
         for (String fkeyName : fKeyNames){
             DatabaseForeignKey fkey = new DatabaseForeignKey();
@@ -330,7 +332,10 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
         final List<String> indexNames = getIndices(dbPath.schema,dbPath.table);
         List<DatabaseIndex> indices = new ArrayList<DatabaseIndex>();
         for (final String ndxName : indexNames){
-            final DatabaseIndex ndx = getIndex(dbPath.schema,ndxName);
+//            final DatabaseIndex ndx = getIndex(dbPath.schema,dbPath.table,ndxName);
+            DatabasePath path = (DatabasePath)dbPath.duplicate();
+            path.index = ndxName;
+            final DatabaseIndex ndx = getIndex(path);
             indices.add(ndx);
         }
 		return indices;
@@ -409,16 +414,17 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 	 */
 	@Override
 	public List<DatabaseView> readViews(DatabasePath dbPath) throws Exception {
-		String sqlTxt = "select viewname,definition  from pg_views  where schemaname = '"
-				+dbPath.schema + "' order by viewname ";
+		String sqlTxt =String.format( "select TABLE_NAME , VIEW_DEFINITION " +
+                "from information_schema.views " +
+                "where TABLE_SCHEMA = '%s' order by TABLE_NAME ",dbPath.schema);
 		List<DatabaseView> views = new ArrayList<DatabaseView>();
 		ResultSet tablesResult = m_DataBase.sql2resultSet(sqlTxt);
 		if (tablesResult != null)
 			while (tablesResult.next()){
 				//r.add(tablesResult.getString(1));
 				DatabaseView view = new DatabaseView();
-				view.setDDL(tablesResult.getString("definition"));
-				view.setName(tablesResult.getString("viewname"));
+				view.setDDL(tablesResult.getString("VIEW_DEFINITION"));
+				view.setName(tablesResult.getString("TABLE_NAME"));
 				DatabasePath tablePath = dbPath;
 				tablePath.view = view.getName();
 				view.setFields(this.readFields(dbPath));  
@@ -537,42 +543,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 
     @Override
     public List<DatabaseSequence> readSequences(DatabasePath dbPath) throws Exception {
-        String sql = String.format("select \n" +
-                " s.cycle_option,\n" +
-                " s.data_type,\n" +
-                " s.\"increment\",\n" +
-                " s.maximum_value,\n" +
-                " s.minimum_value,\n" +
-                " s.numeric_precision,\n" +
-                " s.numeric_scale,\n" +
-                " s.numeric_precision_radix,\n" +
-                " s.sequence_catalog,\n" +
-                " s.sequence_name,\n" +
-                " s.sequence_schema\n" +
-                " from information_schema.sequences s\n" +
-                " where \n" +
-                " s.sequence_schema = '%s'\n",dbPath.schema) ;
-        ResultSet rows =(m_DataBase.sql2resultSet(sql));
-        List<DatabaseSequence> sequences = new ArrayList<DatabaseSequence>();
-        while (rows.next()){
-            DatabasePath seqPath = (DatabasePath)dbPath.duplicate();
-            DatabaseSequence seq = new DatabaseSequence();
-            seq.setName(rows.getString("sequence_name"));
-
-            seq.setComment(readComment(dbPath));
-            //TODO nadopunit za sekvencu sta je potrebno. za sada preskocit sekvence jer nisu toliko bitne
-
-            seq.setCycle((rows.getString("cycle_option")==null) ? false : true);
-
-            seq.setDDL(getSequenceDDL(dbPath.schema,dbPath.sequence));
-            seq.setIncrement(rows.getLong("increment"));
-            seq.setMaxvalue(rows.getLong("maximum_value"));
-            seq.setMinvalue(rows.getLong("minimum_value"));
-
-            sequences.add(seq);
-        }
-
-        return sequences;
+        return  null;
     }
 
     @Override
@@ -648,8 +619,8 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
     }
 
     @Override
-    public List<String> getIndexFields(String indexSchema,String indexName) throws Exception {
-        DatabaseIndex ndx = this.getIndex(indexSchema,indexName);
+    public List<String> getIndexFields(DatabasePath path/*String indexSchema,String indexName*/) throws Exception {
+        DatabaseIndex ndx = this.getIndex(path);
         List<String> indexFields = new ArrayList<String>();
         for (DatabaseField field : ndx.getFields())
             indexFields.add(field.getFieldName());
@@ -657,7 +628,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
     }
 
     @Override
-    public List<String> getForeignKeys(String schema, String table) throws Exception {
+    public List<String> getForeignKeys(DatabasePath path) throws Exception {
         String sql = String.format(
             " SELECT \n" +
             "  distinct CONSTRAINT_NAME\n" +
@@ -666,7 +637,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
             " WHERE\n"+
             " REFERENCED_TABLE_SCHEMA is not null"+
             " AND TABLE_NAME ='%s' " +
-            " AND  CONSTRAINT_SCHEMA = '%s' ",table,schema);
+            " AND  CONSTRAINT_SCHEMA = '%s' ",path.table,path.schema);
 
         List<String> fkeys = GenericHelper.resultSetToList(m_DataBase.sql2resultSet(sql));
         return fkeys;
@@ -722,32 +693,18 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
         return field;
     }
     @Override
-    public DatabaseIndex getIndex(String schemaName, String indexName) throws Exception {
-        String sql =
-            " SELECT i.relname as indname,                               "+
-            "        i.relowner as indowner,                             "+
-            "        idx.indrelid::regclass::varchar as relation,        "+
-            "        am.amname as indam,                                 "+
-            "        idx.indkey,                                         "+
-            "        ARRAY(                                              "+
-            "        SELECT pg_get_indexdef(idx.indexrelid, k + 1, true) "+
-            "        FROM generate_subscripts(idx.indkey, 1) as k        "+
-            "        ORDER BY k                                          "+
-            "        ) as indkey_names,                                  "+
-            "        idx.indexprs IS NOT NULL as indexprs,               "+
-            "        idx.indpred IS NOT NULL as indpred,                 "+
-            "        idx.indisunique                                    "+
-            " FROM   pg_index as idx                                     "+
-            " JOIN   pg_class as i                                       "+
-            " ON     i.oid = idx.indexrelid                              "+
-            " JOIN   pg_am as am                                         "+
-            " ON     i.relam = am.oid                                    "+
-            " JOIN   pg_namespace as ns                                  "+
-            " ON     ns.oid = i.relnamespace                             "+
-            " AND    ns.nspname = 'sch'                                  "+
-            " and    i.relname='ndxName'                                 ";
-        sql=sql.replace("sch",schemaName)
-                .replace("ndxName", indexName);
+    public DatabaseIndex getIndex(DatabasePath path) throws Exception {
+        String sql = String.format("SELECT \n" +
+                "     group_concat(COLUMN_NAME) as `indkey_names`\n" +
+                "     ,NON_UNIQUE\n" +
+                "     ,TABLE_NAME\n" +
+                "FROM INFORMATION_SCHEMA.STATISTICS\n" +
+                "WHERE TABLE_SCHEMA = '%s'\n" +
+                "and index_name='%s'\n" +
+                        ((path.table!=null)? "and TABLE_NAME = '%s'\n":"") +
+                "group by TABLE_NAME"
+        , path.schema,path.index, path.table);
+
         ResultSet resultSet =   m_DataBase.sql2resultSet(sql);
 
         if (resultSet == null)  return null;
@@ -755,22 +712,21 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
         List<DatabaseField> fields = new ArrayList<DatabaseField>();
         boolean isIndexUnique = false;
         while(resultSet.next()){
-            String[] fieldList = (String[])resultSet
-                    .getArray("indkey_names")
-                    .getArray();
-            String[] relationShema  = (resultSet.getString("relation").split("\\."));
-            isIndexUnique = resultSet.getBoolean("indisunique");
+            String[] fieldList = resultSet
+                    .getString("indkey_names").split(",");
+            String[] relationShema  = (resultSet.getString("TABLE_NAME").split("\\."));
+            isIndexUnique = !resultSet.getBoolean("NON_UNIQUE");
             String relation = (relationShema.length>1)?relationShema[1]:relationShema[0];
             for (String fieldName : fieldList)    {
-                DatabaseField field = getFieldData( schemaName,   relation, fieldName);
+                DatabaseField field = getFieldData( path.schema,   relation, fieldName);
                 fields.add(field);
             }
         }
         //TODO moram napunit informacije o indeksu. za sada su mi bitna samo polja
         DatabaseIndex ndx = new DatabaseIndex();
-        ndx.setName(indexName);
+        ndx.setName(path.index);
         ndx.setParallel(false);
-        ndx.setDDL(this.getIndexDDL(schemaName,indexName));
+        ndx.setDDL("N/A");
         ndx.setIsUnique(isIndexUnique);
         ndx.setIndexType("N/A");
         ndx.setFields(fields);
@@ -838,14 +794,7 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
                 ,fKeyName) ;
         return m_DataBase.sql2string(sql);
     }
-    public boolean isTableSelfReferencing(String schemaName, String table) throws Exception {
-        final List<String> keys = this.getForeignKeys(schemaName,table);
-        for(String key : keys){
-            String srcTable = this.getForeignKeySourceTableName(schemaName,key);
-            if (srcTable.equalsIgnoreCase(this.getForeignKeyDestinationTable(schemaName,key))) return true;
-        }
-        return false;
-    }
+
     @Override
     public List<String> getForeignKeysFields(String schema, String fKeyName, boolean sourceTable) throws Exception {
         String dbName = this.m_DataBase.getSettings().getDataBase();

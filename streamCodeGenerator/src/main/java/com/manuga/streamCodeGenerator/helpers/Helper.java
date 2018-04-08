@@ -41,11 +41,11 @@ public class Helper {
 	public static DatabaseSettings homeSettings() {
 		DatabaseSettings settings = new DatabaseSettings();
 		settings.setDataBaseType(DatabaseTypeEnum.postgres);
-		settings.setLogin("ezop");
-		settings.setPass("amr6vkur");
-		settings.setHost("192.168.0.7");
+		settings.setLogin("test");
+		settings.setPass("test");
+		settings.setHost("127.0.0.1");
 		settings.setPort(5432);
-		settings.setDataBase("svastara");
+		settings.setDataBase("test");
 		
 		return settings;
 	}

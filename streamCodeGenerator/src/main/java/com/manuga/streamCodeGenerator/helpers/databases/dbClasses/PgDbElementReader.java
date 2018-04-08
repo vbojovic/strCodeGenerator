@@ -250,25 +250,27 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
             dbKey.setIsUnique(false);
             dbKey.setForeign(false);
 
+            DatabasePath path = (DatabasePath)dbPath.duplicate();
+            path.index = key;
             if  (type.equalsIgnoreCase("p"))   {
-                keyFields =  getPkeyFields(dbPath.schema,dbPath.table);
+                keyFields =  getPkeyFields(path.schema,path.table);
                 dbKey.setPrimary(true);
                 dbKey.setIsUnique(true);
             }
             if  (type.equalsIgnoreCase("u"))   {
-                keyFields = getIndexFields(dbPath.schema,key);
+                keyFields = getIndexFields(path);
                 dbKey.setIsUnique(true);
             }
             if  (type.equalsIgnoreCase("f"))   {
-                keyFields =  getForeignKeysFields(dbPath.schema, key, false);
+                keyFields =  getForeignKeysFields(path.schema, key, false);
                 dbKey.setForeign(true);
             }
             for (String field : keyFields){
-                DatabaseField f = this.getFieldData(dbPath.schema,dbPath.table,field);
+                DatabaseField f = this.getFieldData(path.schema,path.table,field);
                 dbKey.getFields().add(f);
             }
             for (String keyField : keyFields){
-                DatabaseField fieldData = getFieldData(dbPath.schema,dbPath.table,keyField);
+                DatabaseField fieldData = getFieldData(path.schema,path.table,keyField);
                 dbKey.getFields().add(fieldData)  ;
             }
             keys.add(dbKey);
@@ -284,7 +286,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
 	public List<DatabaseForeignKey> readForeignKeys(DatabasePath dbPath)
 			throws Exception {
         if (dbPath.schema.isEmpty() || dbPath.table.isEmpty()) throw  new Exception("Path not complete");
-        List<String> fKeyNames =  this.getForeignKeys(dbPath.schema,dbPath.table);
+        List<String> fKeyNames =  this.getForeignKeys(dbPath);
         List<DatabaseForeignKey> fKeys = new ArrayList<DatabaseForeignKey>();
         for (String fkeyName : fKeyNames){
             DatabaseForeignKey fkey = new DatabaseForeignKey();
@@ -338,7 +340,9 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
         final List<String> indexNames = getIndices(dbPath.schema,dbPath.table);
         List<DatabaseIndex> indices = new ArrayList<DatabaseIndex>();
         for (final String ndxName : indexNames){
-            final DatabaseIndex ndx = getIndex(dbPath.schema,ndxName);
+            DatabasePath path = dbPath.duplicate();
+            path.index = ndxName;
+            final DatabaseIndex ndx = getIndex(path);
             indices.add(ndx);
         }
 		return indices;
@@ -663,8 +667,9 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
     }
 
     @Override
-    public List<String> getIndexFields(String indexSchema,String indexName) throws Exception {
-        DatabaseIndex ndx = this.getIndex(indexSchema,indexName);
+    public List<String> getIndexFields(DatabasePath path) throws Exception {
+        if (path.index == null) throw new Exception("Index name missing");
+        DatabaseIndex ndx = this.getIndex(path);
         List<String> indexFields = new ArrayList<String>();
         for (DatabaseField field : ndx.getFields())
             indexFields.add(field.getFieldName());
@@ -672,7 +677,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
     }
 
     @Override
-    public List<String> getForeignKeys(String schema, String table) throws Exception {
+    public List<String> getForeignKeys(DatabasePath path) throws Exception {
         String sql ="select c.conname::varchar as fkey " +
                 " from pg_constraint c              " +
                 " inner join pg_namespace n         " +
@@ -682,8 +687,8 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
                 " where contype='f'                 " +
                 " and nspname='sch'            " +
                 " and relname='tbl'               " ;
-        sql = sql.replace("sch", schema)
-                .replace("tbl",table);
+        sql = sql.replace("sch", path.schema)
+                .replace("tbl",path.table);
         List<String> fkeys = GenericHelper.resultSetToList(m_DataBase.sql2resultSet(sql));
         return fkeys;
     }
@@ -738,7 +743,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
         return field;
     }
     @Override
-    public DatabaseIndex getIndex(String schemaName, String indexName) throws Exception {
+    public DatabaseIndex getIndex(DatabasePath path) throws Exception {
         String sql =
             " SELECT i.relname as indname,                               "+
             "        i.relowner as indowner,                             "+
@@ -762,8 +767,8 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
             " ON     ns.oid = i.relnamespace                             "+
             " AND    ns.nspname = 'sch'                                  "+
             " and    i.relname='ndxName'                                 ";
-        sql=sql.replace("sch",schemaName)
-                .replace("ndxName", indexName);
+        sql=sql.replace("sch",path.schema)
+                .replace("ndxName", path.index);
         ResultSet resultSet =   m_DataBase.sql2resultSet(sql);
 
         if (resultSet == null)  return null;
@@ -778,22 +783,22 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
             isIndexUnique = resultSet.getBoolean("indisunique");
             String relation = (relationShema.length>1)?relationShema[1]:relationShema[0];
             for (String fieldName : fieldList)    {
-                DatabaseField field = getFieldData( schemaName,   relation, fieldName);
+                DatabaseField field = getFieldData( path.schema,   relation, fieldName);
                 fields.add(field);
             }
         }
         //TODO moram napunit informacije o indeksu. za sada su mi bitna samo polja
         DatabaseIndex ndx = new DatabaseIndex();
-        ndx.setName(indexName);
+        ndx.setName(path.index);
         ndx.setParallel(false);
-        ndx.setDDL(this.getIndexDDL(schemaName,indexName));
+        ndx.setDDL(this.getIndexDDL(path));
         ndx.setIsUnique(isIndexUnique);
         ndx.setIndexType("N/A");
         ndx.setFields(fields);
         return ndx;
     }
 
-    public String getIndexDDL(final String schemaName, final String indexName){
+    public String getIndexDDL(final DatabasePath path){
         return "N/A";
     }
 
@@ -854,20 +859,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
                 ,fKeyName) ;
         return m_DataBase.sql2string(sql);
     }
-    public boolean isTableSelfReferencing(String schemaName, String table) throws Exception {
-        final List<String> keys = this.getForeignKeys(schemaName,table);
-        for(String key : keys){
-            String srcTable = this.getForeignKeySourceTableName(schemaName,key);
-            if (srcTable.equalsIgnoreCase(this.getForeignKeyDestinationTable(schemaName,key))) return true;
-        }
-        return false;
-    }
-    public boolean isKeySelfReferencing(String schemaName,String keyName) throws Exception {
-        if (this.isConstraintPkey(schemaName,keyName)) return false;
-        String dTable = this.getForeignKeyDestinationTable(schemaName, keyName) ;
-        String sTable = this.getForeignKeySourceTableName(schemaName, keyName) ;
-        return dTable.equalsIgnoreCase(sTable);
-    }
+
     @Override
     public List<String> getForeignKeysFields(String schema, String fKeyName, boolean sourceTable) throws Exception {
         String dbName = this.m_DataBase.getSettings().getDataBase();

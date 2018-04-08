@@ -56,7 +56,7 @@ public class ModelTester {
 		//db.setSettings(Helper.zoharSettings());
 		db.connect();
 
-		String outPath = "/tmp/map.xml";
+		String outPath = "/tmp/mapMy.xml";
 		DatabaseModel dbm = new DatabaseModel();
 		List<DatabaseSchema> schemas =  db.getElementReader().readSchemas();
 		dbm.setSchemas(schemas);

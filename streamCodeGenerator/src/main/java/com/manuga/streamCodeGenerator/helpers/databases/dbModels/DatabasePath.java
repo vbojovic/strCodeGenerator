@@ -9,6 +9,7 @@ public class DatabasePath implements Cloneable {
 	public String procedure;
 	public String sequence;
     public String field;
+    public String index;
     public DatabasePath(){super();}
     public DatabasePath(String schema,String table){
         super();
@@ -21,7 +22,8 @@ public class DatabasePath implements Cloneable {
         this.table=table;
         this.field = field;
     }
-    public Object duplicate() throws Exception {
-        return clone();
+
+    public DatabasePath duplicate()throws Exception {
+        return (DatabasePath)clone();
     }
 }
