@@ -14,6 +14,9 @@ float4	float	num
 float8	double	num
 inet	inet	txt
 int	integer	num
+integer	integer	num
+smallint	smallint	num
+tinyint	smallint	num
 int2	smallint	num
 int4	integer	num
 int8	bigint	num
