@@ -201,18 +201,12 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 	@Override
 	public List<DatabaseKey> readKeys(DatabasePath dbPath) throws Exception {
         List<DatabaseKey> keys = new ArrayList<DatabaseKey>();
+//primary, unique, foreign..
+        String sql = String.format("select CONSTRAINT_NAME,CONSTRAINT_TYPE\n" +
+                "from information_schema.table_constraints " +
+                "where CONSTRAINT_SCHEMA = '%s'", dbPath.schema);
 
-        String sql = String.format(
-            " select distinct conname,contype  \n" +
-            " from\n" +
-            " pg_constraint  c\n" +
-            " inner join pg_namespace n\n" +
-            " on n.oid = c.connamespace\n" +
-            " inner join pg_class r\n" +
-            " on r.oid = c.conrelid" +
-            " where nspname ~ '%s'"    , dbPath.schema);
-
-        if (dbPath.table!=null) sql=sql+String.format(" and relname = '%s'", dbPath.table);
+        if (dbPath.table!=null) sql=sql+String.format(" and TABLE_NAME = '%s'", dbPath.table);
         ResultSet rows;
         try{
             rows = m_DataBase.sql2resultSet(sql);
@@ -220,8 +214,8 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
             return keys;
         }
         while (rows.next()){
-            String key = rows.getString("conname");
-            String type = rows.getString("contype");
+            String key = rows.getString("CONSTRAINT_NAME");
+            String type = rows.getString("CONSTRAINT_TYPE").trim();
             DatabaseKey dbKey = new DatabaseKey();
             dbKey.setName(key);
 
@@ -230,25 +224,29 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
             dbKey.setIsUnique(false);
             dbKey.setForeign(false);
 
-            if  (type.equalsIgnoreCase("p"))   {
+            if  (type.equalsIgnoreCase("PRIMARY KEY"))   {
                 keyFields =  getPkeyFields(dbPath.schema,dbPath.table);
                 dbKey.setPrimary(true);
                 dbKey.setIsUnique(true);
             }
-            if  (type.equalsIgnoreCase("u"))   {
+
+            if  (type.equalsIgnoreCase("UNIQUE"))   {
                 DatabasePath path = (DatabasePath)dbPath.duplicate();
                 path.index = key;
                 keyFields = getIndexFields(path);
                 dbKey.setIsUnique(true);
             }
-            if  (type.equalsIgnoreCase("f"))   {
+
+            if  (type.equalsIgnoreCase("FOREIGN KEY"))   {
                 keyFields =  getForeignKeysFields(dbPath.schema, key, false);
                 dbKey.setForeign(true);
             }
+
             for (String field : keyFields){
                 DatabaseField f = this.getFieldData(dbPath.schema,dbPath.table,field);
                 dbKey.getFields().add(f);
             }
+
             for (String keyField : keyFields){
                 DatabaseField fieldData = getFieldData(dbPath.schema,dbPath.table,keyField);
                 dbKey.getFields().add(fieldData)  ;
