@@ -44,8 +44,8 @@ public class StreamCodeGenerator {
         if (!keys.containsKey("db")) throw new Exception("database needed");
         String database = keys.get("db").trim();
 
-        String hostname = (keys.containsKey("hostname"))
-                ? keys.get("hostname").toLowerCase().trim()
+        String hostname = (keys.containsKey("host"))
+                ? keys.get("host").toLowerCase().trim()
                 : "localhost";
 
         String outFile = (keys.containsKey("file"))
@@ -64,6 +64,8 @@ public class StreamCodeGenerator {
             String types[] = "mysql,pg".split(",");
             if (!Arrays.asList(types).contains(databaseType)) throw  new Exception("Unknown database type "+ databaseType);
         }
+
+        if (databaseType=="mysql") schema=database;
 
         int port = 0;
 
