@@ -269,10 +269,10 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
                 DatabaseField f = this.getFieldData(path.schema,path.table,field);
                 dbKey.getFields().add(f);
             }
-            for (String keyField : keyFields){
-                DatabaseField fieldData = getFieldData(path.schema,path.table,keyField);
-                dbKey.getFields().add(fieldData)  ;
-            }
+//            for (String keyField : keyFields){
+//                DatabaseField fieldData = getFieldData(path.schema,path.table,keyField);
+//                dbKey.getFields().add(fieldData)  ;
+//            }
             keys.add(dbKey);
         }
 
@@ -717,7 +717,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
            // field.setDimensionCount(-1);
 
             String pgDataType = row.getString("udt_name").trim().toLowerCase();
-            String genericDataType = this.toGenericDataType(pgDataType);
+            String genericDataType = this.toGenericDataType(pgDataType).trim();
             //dbType.setType(row.getString("data_type").trim().toLowerCase());
             field.setGenericDataType(genericDataType);
             String topLevelDataType = this.converter.nativeToTopLevel(pgDataType);

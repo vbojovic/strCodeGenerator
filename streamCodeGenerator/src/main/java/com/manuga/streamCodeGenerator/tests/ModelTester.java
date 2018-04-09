@@ -48,7 +48,7 @@ public class ModelTester {
 		DatabaseModel dbm = new DatabaseModel();
 		dbm.loadFromXml(importFileName);
 	}
-//	@Test
+	@Test
 	public void testMysqlInnerModelExportAll() throws Exception {
 		MysqDb db = new MysqDb();
 		//db.setSettings(Helper.homeSettings());
@@ -66,7 +66,8 @@ public class ModelTester {
 		Assert.assertTrue(true);
 	}
 
-//	@Test
+
+	@Test
 	public void testInnerModelExportAll() throws Exception {
 		PgDb db = new PgDb();
 		//db.setSettings(Helper.homeSettings());

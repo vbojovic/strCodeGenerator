@@ -247,10 +247,6 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
                 dbKey.getFields().add(f);
             }
 
-            for (String keyField : keyFields){
-                DatabaseField fieldData = getFieldData(dbPath.schema,dbPath.table,keyField);
-                dbKey.getFields().add(fieldData)  ;
-            }
             keys.add(dbKey);
         }
 
@@ -379,10 +375,11 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
 		ResultSet fieldsRes = m_DataBase.sql2resultSet(sqlTxt.toString());
 		if (fieldsRes != null)
 			while (fieldsRes.next()) {
+		        String fieldName= fieldsRes.getString("COLUMN_NAME");
 				DatabaseField field =  this.getFieldData(
                         dbPath.schema
                         ,(dbPath.table != null)?dbPath.table : dbPath.view
-                        ,fieldsRes.getString("column_name"));
+                        ,fieldName);
 
 				fields.add(field);
 			}
@@ -649,44 +646,44 @@ public class MysqlDbElementReader extends ADbElemetReader implements IDbElementR
                 " from information_schema.columns \n" +
                 " where table_schema='SCH'\n" +
                 " and table_name = 'TBL'\n" +
-                " and column_name = 'COL'"  +
-                " and table_catalog = 'CAT'";
+                " and column_name = 'COL'"; //  +
+//                " and table_catalog = 'CAT'";
 
         sql = sql.replace("SCH", schemaName)
                 .replace("TBL" , relName)
-                .replace("COL" , fieldName)
-                .replace("CAT" , this.m_DataBase.getSettings().getDataBase());
+                .replace("COL" , fieldName);
+//                .replace("CAT" , this.m_DataBase.getSettings().getDataBase());
 
         ResultSet row = m_DataBase.sql2resultSet(sql);
         while (row.next()){
-            if (row.getString("column_default")!=null) field.setDefaultValue(row.getString("column_default"));
-            field.setNullable((row.getString("is_nullable").trim().equalsIgnoreCase("NO")) ? false : true);
+            if (row.getString("COLUMN_DEFAULT")!=null) field.setDefaultValue(row.getString("COLUMN_DEFAULT"));
+            field.setNullable((row.getString("IS_NULLABLE").trim().equalsIgnoreCase("NO")) ? false : true);
 
            // field.setDimensionCount(-1);
 
-            String pgDataType = row.getString("udt_name").trim().toLowerCase();
-            String genericDataType = this.toGenericDataType(pgDataType);
+            String dataType = row.getString("DATA_TYPE").trim().toLowerCase();
+            String genericDataType = this.toGenericDataType(dataType).trim();
             //dbType.setType(row.getString("data_type").trim().toLowerCase());
             field.setGenericDataType(genericDataType);
-            String topLevelDataType = this.converter.nativeToTopLevel(pgDataType);
+            String topLevelDataType = this.converter.nativeToTopLevel(dataType);
             field.setPrecision(-1);
-            if (row.getString("data_type").equalsIgnoreCase("character varying"))
-                field.setSize(row.getInt("character_maximum_length"));
+            if (dataType.equalsIgnoreCase("varchar"))
+                field.setSize(row.getInt("CHARACTER_MAXIMUM_LENGTH"));
 
-            //System.out.println("staza: "+schemaName +';' +relName+';' + fieldName+" tip :"+genericDataType+":"+pgDataType);
+            //System.out.println("staza: "+schemaName +';' +relName+';' + fieldName+" tip :"+genericDataType+":"+dataType);
 
             if (genericDataType.equalsIgnoreCase("double")||genericDataType.equalsIgnoreCase("float"))                           {
-                field.setPrecision(row.getInt("numeric_precision_radix"));
-                if (row.getString("numeric_scale")!=null)
-                    field.setSize(row.getInt("numeric_scale"));
+                field.setPrecision(row.getInt("NUMERIC_PRECISION"));
+                if (row.getString("NUMERIC_SCALE")!=null)
+                    field.setSize(row.getInt("NUMERIC_SCALE"));
             }
             //boolean isInPrimaryKey = (row.getString("is_identity").trim().equalsIgnoreCase("NO")) ? false : true;
             //field.setInPrimaryKey(isInPrimaryKey);
             field.setInPrimaryKey(this.isFieldInPrimaryKey(schemaName,relName,fieldName));
             //System.out.println(String.format("table: %s, field: %s, inPk:%s, inDb: %s",relName,fieldName,field.isInPrimaryKey(),row.getString("is_identity")));
             //logger.debug(String.format("table: %s, field: %s, inPk:%s",relName,fieldName,field.isInPrimaryKey()));
-            field.setTableOrder(row.getInt("ordinal_position"));
-            field.setFieldType(pgDataType);
+            field.setTableOrder(row.getInt("ORDINAL_POSITION"));
+            field.setFieldType(dataType);
         }
         return field;
     }

@@ -1,6 +1,6 @@
 \char\"	char	txt
 "\char\"	char	txt
-bigint	int8	num
+bigint	bigint	num
 bool	bool	bit
 boolean	bool	bit
 bpchar	char	txt
