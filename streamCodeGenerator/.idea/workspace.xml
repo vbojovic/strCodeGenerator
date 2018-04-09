@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="edeccb24-aa9e-48f8-8fc7-8487a9aac34b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/strCodegen_jar/strCodegen.jar" afterPath="$PROJECT_DIR$/out/artifacts/strCodegen_jar/strCodegen.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/StreamCodeGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/StreamCodeGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/Helper.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/Helper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/IDbElementReader.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/IDbElementReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" afterPath="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt" afterPath="$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt" />
     </list>
     <ignored path="strCodegen.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,13 +96,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ModelTester.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ModelTester.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+            <state relative-caret-position="119">
+              <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
               <folding>
-                <marker date="1523265694652" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
+                <marker date="1523287158248" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
               </folding>
             </state>
           </provider>
@@ -119,8 +111,8 @@
       <file leaf-file-name="MysqlDbElementReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="664" column="76" lean-forward="false" selection-start-line="664" selection-start-column="76" selection-end-line="664" selection-end-column="76" />
+            <state relative-caret-position="544">
+              <caret line="674" column="49" lean-forward="false" selection-start-line="674" selection-start-column="49" selection-end-line="674" selection-end-column="49" />
               <folding>
                 <element signature="e#1135#1151#0" expanded="true" />
                 <element signature="e#1907#1923#0" expanded="true" />
@@ -149,20 +141,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mysqlDataTypes.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PgDbElementReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
+            <state relative-caret-position="17">
               <caret line="719" column="78" lean-forward="false" selection-start-line="719" selection-start-column="78" selection-end-line="719" selection-end-column="78" />
               <folding>
                 <element signature="e#34891#34892#0" expanded="true" />
@@ -175,7 +157,7 @@
       <file leaf-file-name="DatabasePath.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="344">
               <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
@@ -238,10 +220,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/StreamCodeGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/Helper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java" />
       </list>
     </option>
   </component>
@@ -661,10 +643,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="NBKnowledgePane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="NBKnowledgePane" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -789,7 +772,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1429,12 +1411,6 @@
     <history-entry file="ModelTester_testInnerModelExportAll - 2018.04.09 at 12h 25m 44s.xml">
       <configuration name="ModelTester.testInnerModelExportAll" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 11h 47m 23s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 11h 52m 07s.xml">
-      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 12h 04m 38s.xml">
       <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
     </history-entry>
@@ -1453,6 +1429,12 @@
     <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 12h 27m 40s.xml">
       <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 12h 32m 14s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ModelTester_testMysqlInnerModelExportAll - 2018.04.09 at 12h 42m 40s.xml">
+      <configuration name="ModelTester.testMysqlInnerModelExportAll" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1465,28 +1447,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-1" width="1924" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49787235" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31939977" sideWeight="0.4680851" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5562701" sideWeight="0.22978723" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15319149" sideWeight="0.67799354" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37406215" sideWeight="0.8095745" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.4978701" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37406215" sideWeight="0.8095745" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36334404" sideWeight="0.77021277" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20531915" sideWeight="0.67799354" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20957446" sideWeight="0.67799354" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43729904" sideWeight="0.80638295" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1494,6 +1476,7 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5260916" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31939977" sideWeight="0.4680851" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.4978701" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32580644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1783,7 +1766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1791,9 +1773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
-          <folding>
-            <element signature="e#7229#7230#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1801,10 +1780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#1192#1342#0" expanded="false" />
-            <element signature="e#1341#1342#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1830,14 +1805,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePathShort.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="9" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePathShort.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/IDatabaseDataObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1858,7 +1826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1878,14 +1845,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDb.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1898,7 +1857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1910,21 +1868,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqDb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="719" column="78" lean-forward="false" selection-start-line="719" selection-start-column="78" selection-end-line="719" selection-end-column="78" />
-          <folding>
-            <element signature="e#34891#34892#0" expanded="true" />
-            <element signature="e#34919#34920#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="664" column="76" lean-forward="false" selection-start-line="664" selection-start-column="76" selection-end-line="664" selection-end-column="76" />
+        <state relative-caret-position="544">
+          <caret line="674" column="49" lean-forward="false" selection-start-line="674" selection-start-column="49" selection-end-line="674" selection-end-column="49" />
           <folding>
             <element signature="e#1135#1151#0" expanded="true" />
             <element signature="e#1907#1923#0" expanded="true" />
@@ -1952,29 +1914,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/MysqDb.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbModels/DatabasePath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="344">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="719" column="78" lean-forward="false" selection-start-line="719" selection-start-column="78" selection-end-line="719" selection-end-column="78" />
+          <folding>
+            <element signature="e#34891#34892#0" expanded="true" />
+            <element signature="e#34919#34920#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/manuga/streamCodeGenerator/tests/ModelTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+        <state relative-caret-position="119">
+          <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
           <folding>
-            <marker date="1523265694652" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
+            <marker date="1523287158248" expanded="false" signature="1416:1432" ph="&lt;~&gt;" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mysqlDataTypes.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
