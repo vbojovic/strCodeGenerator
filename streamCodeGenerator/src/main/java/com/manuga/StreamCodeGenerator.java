@@ -125,7 +125,8 @@ public class StreamCodeGenerator {
 
 
         String schema = "";
-        if (keys.containsKey("sch")) schema = keys.get("sch").trim();
+//        if (keys.containsKey("sch")) schema = keys.get("sch").trim();
+        schema=settings.getSchema();
         List<DatabaseSchema> schemas = new ArrayList<DatabaseSchema>();
         if (!schema.equalsIgnoreCase("")) {
             schemas = db.getElementReader().readSchemas();
