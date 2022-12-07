@@ -18,6 +18,7 @@ var Generator = (function () {
     Generator.prototype.loadDefultFunctions = function () {
         _functions = new Array();
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "LaravelAppzCoderTemplate", funcName: "LaravelAppzCoderTemplate"});
+        _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP/js/bootstrap', name: "Fullstack1Template", funcName: "Fullstack1Template"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgWH", funcName: "Pg2PgWH"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgDynAttrib", funcName: "Pg2PgDynAttrib"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'js', name: "JTable attrib view actions ", funcName: "JTableAttribViewActionsJs"});
@@ -349,11 +350,31 @@ var Generator = (function () {
 
         return lookups;
     };
-
-    Generator.prototype.extractTables = function () {
+    
+    Generator.prototype.cleanEmptySchemas = function(){
         if (_dbModel == null)
             return null;
 
+        var i = 0;
+        var schemas = _dbModel.schemas['@items'];
+        var resultTables = new Array();
+        for ( i = schemas.length -1 ; i>=0 ; i-- ) {
+            var schemaName = schemas[i].schemaName;
+            var j = 0;
+
+            var tables = schemas[i].tables["@items"];
+            if (tables == undefined) {
+                _dbModel.schemas['@items'] = _dbModel.schemas['@items'].splice(i,1)
+            }
+  
+        }
+        return resultTables;
+    }
+    
+    Generator.prototype.extractTables = function () {
+        if (_dbModel == null)
+            return null;
+        this.cleanEmptySchemas(); //TODO viktor corrections
         var i = 0;
         var schemas = _dbModel.schemas['@items'];
         var resultTables = new Array();
@@ -362,6 +383,7 @@ var Generator = (function () {
             var j = 0;
 
             var tables = schemas[i].tables["@items"];
+            if (tables == undefined) continue;
             for (; j < tables.length; ) {
                 resultTables.push({
                     "schema": schemaName,
