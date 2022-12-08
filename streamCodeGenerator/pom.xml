@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.manuga</groupId>
+    <groupId>com.timanaga</groupId>
     <artifactId>StreamCodeGenerator</artifactId>
     <version>1.4</version>
     <build>
@@ -15,7 +15,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.manuga.StreamCodeGenerator</mainClass>
+                            <mainClass>com.timanaga.StreamCodeGenerator</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -34,32 +34,33 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
 
     </build>
 
-    <repositories>
-        <!--<repository>-->
-            <!--<id>central</id>-->
-            <!--<name>moj lokalni repo</name>-->
-            <!--<layout>default</layout>-->
-            <!--&lt;!&ndash;<url>C:\Users\x\.m2\repository\</url>&ndash;&gt;-->
-            <!--<url>/home/wwwsv/.m2/repository</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-        <repository>
-            <id>mvnrepository</id>
-            <name>mvnrepository</name>
-            <url>http://www.mvnrepository.com</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        &lt;!&ndash;<repository>&ndash;&gt;-->
+<!--            &lt;!&ndash;<id>central</id>&ndash;&gt;-->
+<!--            &lt;!&ndash;<name>moj lokalni repo</name>&ndash;&gt;-->
+<!--            &lt;!&ndash;<layout>default</layout>&ndash;&gt;-->
+<!--            &lt;!&ndash;&lt;!&ndash;<url>C:\Users\x\.m2\repository\</url>&ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;<url>/home/wwwsv/.m2/repository</url>&ndash;&gt;-->
+<!--            &lt;!&ndash;<snapshots>&ndash;&gt;-->
+<!--                &lt;!&ndash;<enabled>false</enabled>&ndash;&gt;-->
+<!--            &lt;!&ndash;</snapshots>&ndash;&gt;-->
+<!--        &lt;!&ndash;</repository>&ndash;&gt;-->
+<!--        <repository>-->
+<!--            <id>mvnrepository</id>-->
+<!--            <name>mvnrepository</name>-->
+<!--            <url>http://www.mvnrepository.com</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
 
     <dependencies>
@@ -155,11 +156,11 @@
             <artifactId>json-io</artifactId>
             <version>4.10.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.manuga</groupId>
-            <artifactId>StreamCodeGenerator</artifactId>
-            <version>1.3-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.timanaga</groupId>-->
+<!--            <artifactId>StreamCodeGenerator</artifactId>-->
+<!--            <version>1.3-SNAPSHOT</version>-->
+<!--        </dependency>-->
 
 
     </dependencies>

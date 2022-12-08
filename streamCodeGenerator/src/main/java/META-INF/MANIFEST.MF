@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: com.manuga.StreamCodeGenerator
-Main-Class: com.manuga.StreamCodeGenerator
+Class-Path: com.timanaga.StreamCodeGenerator
+Main-Class: com.timanaga.StreamCodeGenerator
 
