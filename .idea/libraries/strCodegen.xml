@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="strCodegen">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/streamCodeGenerator/out/artifacts/strCodegen_jar/strCodegen.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
