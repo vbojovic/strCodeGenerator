@@ -3,7 +3,6 @@ package com.timanaga.streamCodeGenerator.helpers.databases.dbClasses;
 import com.timanaga.streamCodeGenerator.helpers.databases.DataFormatConverter;
 import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.*;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
-import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PgDbElementReader extends ADbElemetReader implements IDbElementReader {
-    private static Logger logger = Logger.getLogger(PgDbElementReader.class);
-	
+
 	/* Constructor */
 	public PgDbElementReader(PgDb dataBase) throws Exception {
 		m_DataBase = dataBase;

@@ -704,7 +704,7 @@
       <recent name="com.manuga.streamCodeGenerator.helpers.databases.dbClasses" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StreamCodeGeneratorTest.testPrintHelp">
+  <component name="RunManager" selected="Maven.StreamCodeGenerator [clean]">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -1218,27 +1218,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java</url>
-          <line>396</line>
+          <line>394</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
-          <line>769</line>
+          <line>767</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
-          <line>260</line>
+          <line>258</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java</url>
-          <line>383</line>
+          <line>381</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/MysqlDbElementReader.java</url>
-          <line>656</line>
+          <line>654</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

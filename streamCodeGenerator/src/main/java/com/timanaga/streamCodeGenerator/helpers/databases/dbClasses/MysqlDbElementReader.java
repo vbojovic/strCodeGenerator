@@ -3,7 +3,6 @@ package com.timanaga.streamCodeGenerator.helpers.databases.dbClasses;
 import com.timanaga.streamCodeGenerator.helpers.databases.DataFormatConverter;
 import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.*;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
-import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MysqlDbElementReader extends ADbElemetReader implements IDbElementReader {
-    private static Logger logger = Logger.getLogger(MysqlDbElementReader.class);
 
 	/* Constructor */
 	public MysqlDbElementReader(MysqDb dataBase) throws Exception {

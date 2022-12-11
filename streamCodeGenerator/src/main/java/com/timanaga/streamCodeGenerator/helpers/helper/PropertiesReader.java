@@ -8,18 +8,16 @@ package com.timanaga.streamCodeGenerator.helpers.helper;
  * To change this template use File | Settings | File Templates.
  */
 
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.Properties;
 
 public class PropertiesReader {
-    private static Logger logger = Logger.getLogger(PropertiesReader.class);
+//    private static Logger logger = Logger.getLogger(PropertiesReader.class);
     private static PropertiesReader instance = null;
 
     private Hashtable<String, Properties> propertiesHash = new Hashtable<String, Properties>();
@@ -56,8 +54,8 @@ public class PropertiesReader {
         try
         {
             propFile = new File(url.toString());
-            logger.debug("URL:" + url.toString());
-            Long lastModified = new Long(propFile.lastModified());
+//            logger.debug("URL:" + url.toString());
+            Long lastModified = (Long)(propFile.lastModified());
 
             // ako u memoriji nema tog file-a ili se u medjuvremenu promijenio na disku, ucitaj file ponovo
             if (prop == null || datePropFileModified != null && !datePropFileModified.equals(lastModified))
@@ -67,7 +65,6 @@ public class PropertiesReader {
                 // metode ali samo kod prije nego je prvi put kreirana
                 synchronized (this)
                 {
-                    logger.debug("Loading properties file: " + propFilePath + " - last modified: " + new Date(lastModified.longValue()));
 
                     InputStream is = url.openStream();
                     prop = new Properties();
@@ -85,7 +82,7 @@ public class PropertiesReader {
                     }
                     catch (IOException e)
                     {
-                        logger.error(e.getMessage(), e);
+//                        logger.error(e.getMessage(), e);
                     }
                 }
 
@@ -96,7 +93,6 @@ public class PropertiesReader {
         }
         catch (IOException e)
         {
-            logger.error(e);
             throw new RuntimeException("Greska pri dohvatu property file-a: " + propFilePath, e);
         }
 
