@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/strCodegen.iml" filepath="$PROJECT_DIR$/strCodegen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StreamCodeGenerator.iml" filepath="$PROJECT_DIR$/StreamCodeGenerator.iml" />
     </modules>
   </component>
 </project>
-

@@ -16,11 +16,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="strCodegen" />
+        <module name="StreamCodeGenerator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="strCodegen" target="10" />
+      <module name="StreamCodeGenerator" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>

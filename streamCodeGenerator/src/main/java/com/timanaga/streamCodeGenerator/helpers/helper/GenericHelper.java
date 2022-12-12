@@ -250,9 +250,27 @@ public class GenericHelper {
     }
 
 	public static String resourceToString(String resourcePath) throws Exception{
-		var relPath = Paths.get("src", "main", "resources", resourcePath);
-		var absPath = relPath.toFile().getAbsolutePath();
-		return file2String(absPath);
+		try{
+			var relPath = Paths.get("src", "main", "resources", resourcePath);
+			var absPath = relPath.toFile().getAbsolutePath();
+			return file2String(absPath);
+		} catch (Exception e){
+			        final InputStream in = GenericHelper.class.getClass().getResourceAsStream(
+                resourcePath);
+			final BufferedReader bufReader = new BufferedReader(
+					new InputStreamReader(in));
+
+			String content = "";
+			String line = "";
+			int i = 0;
+			while ((line = bufReader.readLine()) != null) {
+				if (i>0) content+="\n";
+				content += line;
+				i++;
+			}
+			return content;
+		}
+
 	}
 
 //    public static String resourceToString(String resourcePath,String lineSeparator) throws Exception{
