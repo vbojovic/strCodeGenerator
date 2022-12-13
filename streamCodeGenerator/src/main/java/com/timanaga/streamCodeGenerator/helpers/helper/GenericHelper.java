@@ -255,10 +255,12 @@ public class GenericHelper {
 			var absPath = relPath.toFile().getAbsolutePath();
 			return file2String(absPath);
 		} catch (Exception e){
-			        final InputStream in = GenericHelper.class.getClass().getResourceAsStream(
-                resourcePath);
+			final InputStream in = GenericHelper.class.getClass().getResourceAsStream(
+                resourcePath
+			);
 			final BufferedReader bufReader = new BufferedReader(
-					new InputStreamReader(in));
+				new InputStreamReader(in)
+			);
 
 			String content = "";
 			String line = "";
@@ -270,7 +272,6 @@ public class GenericHelper {
 			}
 			return content;
 		}
-
 	}
 
 //    public static String resourceToString(String resourcePath,String lineSeparator) throws Exception{

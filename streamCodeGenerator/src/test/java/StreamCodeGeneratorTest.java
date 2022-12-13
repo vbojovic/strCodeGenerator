@@ -59,4 +59,19 @@ public class StreamCodeGeneratorTest {
         var anyFileUnderThisPath = new File(absPath).exists(); // true
         Assert.assertEquals(true,anyFileUnderThisPath);
     }
+
+    @Test
+    public void testPrintHelp3() throws Exception {
+        String res = GenericHelper.resourceToString("/parameters.txt");
+        System.out.println(res);
+        Assert.assertEquals(true,res.length()>0);
+    }
+
+    @Test
+    public void testPrintHelp2() throws Exception {
+        var relPath = Paths.get("src", "main", "resources", "/parameters.txt"); // src/test/resources/image.jgp
+        var absPath = relPath.toFile().getAbsolutePath(); // /home/<user>/../<project-root>/src/test/resources/image.jpg
+        var anyFileUnderThisPath = new File(absPath).exists(); // true
+        Assert.assertEquals(true,anyFileUnderThisPath);
+    }
 }

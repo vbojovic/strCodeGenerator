@@ -17,7 +17,7 @@ import java.util.List;
 public class StreamCodeGenerator {
 	public static void main(String[] args) throws Exception {
 //        String paramHelp = GenericHelper.resourceToString("/parameters.txt","\r\n");
-        String paramHelp = GenericHelper.resourceToString("parameters.txt");
+        String paramHelp = getHelp();//GenericHelper.resourceToString("parameters.txt");
 		if (args == null | args.length == 0){
             System.out.println(paramHelp);
 			//GeneratorsClass gc = new GeneratorsClass();
@@ -29,7 +29,26 @@ public class StreamCodeGenerator {
 //        runApp(keys);
         runApp2(keys);
 	}
-
+    private static String getHelp(){
+        String help="""
+java -jar streamCodeGenerator.jar <param1>...<paramN>
+    --format        [json|xml]		    export schema to template (default=JSON)
+    --file          <filename>            export to filename (default = out.json)
+    --sch           [schema|all]          included schema (default = all)
+    --public        [true/false]          autoinclude public    (N/A)
+    --db            <database name>       database
+    --login         <username>            login
+    --pass          <password>            password
+    --port          <port>                port
+    --dtype         [mysql,pg]            database type  (default = pg)
+    --host          <hostname>            server name or address (default = localhost)
+    --folowDepth    <true/false>          folow constraints to tables in another schemas depth
+                                          (0 = follow all,
+                                           1= first table,
+                                           2 first and second) N/A
+""";
+        return help;
+    }
     private static DatabaseSettings getSettingsFromKeys(HashMap<String,String> keys) throws Exception{
 
         if (!keys.containsKey("login")) throw new Exception("login needed");

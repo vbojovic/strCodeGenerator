@@ -704,7 +704,7 @@
       <recent name="com.manuga.streamCodeGenerator.helpers.databases.dbClasses" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.StreamCodeGenerator [clean]">
+  <component name="RunManager" selected="JUnit.StreamCodeGeneratorTest.testPrintHelp3">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -867,58 +867,11 @@
       <testRegexps />
       <envs />
     </configuration>
-    <configuration name="ModelTester" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="strCodegen" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.manuga.streamCodeGenerator.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.manuga.streamCodeGenerator.tests" />
-      <option name="MAIN_CLASS_NAME" value="com.manuga.streamCodeGenerator.tests.ModelTester" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelTester.testInnerModelExportAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="strCodegen" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.manuga.streamCodeGenerator.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.manuga.streamCodeGenerator.tests" />
-      <option name="MAIN_CLASS_NAME" value="com.manuga.streamCodeGenerator.tests.ModelTester" />
-      <option name="METHOD_NAME" value="testInnerModelExportAll" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelTester.testMysqlInnerModelExportAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="strCodegen" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.manuga.streamCodeGenerator.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.manuga.streamCodeGenerator.tests" />
-      <option name="MAIN_CLASS_NAME" value="com.manuga.streamCodeGenerator.tests.ModelTester" />
-      <option name="METHOD_NAME" value="testMysqlInnerModelExportAll" />
+    <configuration name="StreamCodeGeneratorTest.testPrintHelp (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="StreamCodeGenerator" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
+      <option name="METHOD_NAME" value="testPrintHelp" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -934,6 +887,36 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
       <option name="METHOD_NAME" value="testPrintHelp" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamCodeGeneratorTest.testPrintHelp2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="StreamCodeGenerator" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
+      <option name="METHOD_NAME" value="testPrintHelp2" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StreamCodeGeneratorTest.testPrintHelp3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="StreamCodeGenerator" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
+      <option name="METHOD_NAME" value="testPrintHelp3" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -1014,20 +997,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp (1)" />
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp3" />
       <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp" />
       <item itemvalue="JUnit.StreamCodeGeneratorTest.testStreamCodeGenerator" />
-      <item itemvalue="JUnit.ModelTester.testInnerModelExportAll" />
-      <item itemvalue="JUnit.ModelTester" />
-      <item itemvalue="JUnit.ModelTester.testMysqlInnerModelExportAll" />
       <item itemvalue="Maven.StreamCodeGenerator [clean]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp3" />
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp (1)" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testStreamCodeGenerator" />
-        <item itemvalue="JUnit.ModelTester.testMysqlInnerModelExportAll" />
-        <item itemvalue="JUnit.ModelTester.testInnerModelExportAll" />
-        <item itemvalue="JUnit.ModelTester" />
       </list>
     </recent_temporary>
   </component>
@@ -1243,7 +1226,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>276</line>
+          <line>277</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1255,6 +1238,16 @@
           <url>file://$PROJECT_DIR$/src/test/java/StreamCodeGeneratorTest.java</url>
           <line>58</line>
           <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
+          <line>253</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
+          <line>257</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
