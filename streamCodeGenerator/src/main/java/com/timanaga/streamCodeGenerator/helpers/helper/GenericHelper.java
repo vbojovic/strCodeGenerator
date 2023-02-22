@@ -244,7 +244,8 @@ public class GenericHelper {
 //        while ((line = bufReader.readLine()) != null)
 //            lines.add(line);
 //        return lines;
-		var relPath = Paths.get("src", "main", "resources", resourcePath);
+//		var relPath = Paths.get("src", "main", "resources", resourcePath);
+		var relPath = Paths.get("classes",  resourcePath);
 		var absPath = relPath.toFile().getAbsolutePath();
 		return file2stringLines(absPath);
     }
