@@ -544,56 +544,82 @@
         <ol>
         <%
             code=[];
-        
             for (var i = 0; i < selectedTables.length; i++) {
-                code.push("/*-------------------------------------------------------------"+selectedTables[i].table+"Form.php-------------------------------------------------------------------------------*/");
+                code.push("&lt;!-----------------------------"+selectedTables[i].table+"--------------------------------------------&gt;");
                 var schemaName=selectedTables[i].schema;
                 var tableName=selectedTables[i].table;
-                
-                var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),false);   
+                var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),true);   
                 code.push(allAttribs);
-                
                 var fields = generator.getTableFields(schemaName, tableName, true);
                 code.push("&#x3C;div class=&#x22;form-group row&#x22;&#x3E;");
-                for ( var j = 0; j < fields.length; j++ ) {  
-                      var field = fields[j];
-                      if (generator.isUserField(field.fieldName)) continue;
-                      var isFk = generator.isFieldPartOfFKey(schemaName, tableName, field.fieldName);
-                      var gType = field.genericDataType.trim();
-                      var types = generator.genericDataTypes;
-                      var name = field.fieldName.trim();                
-                      var fieldCode=schemaName+"_"+tableName+"_"+field.fieldName;
-                          fieldCode=fieldCode.toUpperCase();
-                      
-                      
-                      if (isFk){
-                          //TODO get remoteTable
-                          //generator.get
+                
+                for ( var j = 0; j < fields.length; j++ ) {
+                    var field = fields[j];
+                    if (generator.isUserField(field.fieldName)) continue;
+                    var isFk = generator.isFieldPartOfFKey(schemaName, tableName, field.fieldName);
+                    var gType = field.genericDataType.trim();
+                    
+                    var types = generator.genericDataTypes;
+                    var fieldName = field.fieldName.trim();                
+                    var fieldCode=schemaName+"_"+tableName+"_"+fieldName;
+                        fieldCode=fieldCode.toUpperCase();
+                        
+                    if (isFk){
                           var firstVarcharField = generator.getFirstVarcharField(schemaName, tableName);
-                          //TODO moram sredit da se sastavi dropdown ili napravi link na tablicu..ili oboje
-                          
+                          code.push(fieldName);
+                          code.push("&lt;!----------mroam stavit da se dropdownowi ili linkovi na druge straanice pojave-------&gt;");
+
                           continue;
-                      } 
-                      switch(gType){
+                    } 
+                    
+                    
+                    switch(gType){
+                          case 'uid':
+                                code.push("&#x3C;div class=&#x22;col-sm-6 mb-3 mb-sm-0&#x22;&#x3E;");
+                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22; placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
+                                code.push("&#x3C;/div&#x3E; ");
+                              break;        
                           case 'varchar':
                                 code.push("&#x3C;div class=&#x22;col-sm-6 mb-3 mb-sm-0&#x22;&#x3E;");
-                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22;");
-                                code.push(" placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
+                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22; placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
                                 code.push("&#x3C;/div&#x3E; ");
+                              break;
+                          case 'integer':
+                                code.push("&#x3C;div class=&#x22;col-sm-6 mb-3 mb-sm-0&#x22;&#x3E;");
+                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22; placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
+                                code.push("&#x3C;/div&#x3E; ");
+                              break;          
+                          case 'bigint':
+                                code.push("&#x3C;div class=&#x22;col-sm-6 mb-3 mb-sm-0&#x22;&#x3E;");
+                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22; placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
+                                code.push("&#x3C;/div&#x3E; ");
+                              break;      
+                          case 'bool':
+                                code.push('&#x3C;div class=&#x22;form-check&#x22;&#x3E;
+                                    &#x3C;input class=&#x22;form-check-input&#x22; type=&#x22;checkbox&#x22; value=&#x22;&#x22; id=&#x22;'+fieldCode+'&#x22;&#x3E;
+                                    &#x3C;label class=&#x22;form-check-label&#x22; for=&#x22;'+fieldCode+'&#x22;&#x3E;'+fieldName+'&#x3C;/label&#x3E;
+                                  &#x3C;/div&#x3E;');
                               break;
                           default :
                                 code.push(name);
-                                code.push(gType);        
+                                code.push(gType);    
+                                console.log(field);
+                                code.push("&lt;!----------moram stavit ostale tipove polja-------&gt;");
+                                code.push("&#x3C;div class=&#x22;col-sm-6 mb-3 mb-sm-0&#x22;&#x3E;");
+                                code.push("&#x3C;input type=&#x22;text&#x22; class=&#x22;form-control form-control-user&#x22; id=&#x22;"+fieldCode+"&#x22; placeholder=&#x22;"+fieldCode+"&#x22;&#x3E;");
+                                code.push("&#x3C;/div&#x3E; ");
                               break;
-                      }
-                  
-                }  
+                    }
+                }
+                
+                
                 code.push("&#x3C;/div&#x3E;")
             }
             
             for (var i = 0; i < code.length; i++) {
                 %> <li> <%= code[i] %></li><%
             }
+          
         %>
         </ol>
 </code>
