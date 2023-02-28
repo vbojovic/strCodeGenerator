@@ -540,8 +540,78 @@
     </ol>
     </code>    
     
+
+    
+    
+
 <code>   
         <ol>
+        <li> &lt;!-- ---------------------------- actions.php -------------------&gt; </li>
+        <li> &lt;?php</li>
+        <li>require &#x27;./dbClass.php&#x27;;</li>
+        <li>require &#x27;./SqlClass.php&#x27;;</li>
+
+        <li>$a=$_REQUEST[&#x27;a&#x27;];</li>
+
+        <%
+            code=[];
+            var tableNames=[];
+            
+            
+            for (var i = 0; i < selectedTables.length; i++) {
+                var schemaName=selectedTables[i].schema;
+                var tableName=selectedTables[i].table;
+                tableNames.push(tableName);
+            }
+            
+            var tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_list&#x27;');
+            code.push( "$lists=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_delete&#x27;');
+            code.push( "$deletes=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_switch&#x27;');
+            code.push( "$switches=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_search&#x27;');
+            code.push( "$searches=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_update&#x27;');
+            code.push( "$updates=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
+            code.push( "$inserts=array("+tmp.join(",")+");" );
+            
+            code.push( "$inserts=array("+tmp.join(",")+");" );
+            
+            for (var i = 0; i < code.length; i++) {
+                %> <li><%= code[i] %></li><%
+            }
+          
+        %>
+        <li>if (in_array($a, $lists)){</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>} elseif (in_array($a, $deletings)) {</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>} elseif (in_array($a, $updates)) {</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>} elseif (in_array($a, $switches)) {</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>} elseif (in_array($a, $searches)) {</li>
+        <li>    require "actions/{$a}.php";    </li>
+        <li>} elseif (in_array($a, $inserts)) {</li>
+        <li>    require "actions/{$a}.php";        </li>
+        <li>} elseif (in_array($a, $custom)) {</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>}</li>
+
+        <li> ?&gt;</li>
+        </ol>
+</code>
+    
+<code>   
+        <ol>
+        <li> ---------------------------- N/A ------------------- </li>
         <%
             code=[];
             for (var i = 0; i < selectedTables.length; i++) {
@@ -623,9 +693,6 @@
         %>
         </ol>
 </code>
-    
-    
-    
     
 </pre>
 </script>
