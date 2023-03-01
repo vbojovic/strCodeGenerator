@@ -538,16 +538,14 @@
   %>
 
     </ol>
-    </code>    
-    
-
-    
+</code>    
     
 
 <code>   
         <ol>
         <li> &lt;!-- ---------------------------- actions.php -------------------&gt; </li>
         <li> &lt;?php</li>
+        <li>require &#x27;./var.php&#x27;;</li>
         <li>require &#x27;./dbClass.php&#x27;;</li>
         <li>require &#x27;./SqlClass.php&#x27;;</li>
 
@@ -582,7 +580,9 @@
             tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
             code.push( "$inserts=array("+tmp.join(",")+");" );
             
-            code.push( "$inserts=array("+tmp.join(",")+");" );
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_options&#x27;');
+            code.push( "$options=array("+tmp.join(",")+");" );
+            
             
             for (var i = 0; i < code.length; i++) {
                 %> <li><%= code[i] %></li><%
@@ -601,6 +601,8 @@
         <li>    require "actions/{$a}.php";    </li>
         <li>} elseif (in_array($a, $inserts)) {</li>
         <li>    require "actions/{$a}.php";        </li>
+        <li>} elseif (in_array($a, $options)) {</li>
+        <li>    require "actions/{$a}.php";        </li>
         <li>} elseif (in_array($a, $custom)) {</li>
         <li>    require "actions/{$a}.php";</li>
         <li>}</li>
@@ -611,6 +613,7 @@
     
 <code>   
         <ol>
+        <li> ---------------------------- Index.php ------------------- </li>
         <li> ---------------------------- N/A ------------------- </li>
         <%
             code=[];
@@ -619,7 +622,6 @@
                 var schemaName=selectedTables[i].schema;
                 var tableName=selectedTables[i].table;
                 var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),true);   
-                code.push(allAttribs);
                 var fields = generator.getTableFields(schemaName, tableName, true);
                 code.push("&#x3C;div class=&#x22;form-group row&#x22;&#x3E;");
                 
@@ -638,6 +640,22 @@
                           var firstVarcharField = generator.getFirstVarcharField(schemaName, tableName);
                           code.push(fieldName);
                           code.push("&lt;!----------mroam stavit da se dropdownowi ili linkovi na druge straanice pojave-------&gt;");
+                          
+
+                          code.push(genericHelper.toHtmlEntities("
+                                  TODO
+                             <div class=\"dropdown\">
+                                <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                  Dropdown button
+                                </button>
+                                <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                                  <a class=\"dropdown-item\" href=\"#\">Action TODO</a>
+                                  <a class=\"dropdown-item\" href=\"#\">Another action</a>
+                                  <a class=\"dropdown-item\" href=\"#\">Something else here</a>
+                                </div>
+                              </div>
+                            " ));
+
 
                           continue;
                     } 
@@ -694,5 +712,58 @@
         </ol>
 </code>
     
+<code>   
+        <ol>
+        <li> &lt;!-- ---------------------------- options.php N/A -------------------&gt; </li>
+        <li> &lt;?php</li>
+        <%
+            code=[];
+            var tableNames=[];
+            code.push("switch ($a){");
+            
+            for (var i = 0; i < selectedTables.length; i++) {
+                var schemaName=selectedTables[i].schema;
+                var tableName=selectedTables[i].table;
+                
+                var field = generator.getFirstVarcharField(schemaName,tableName);
+                if (field == null) continue;
+                var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
+                code.push("case  \""+tableName+"_option\":");
+                code.push("     $table=\""+tableName+"\";");
+                code.push("     $pkeyField=\""+pkeyField+"\";");
+                code.push("     $field=\""+field+"\";");
+                var tmp = "     $res=$sqlClass->getListForCombo($table,$pkeyField,$field);";
+                tmp = genericHelper.toHtmlEntities(tmp);
+                code.push(tmp);
+                code.push("     die(json_encode($res));");
+                code.push("break;");
+            }
+            
+            code.push("}");
+            
+            for (var i = 0; i < code.length; i++) {
+                %> <li><%= code[i] %></li><%
+            }
+          
+        %>
+
+        <li> ?&gt;</li>
+        </ol>
+</code>
+    
+<code>   
+        <ol>
+        <li> &lt;?php</li>
+        <li> //&lt;!-- ---------------------------- var.php -------------------&gt; </li>
+
+        <li>    $login="postgres";</li>
+        <li>    $pass="postgres";</li>
+        <li>    $server="127.0.0.1";</li>
+        <li>    $dbName="db";</li>
+        <li>    $tbPrefix="";</li>
+        <li>    $port="5432";</li>
+        <li>?&gt;</li>
+        </ol>
+</code>
 </pre>
 </script>

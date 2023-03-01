@@ -1,5 +1,6 @@
 var GenericHelper = (function () {
     function GenericHelper() {
+  
     };
     
     GenericHelper.prototype.clone = function (obj) {
@@ -12,6 +13,18 @@ var GenericHelper = (function () {
         }
         return copy;
     };
+    
+    GenericHelper.prototype.toHtmlEntities = function(html) {
+        return html.replace(/./gm, function(s) {
+            return (s.match(/[a-z0-9\s]+/i)) ? s : "&#" + s.charCodeAt(0) + ";";
+        });
+    };
+
+    GenericHelper.prototype.fromHtmlEntities = function(string) {
+        return (string+"").replace(/&#\d+;/gm,function(s) {
+            return String.fromCharCode(s.match(/\d+/gm)[0]);
+        });
+    };      
     
     GenericHelper.prototype.getSelectionText = function () {
         var text = "";
