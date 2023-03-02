@@ -714,7 +714,7 @@
     
 <code>   
         <ol>
-        <li> &lt;!-- ---------------------------- options.php N/A -------------------&gt; </li>
+        <li> &lt;!-- ---------------------------- options.php (1) -------------------&gt; </li>
         <li> &lt;?php</li>
         <%
             code=[];
@@ -729,12 +729,11 @@
                 if (field == null) continue;
                 var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
                 code.push("case  \""+tableName+"_option\":");
-                code.push("     $table=\""+tableName+"\";");
-                code.push("     $pkeyField=\""+pkeyField+"\";");
-                code.push("     $field=\""+field+"\";");
-                var tmp = "     $res=$sqlClass->getListForCombo($table,$pkeyField,$field);";
+                
+                tmp = "     $res=$sqlClass->getListForCombo(\""+tableName+"\",\""+pkeyField+"\",\""+field+"\");";
                 tmp = genericHelper.toHtmlEntities(tmp);
                 code.push(tmp);
+                
                 code.push("     die(json_encode($res));");
                 code.push("break;");
             }
@@ -765,5 +764,22 @@
         <li>?&gt;</li>
         </ol>
 </code>
+
+<code>   
+        <ol>
+        <li> &lt;?php</li>
+        <li> //&lt;!-- ---------------------------- options.php (2) -------------------&gt; </li>
+
+
+
+
+
+
+
+
+        <li>?&gt;</li>
+        </ol>
+</code>
+
 </pre>
 </script>
