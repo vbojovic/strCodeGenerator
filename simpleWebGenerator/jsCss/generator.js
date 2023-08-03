@@ -19,8 +19,6 @@ var Generator = (function () {
         _functions = new Array();
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "LaravelAppzCoderTemplate", funcName: "LaravelAppzCoderTemplate"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP/js/bootstrap', name: "Fullstack1Template", funcName: "Fullstack1Template"});
-        _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgWH", funcName: "Pg2PgWH"});
-        _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg2PgDynAttrib", funcName: "Pg2PgDynAttrib"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'js', name: "JTable attrib view actions ", funcName: "JTableAttribViewActionsJs"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP update jTable With Array", funcName: "PgPHPUpdateJTableWithArray"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP insert jTable With Array", funcName: "PgPHPInsertJTableWithArray"});
@@ -90,12 +88,12 @@ var Generator = (function () {
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP list", funcName: "PgPHPList", 'callingFunction': '', 'callingArgs': new Array()});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP switch", funcName: "PgPHPSwitch", 'callingArgs': new Array(), 'header': null, 'footer': null});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP view", funcName: "PgPHPView", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg delete function", funcName: "PgDeleteFunction", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg insert function", funcName: "PgInsertFunction", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg update function", funcName: "PgUpdateFunction", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg Switch", funcName: "PgSwitch", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'C#', name: "C# View Model", funcName: "CSViewModel", 'callingArgs': new Array()});
-        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg warehouse", funcName: "PgWarehouse", 'callingArgs': new Array()});
+        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg delete function (N/A)", funcName: "PgDeleteFunction", 'callingArgs': new Array()});
+//        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg insert function", funcName: "PgInsertFunction", 'callingArgs': new Array()});
+//        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg update function", funcName: "PgUpdateFunction", 'callingArgs': new Array()});
+//        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg Switch", funcName: "PgSwitch", 'callingArgs': new Array()});
+//        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'C#', name: "C# View Model", funcName: "CSViewModel", 'callingArgs': new Array()});
+//        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg warehouse", funcName: "PgWarehouse", 'callingArgs': new Array()});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'js', name: "Translation variables", funcName: "jsTransVars", 'callingArgs': new Array()});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'js', name: "Translation variables autotranslated", funcName: "jsTransVarsAutotranslated", 'callingArgs': new Array()});
 
