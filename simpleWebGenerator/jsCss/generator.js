@@ -89,14 +89,17 @@ var Generator = (function () {
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP switch", funcName: "PgPHPSwitch", 'callingArgs': new Array(), 'header': null, 'footer': null});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP', name: "PgPHP view", funcName: "PgPHPView", 'callingArgs': new Array()});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg delete function (N/A)", funcName: "PgDeleteFunction", 'callingArgs': new Array()});
+        /*
 //        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg insert function", funcName: "PgInsertFunction", 'callingArgs': new Array()});
 //        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg update function", funcName: "PgUpdateFunction", 'callingArgs': new Array()});
 //        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg Switch", funcName: "PgSwitch", 'callingArgs': new Array()});
 //        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'C#', name: "C# View Model", funcName: "CSViewModel", 'callingArgs': new Array()});
 //        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg', name: "Pg warehouse", funcName: "PgWarehouse", 'callingArgs': new Array()});
+        */
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'js', name: "Translation variables", funcName: "jsTransVars", 'callingArgs': new Array()});
         _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'js', name: "Translation variables autotranslated", funcName: "jsTransVarsAutotranslated", 'callingArgs': new Array()});
-
+        
+        _functions.push({singleFile: false, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'js/ts/shell/nextJS/prisma', name: "nodejs web app", funcName: "nodejsWebApp", 'callingArgs': new Array()});
         for (var i = 0; i < _functions.length; i++) {
             _functions[i].args = new Array("dbModel", "tableName");
             //_functions[i].funcName= this.getFuncNameFromDescr(_functions[i].name,true,_functions[i].args);
