@@ -2,6 +2,25 @@
       <pre>
        <code>
             <ol>   
+                <li>### .env (prisma file) ###</li>
+                <li>DATABASE_URL="postgresql://postgres:sragne@localhost:5432/growr?schema=public"</li>
+            </ol>
+            <ol>   
+                <li>### shell commands for creating nodejs project with prisma and nextJS ###</li>
+                
+                <li>npm init -y</li>
+                <li>npm install prisma typescript ts-node @types/node --save-dev</li>
+                <li>npx tsc --init</li>
+                
+                <li>npx prisma init</li>
+                <!--<li>npx prisma db validate</li>-->
+                <li>npx prisma db pull --force</li>
+                <li>npx prisma db generate</li>
+
+            </ol>
+        </code>    
+       <code>
+            <ol>   
                 <li>&lt;!-- ... --&gt;</li>
 <% 
     for ( var i = 0; i < selectedTables.length; i++ ) { 
