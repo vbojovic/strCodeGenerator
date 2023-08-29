@@ -16,12 +16,18 @@
                 <!--<li>npx prisma db validate</li>-->
                 <li>npx prisma db pull --force</li>
                 <li>npx prisma db generate</li>
-                <li>npx prisma migrate dev --name init</li>
+                <!--<li>npx prisma migrate dev --name init</li>-->
+                <li>npm install @prisma/client</li>
             </ol>
         </code>    
        <code>
             <ol>   
-                <li>&lt;!-- ... --&gt;</li>
+                <li>//### importData.ts ###</li>
+                <li>const NUMBER_OF_RECORDS=10</li>
+                <li>import { PrismaClient } from "@prisma/client"</li>
+                <li>const prisma = new PrismaClient()</li>
+                <li>async function main() {</li>
+                <li>&nbsp;for (var i=0; i< NUMBER_OF_RECORDS; i++){</li>
 <% 
     for ( var i = 0; i < selectedTables.length; i++ ) { 
        var schemaName=selectedTables[i].schema; 
@@ -37,9 +43,33 @@
        
        var pKeyFields=generator.getPkeyFieldNames(schemaName,tableName);
        
-     }
-%>
+       
+       %><li>&nbsp;&nbsp;await prisma.<%=tableName%>.create({</li>
+           data: {
+           
+           
+           
+           
+           }<%
+         
+   
+          
 
+       %><li>&nbsp;&nbsp;})</li><%
+          
+     }
+     %><li>&nbsp;}</li><%
+%>
+            <li>}</li>
+            <li>main()</li>
+            <li>  .then(async () => {</li>
+            <li>    await prisma.$disconnect()</li>
+            <li>  })</li>
+            <li>  .catch(async (e) => {</li>
+            <li>    console.error(e)</li>
+            <li>    await prisma.$disconnect()</li>
+            <li>    process.exit(1)</li>
+            <li>  })</li>
 
             </ol>
         </code>    
