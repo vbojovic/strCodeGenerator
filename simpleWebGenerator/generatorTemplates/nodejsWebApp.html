@@ -18,6 +18,8 @@
                 <li>npx prisma db generate</li>
                 <!--<li>npx prisma migrate dev --name init</li>-->
                 <li>npm install @prisma/client</li>
+                <li>npm install express pg sequelize express-session express-validator bcrypt passport passport-local connect-flash
+</li>
             </ol>
         </code>    
        <code>
@@ -64,7 +66,8 @@
                 
                 if (isFk){
                     
-                    code.push(fieldName+" - ANOTHER TABLE");
+                    /*code.push(fieldName+" - ANOTHER TABLE");*/
+                    code.push(fieldName+":"+i+",");
                     continue;
                 } else {
                     if (pkeyFields.includes(fieldName)) continue;
@@ -91,14 +94,21 @@
                               break;          
                           case 'bigint':
                               code.push(fieldName+":"+i+",");
-                              break;      
+                              break;  
+                          case 'double':
+                              code.push(fieldName+":"+i/7+",");
+                              break;                                    
                           case 'bool':
                               code.push(fieldName+": true ,");
                               break;
                           case 'date':
-                              code.push(fieldName+": DATE ,");
+                              code.push(fieldName+": \"2023-09-"+("0"+i).slice(-2)+"\",");
                               break;
+                          case 'time':
+                              code.push(fieldName+": \"14:30:"+("00"+i).slice(-2)+"\",");
+                              break;                              
                           default :
+                              code.push("field type not found!");
                               code.push(name);
                               code.push(gType);    
                               console.log(field);
