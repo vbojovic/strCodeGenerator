@@ -172,6 +172,9 @@
       <select />
     </treeState>
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectFrameBounds">
     <option name="width" value="1924" />
     <option name="height" value="1057" />
@@ -964,6 +967,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -978,6 +982,9 @@
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -1012,8 +1019,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp3" />
-        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp (1)" />
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testStreamCodeGenerator" />
       </list>
@@ -1253,6 +1260,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
           <line>258</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
+          <line>359</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

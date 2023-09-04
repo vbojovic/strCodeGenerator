@@ -21,7 +21,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="strCodegen" target="10" />
-      <module name="StreamCodeGenerator" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>
