@@ -1,4 +1,10 @@
 import com.timanaga.StreamCodeGenerator;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.IDbElementReader;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDbElementReader;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseField;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseSettings;
+import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseTypeEnum;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +16,9 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import static org.junit.Assert.*;
 
 public class StreamCodeGeneratorTest {
     @Test
@@ -33,7 +42,41 @@ public class StreamCodeGeneratorTest {
 
         return filenames;
     }
+//@Test
+//public void testLoadResource() {
+//    InputStream inputStream = getClass().getResourceAsStream("/pgDataTypes.txt");
+//    assertNotNull(inputStream);
+//
+//    // Process the resource (e.g., load properties)
+//    Properties properties = new Properties();
+//    try {
+//        properties.load(inputStream);
+//    } catch (Exception e) {
+//        fail("Failed to load properties from resource");
+//    }
+//
+//    // Assert the content of the resource
+//    assertEquals("value1", properties.getProperty("key1"));
+//    assertEquals("value2", properties.getProperty("key2"));
+//}
+//    @Test
+    public void testGetCharacterFieldLength() throws Exception {
+        DatabaseSettings settings = new DatabaseSettings();
+        settings.setDataBase("growr");
+        settings.setLogin("postgres");
+        settings.setPass("sragne");
+        settings.setHost("localhost");
+        settings.setSchema("public");
+        settings.setDataBaseType(DatabaseTypeEnum.postgres);
 
+        PgDb dataBase = new PgDb();
+        dataBase.setSettings(settings);
+        dataBase.connect();
+        PgDbElementReader reader = new PgDbElementReader(dataBase);
+        DatabaseField field = reader.getFieldData("public", "places", "country_id");
+        dataBase.disconnect();
+        assertNotNull(field);
+    }
     private InputStream getResourceAsStream(String resource) {
         final InputStream in
                 = getContextClassLoader().getResourceAsStream(resource);
@@ -57,14 +100,20 @@ public class StreamCodeGeneratorTest {
         var relPath = Paths.get("src", "main", "resources", "parameters.txt"); // src/test/resources/image.jgp
         var absPath = relPath.toFile().getAbsolutePath(); // /home/<user>/../<project-root>/src/test/resources/image.jpg
         var anyFileUnderThisPath = new File(absPath).exists(); // true
-        Assert.assertEquals(true,anyFileUnderThisPath);
+        assertEquals(true,anyFileUnderThisPath);
+    }
+    @Test
+    public void testLoadFile() throws Exception {
+        List<String> res = GenericHelper.resourceToList("/pgDataTypes.txt");
+        System.out.println(res);
+        assertEquals(true,res.size()>0);
     }
 
     @Test
     public void testPrintHelp3() throws Exception {
         String res = GenericHelper.resourceToString("/parameters.txt");
         System.out.println(res);
-        Assert.assertEquals(true,res.length()>0);
+        assertEquals(true,res.length()>0);
     }
 
     @Test
@@ -72,6 +121,6 @@ public class StreamCodeGeneratorTest {
         var relPath = Paths.get("src", "main", "resources", "/parameters.txt"); // src/test/resources/image.jgp
         var absPath = relPath.toFile().getAbsolutePath(); // /home/<user>/../<project-root>/src/test/resources/image.jpg
         var anyFileUnderThisPath = new File(absPath).exists(); // true
-        Assert.assertEquals(true,anyFileUnderThisPath);
+        assertEquals(true,anyFileUnderThisPath);
     }
 }

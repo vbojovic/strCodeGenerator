@@ -722,7 +722,8 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
             field.setPrecision(-1);
             if (row.getString("data_type").equalsIgnoreCase("character varying"))
                 field.setSize(row.getInt("character_maximum_length"));
-
+            if (row.getString("data_type").equalsIgnoreCase("character"))
+                field.setSize(row.getInt("character_maximum_length"));
             //System.out.println("staza: "+schemaName +';' +relName+';' + fieldName+" tip :"+genericDataType+":"+pgDataType);
 
             if (genericDataType.equalsIgnoreCase("double")||genericDataType.equalsIgnoreCase("float"))                           {

@@ -151,6 +151,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="MavenProjectNavigator">
     <treeState>
       <expand>
@@ -172,9 +179,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectFrameBounds">
     <option name="width" value="1924" />
     <option name="height" value="1057" />
@@ -712,7 +719,7 @@
       <recent name="com.manuga.streamCodeGenerator.helpers.databases.dbClasses" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StreamCodeGeneratorTest.testPrintHelp3">
+  <component name="RunManager" selected="JUnit.StreamCodeGeneratorTest.testGetCharacterFieldLength">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -875,11 +882,11 @@
       <testRegexps />
       <envs />
     </configuration>
-    <configuration name="StreamCodeGeneratorTest.testPrintHelp (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StreamCodeGeneratorTest.testGetCharacterFieldLength" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="StreamCodeGenerator" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
-      <option name="METHOD_NAME" value="testPrintHelp" />
+      <option name="METHOD_NAME" value="testGetCharacterFieldLength" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -890,11 +897,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StreamCodeGeneratorTest.testPrintHelp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="strCodegen" />
+    <configuration name="StreamCodeGeneratorTest.testLoadFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="StreamCodeGenerator" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
-      <option name="METHOD_NAME" value="testPrintHelp" />
+      <option name="METHOD_NAME" value="testLoadFile" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -935,11 +942,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StreamCodeGeneratorTest.testStreamCodeGenerator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="strCodegen" />
+    <configuration name="StreamCodeGeneratorTest.testPrintHelp4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="StreamCodeGenerator" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="StreamCodeGeneratorTest" />
-      <option name="METHOD_NAME" value="testStreamCodeGenerator" />
+      <option name="METHOD_NAME" value="testPrintHelp4" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -967,7 +974,6 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
-            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -982,9 +988,6 @@
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
-            </option>
-            <option name="projectsCmdOptionValues">
-              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -1009,20 +1012,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp (1)" />
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testGetCharacterFieldLength" />
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testLoadFile" />
+      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp4" />
       <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
       <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp3" />
-      <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp" />
-      <item itemvalue="JUnit.StreamCodeGeneratorTest.testStreamCodeGenerator" />
       <item itemvalue="Maven.StreamCodeGenerator [clean]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testGetCharacterFieldLength" />
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testLoadFile" />
+        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp4" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp3" />
-        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp (1)" />
         <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp2" />
-        <item itemvalue="JUnit.StreamCodeGeneratorTest.testPrintHelp" />
-        <item itemvalue="JUnit.StreamCodeGeneratorTest.testStreamCodeGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -1218,7 +1221,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
-          <line>767</line>
+          <line>768</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1238,7 +1241,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>278</line>
+          <line>288</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1248,23 +1251,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/StreamCodeGeneratorTest.java</url>
-          <line>58</line>
+          <line>101</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>254</line>
+          <line>264</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>258</line>
+          <line>268</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
           <line>359</line>
           <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/StreamCodeGeneratorTest.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/StreamCodeGeneratorTest.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
+          <line>695</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/databases/dbClasses/PgDbElementReader.java</url>
+          <line>722</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

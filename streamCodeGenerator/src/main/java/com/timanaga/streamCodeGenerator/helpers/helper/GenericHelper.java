@@ -233,21 +233,31 @@ public class GenericHelper {
 		return System.getProperty("java.io.tmpdir");
 	}
 
+	public static List<String> InputStream2List(InputStream source) throws IOException {
+		List<String> lines = new ArrayList<>();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(source));
+		String line;
+		while ((line = reader.readLine()) != null) {
+			lines.add(line);
+		}
+		reader.close();
+		source.close();
+		return lines;
+	}
     public static List<String> resourceToList(String resourcePath) throws Exception{
-//        List<String> lines = new ArrayList<String>();
-//        final InputStream in = GenericHelper.class.getClass().getResourceAsStream(
-//                resourcePath);
-//        final BufferedReader bufReader = new BufferedReader(
-//                new InputStreamReader(in));
-//
-//        String line = "";
-//        while ((line = bufReader.readLine()) != null)
-//            lines.add(line);
-//        return lines;
-//		var relPath = Paths.get("src", "main", "resources", resourcePath);
-		var relPath = Paths.get("classes",  resourcePath);
-		var absPath = relPath.toFile().getAbsolutePath();
-		return file2stringLines(absPath);
+		try{
+			List<String> lines = new ArrayList<String>();
+			final InputStream in = GenericHelper.class.getClass().getResourceAsStream(
+					resourcePath);
+			lines = GenericHelper.InputStream2List(in);
+			return lines;
+		} catch (Exception e) {
+			//TODO possible error with path. need to try/catch it
+					var relPath = Paths.get("src", "main", "resources", resourcePath);
+//			var relPath = Paths.get("classes",  resourcePath);
+			var absPath = relPath.toFile().getAbsolutePath();
+			return file2stringLines(absPath);
+		}
     }
 
 	public static String resourceToString(String resourcePath) throws Exception{
