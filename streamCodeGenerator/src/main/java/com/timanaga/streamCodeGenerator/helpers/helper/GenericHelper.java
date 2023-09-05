@@ -253,10 +253,15 @@ public class GenericHelper {
 			return lines;
 		} catch (Exception e) {
 			//TODO possible error with path. need to try/catch it
-					var relPath = Paths.get("src", "main", "resources", resourcePath);
-//			var relPath = Paths.get("classes",  resourcePath);
-			var absPath = relPath.toFile().getAbsolutePath();
-			return file2stringLines(absPath);
+			try {
+				var relPath = Paths.get("src", "main", "resources", resourcePath);
+				var absPath = relPath.toFile().getAbsolutePath();
+				return file2stringLines(absPath);
+			} catch (IOException e1) {
+				var relPath = Paths.get("classes",  resourcePath);
+				var absPath = relPath.toFile().getAbsolutePath();
+				return file2stringLines(absPath);
+			}
 		}
     }
 

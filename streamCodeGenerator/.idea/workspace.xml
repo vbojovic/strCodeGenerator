@@ -1241,7 +1241,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>288</line>
+          <line>293</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1256,12 +1256,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>264</line>
+          <line>269</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/helpers/helper/GenericHelper.java</url>
-          <line>268</line>
+          <line>273</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
