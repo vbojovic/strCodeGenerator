@@ -93,7 +93,7 @@
                               code.push("   "+fieldName+": i/7 ,");
                               break;                                    
                           case 'bool':
-                              code.push("   "+fieldName+": true ,");
+                              code.push("   "+fieldName+": Math.random() < 0.5 ,");
                               break;
                           case 'date':
                               code.push("   "+fieldName+": \"2023-09-\"+"+"(\"0\"+i).slice(-2)"+",");
