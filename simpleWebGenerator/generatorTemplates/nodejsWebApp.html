@@ -25,7 +25,7 @@
        <code>
             <ol>   
                 <li>//### importData.ts ###</li>
-                <li>//npx ts-node src\app\db\importData.ts</li>
+                <li>//npx ts-node src\\app\\db\\importData.ts</li>
                 <li>const NUMBER_OF_RECORDS=10</li>
                 <li>import { PrismaClient } from "@prisma/client"</li>
                 <li>const prisma = new PrismaClient()</li>
@@ -64,7 +64,7 @@
                     if (isNumeric){
                         code.push("   "+fieldName+":"+"i"+",");
                     } else {
-                        code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\");");
+                        code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
                     }
                     continue;
                 } else {
@@ -81,7 +81,7 @@
                               code.push("   "+fieldName+": \""+fieldName+" - \""+"+i,");
                               break;
                           case 'char':
-                              code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\");");
+                              code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
                               break;
                           case 'integer':
                               code.push("   "+fieldName+":"+"i"+",");
