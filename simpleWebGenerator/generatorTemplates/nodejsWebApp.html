@@ -58,12 +58,13 @@
                 var types = generator.genericDataTypes;
                 var fieldName = field.fieldName.trim();                
                 var isNumeric = generator.isFieldNumeric(schemaName, tableName, fieldName);
+                var fieldSize = generator.getFieldData(schemaName, tableName, fieldName).size;
                 
                 if (isFk){ 
                     if (isNumeric){
                         code.push("   "+fieldName+":"+"i"+",");
                     } else {
-                        code.push("   "+fieldName+":\""+"i"+"\",");
+                        code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\");");
                     }
                     continue;
                 } else {
@@ -80,7 +81,7 @@
                               code.push("   "+fieldName+": \""+fieldName+" - \""+"+i,");
                               break;
                           case 'char':
-                              code.push("   "+fieldName+": \""+String.fromCharCode(Math.floor(Math.random() * (90 - 65 + 1)) + 65)+"\",");
+                              code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\");");
                               break;
                           case 'integer':
                               code.push("   "+fieldName+":"+"i"+",");
