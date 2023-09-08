@@ -41,31 +41,47 @@
                 <li>  const randomDate = new Date(year, month, day, hour, minute, second);</li>
                 <li>  return randomDate;</li>
                 <li>}</li>
-                <li>function getRandomDateFormatted() {</li>
+                <li> function getRandomDateFormatted() {</li>
                 <li>  const randomDate = getRandomDate();  </li>
                 <li>  const year = randomDate.getFullYear();</li>
                 <li>  const month = String(randomDate.getMonth() + 1).padStart(2, "0");  </li>
                 <li>  const day = String(randomDate.getDate()).padStart(2, "0");</li>
-                <li>  const formattedDate = `${year}-${month}-${day}`;</li>
+                <li>  const formattedDate = "${year}-${month}-${day}";</li>
                 <li>  return formattedDate;</li>
                 <li>}</li>
-                
+                <li>function getRandomTimeFormatted() {</li>
+                <li>   const hour = String(Math.floor(Math.random() * 24)).padStart(2, "0");</li>
+                <li>   const minute = String(Math.floor(Math.random() * 60)).padStart(2, "0");</li>
+                <li>   const second = String(Math.floor(Math.random() * 60)).padStart(2, "0");</li>
+                <li>   const formattedTime = "${hour}:${minute}:${second}";</li>
+                <li>   return formattedTime;</li>
+                <li> }</li>
+                 
+                <li> module.exports = {</li>
+                <li>   getRandomDate,</li>
+                <li>   getRandomDateFormatted,</li>
+                <li>   getRandomTimeFormatted,</li>
+                <li> };</li>
             </ol>
         </code>
-       <code>
+        <code>
             <ol>   
                 <li>//### importData.ts ###</li>
                 <li>//npx ts-node src\\app\\db\\importData.ts</li>
                 <li>//npx ts-node src/app/db/importData.ts</li>
-                <li>const NUMBER_OF_RECORDS=10</li>
-                <li>//import { PrismaClient } from "@prisma/client"</li>
+                <li>const NUMBER_OF_RECORDS=10;</li>
+                <li>//import { PrismaClient } from "@prisma/client";</li>
                 <li>const { PrismaClient } = require("@prisma/client");</li>
-                <li>const prisma = new PrismaClient()</li>
+                <li>const prisma = new PrismaClient();</li>
+<!--                <li>import {getRandomDate}          from "./src/helper.js";</li>
+                <li>import {getRandomDateFormatted} from "./src/helper.js";</li>
+                <li>import {getRandomTimeFormatted} from "./src/helper.js";</li>      -->
+                <li>const { getRandomDate } = require("./helper.js");</li>
+                <li>const { getRandomDateFormatted } = require("./helper.js");</li>
+                <li>const { getRandomTimeFormatted } = require("./helper.js");</li>
                 <li>async function main() {</li>
-                <li>const { v4: uuidv4 } = require("uuid");</li>
-                
-
-                <li>&nbsp;for (var i=0; i< NUMBER_OF_RECORDS; i++){</li>
+                <li>    const { v4: uuidv4 } = require("uuid");</li>
+                <li>    for (var i=0; i< NUMBER_OF_RECORDS; i++){</li>
 <% 
     var code=[];
     for ( var i = 0; i < selectedTables.length; i++ ) { 
@@ -81,8 +97,8 @@
                 
         var pKeyFields=generator.getPkeyFieldNames(schemaName,tableName);
        
-        code.push("await prisma."+tableName+".create({");
-            code.push("data: {");
+        code.push("     await prisma."+tableName+".create({");
+            code.push("     data: {");
 
             for ( var j = 0; j < fields.length; j++ ) {
                 var field = fields[j]; 
@@ -96,9 +112,9 @@
                 
                 if (isFk){ 
                     if (isNumeric){
-                        code.push("   "+fieldName+":"+"i"+",");
+                        code.push("     "+fieldName+":"+"i"+",");
                     } else {
-                        code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
+                        code.push("     "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
                     }
                     continue;
                 } else {
@@ -106,34 +122,34 @@
                     
                     switch(gType){
                           case 'uid':
-                              code.push("     "+fieldName+": uuidv4() ,");
+                              code.push("       "+fieldName+": uuidv4() ,");
                               break;        
                           case 'varchar':
-                              code.push("     "+fieldName+": \""+fieldName+" - \""+"+i,");
+                              code.push("       "+fieldName+": \""+fieldName+" - \""+"+i,");
                               break;
                           case 'text':
-                              code.push("   "+fieldName+": \""+fieldName+" - \""+"+i,");
+                              code.push("       "+fieldName+": \""+fieldName+" - \""+"+i,");
                               break;
                           case 'char':
-                              code.push("   "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
+                              code.push("       "+fieldName+": String(i).padStart("+fieldSize+", \"0\"),");
                               break;
                           case 'integer':
-                              code.push("   "+fieldName+":"+"i"+",");
+                              code.push("       "+fieldName+":"+"i"+",");
                               break;          
                           case 'bigint':
-                              code.push("   "+fieldName+":"+"i"+",");
+                              code.push("       "+fieldName+":"+"i"+",");
                               break;  
                           case 'double':
-                              code.push("   "+fieldName+": i/7 ,");
+                              code.push("       "+fieldName+": i/7 ,");
                               break;                                    
                           case 'bool':
-                              code.push("   "+fieldName+": Math.random() < 0.5 ,");
+                              code.push("       "+fieldName+": Math.random() < 0.5 ,");
                               break;
                           case 'date':
-                              code.push("   "+fieldName+": \"2023-09-\"+"+"(\"0\"+i).slice(-2)"+",");
+                              code.push("       "+fieldName+": getRandomDateFormatted(),");
                               break;
                           case 'time':
-                              code.push("   "+fieldName+": \"14:30:\""+"+(\"00\"+i).slice(-2)"+",");
+                              code.push("       "+fieldName+": getRandomTimeFormatted(),");
                               break;                              
                           default :
                               code.push("field type not found!");

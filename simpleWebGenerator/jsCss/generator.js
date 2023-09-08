@@ -1344,6 +1344,7 @@ var Generator = (function () {
         }
         return destTables;
     };
+    
     /*
      * gleda da li se sors atrib iz src tablice povezuje sa destTablicom
      * @param {string} schemaName
