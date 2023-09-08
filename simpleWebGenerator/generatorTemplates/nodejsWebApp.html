@@ -13,24 +13,58 @@
                 <li>npx tsc --init</li>
                 
                 <li>npx prisma init</li>
-                <!--<li>npx prisma db validate</li>-->
-                <li>npx prisma db pull --force</li>
+                <li>#npx prisma db validate</li>
+                <li>#npx prisma db pull --force</li>
+                <li>npx prisma db pull</li>
                 <li>npx prisma db generate</li>
-                <!--<li>npx prisma migrate dev --name init</li>-->
+                <li>#npx prisma migrate dev --name init</li>
                 <li>npm install @prisma/client</li>
                 <li>npm install express pg sequelize express-session express-validator bcrypt passport passport-local connect-flash
                 <li>npm install uuid</li>
+                
+                <li>## replace autoincrement() to auto() in prisma/schema.prisma file</li>
             </ol>
         </code>    
+        <code>
+            <ol>
+                <li>//######### helper.js ###########</li>
+                <li>function getRandomDate() {</li>
+                <li>  const minYear = 1900;</li>
+                <li>  const maxYear = 2099;</li>
+                <li>  const year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;</li>
+                <li>  const month = Math.floor(Math.random() * 12);</li>
+                <li>  const maxDay = new Date(year, month + 1, 0).getDate();</li>
+                <li>  const day = Math.floor(Math.random() * maxDay) + 1;</li>
+                <li>  const hour = Math.floor(Math.random() * 24);</li>
+                <li>  const minute = Math.floor(Math.random() * 60);</li>
+                <li>  const second = Math.floor(Math.random() * 60);</li>
+                <li>  const randomDate = new Date(year, month, day, hour, minute, second);</li>
+                <li>  return randomDate;</li>
+                <li>}</li>
+                <li>function getRandomDateFormatted() {</li>
+                <li>  const randomDate = getRandomDate();  </li>
+                <li>  const year = randomDate.getFullYear();</li>
+                <li>  const month = String(randomDate.getMonth() + 1).padStart(2, "0");  </li>
+                <li>  const day = String(randomDate.getDate()).padStart(2, "0");</li>
+                <li>  const formattedDate = `${year}-${month}-${day}`;</li>
+                <li>  return formattedDate;</li>
+                <li>}</li>
+                
+            </ol>
+        </code>
        <code>
             <ol>   
                 <li>//### importData.ts ###</li>
                 <li>//npx ts-node src\\app\\db\\importData.ts</li>
+                <li>//npx ts-node src/app/db/importData.ts</li>
                 <li>const NUMBER_OF_RECORDS=10</li>
-                <li>import { PrismaClient } from "@prisma/client"</li>
+                <li>//import { PrismaClient } from "@prisma/client"</li>
+                <li>const { PrismaClient } = require("@prisma/client");</li>
                 <li>const prisma = new PrismaClient()</li>
                 <li>async function main() {</li>
                 <li>const { v4: uuidv4 } = require("uuid");</li>
+                
+
                 <li>&nbsp;for (var i=0; i< NUMBER_OF_RECORDS; i++){</li>
 <% 
     var code=[];
