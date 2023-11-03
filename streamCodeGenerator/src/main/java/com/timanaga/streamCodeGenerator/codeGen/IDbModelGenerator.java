@@ -1,6 +1,6 @@
 package com.timanaga.streamCodeGenerator.codeGen;
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseModel;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseModel;
 
 /**
  * Created by x on 6/16/2014.

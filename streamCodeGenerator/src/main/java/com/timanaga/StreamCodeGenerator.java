@@ -1,12 +1,11 @@
 package com.timanaga;
 
 //import com.manuga.streamCodeGenerator.helpers.Helper;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.IDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.MysqDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.*;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.IDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.databases.dbModels.*;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
-import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;

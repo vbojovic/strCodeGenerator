@@ -1,7 +1,7 @@
 package com.timanaga.streamCodeGenerator.codeGen;
 
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseModel;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseModel;
 
 public abstract class GeneratorFromDbModel implements IDbModelGenerator{
 	private DatabaseModel dbModel;

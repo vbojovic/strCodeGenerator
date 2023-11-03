@@ -1,7 +1,7 @@
 package com.timanaga.streamCodeGenerator.helpers;
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseSettings;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseTypeEnum;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseSettings;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseTypeEnum;
 
 
 /**

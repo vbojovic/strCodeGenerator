@@ -1,10 +1,9 @@
 import com.timanaga.StreamCodeGenerator;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.IDbElementReader;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDbElementReader;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseField;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseSettings;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseTypeEnum;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDbElementReader;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseField;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseSettings;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseTypeEnum;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import static org.junit.Assert.*;
 

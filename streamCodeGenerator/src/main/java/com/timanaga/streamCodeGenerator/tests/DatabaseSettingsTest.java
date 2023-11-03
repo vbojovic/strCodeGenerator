@@ -2,10 +2,9 @@ package com.timanaga.streamCodeGenerator.tests; /**
  * 
  */
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseSettings;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseSettings;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
 import com.timanaga.streamCodeGenerator.helpers.Helper;
-import org.junit.Test;
 
 /**
  * @author x

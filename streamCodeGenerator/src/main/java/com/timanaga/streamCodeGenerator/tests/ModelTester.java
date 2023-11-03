@@ -3,16 +3,13 @@ package com.timanaga.streamCodeGenerator.tests; /**
  */
 
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.MysqDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseModel;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseSchema;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseModel;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseSchema;
 import com.timanaga.streamCodeGenerator.helpers.Helper;
 import junit.framework.Assert;
-import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

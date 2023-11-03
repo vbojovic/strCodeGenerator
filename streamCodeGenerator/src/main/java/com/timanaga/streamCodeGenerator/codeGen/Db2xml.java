@@ -5,10 +5,10 @@ package com.timanaga.streamCodeGenerator.codeGen;
 
 import java.util.List;
 
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.IDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.MysqDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbClasses.PgDb;
-import com.timanaga.streamCodeGenerator.helpers.databases.dbModels.DatabaseTypeEnum;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.IDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseTypeEnum;
 
 
 /**
