@@ -4,6 +4,7 @@ package com.timanaga;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.IDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.SqlServerDb;
 import com.timanaga.streamCodeGenerator.databases.dbModels.*;
 import com.timanaga.streamCodeGenerator.helpers.helper.GenericHelper;
 
@@ -100,6 +101,8 @@ java -jar streamCodeGenerator.jar <param1>...<paramN>
             settings.setDataBaseType(DatabaseTypeEnum.postgres);
         }else if (databaseType.equalsIgnoreCase("mysql")){
             settings.setDataBaseType(DatabaseTypeEnum.mysql);
+        }else if (databaseType.equalsIgnoreCase("mssql")){
+            settings.setDataBaseType(DatabaseTypeEnum.mssql);
         }else{
             throw new Exception("not supported database type");
         }
@@ -112,6 +115,21 @@ java -jar streamCodeGenerator.jar <param1>...<paramN>
         return settings;
     }
 
+    public static IDb Factory(DatabaseSettings settings) throws Exception {
+        IDb db;
+        if (settings.getDataBaseType().equals(DatabaseTypeEnum.postgres)){
+            db = new PgDb();
+        } else if (settings.getDataBaseType().equals(DatabaseTypeEnum.mysql)){
+            db = new MysqDb();
+        } else if (settings.getDataBaseType().equals(DatabaseTypeEnum.mssql)){
+            db = new SqlServerDb();
+        }else{
+            throw new Exception("not supported database type");
+            //TODO N/A treban implementirat ostale baze
+        }
+        db.setSettings(settings);
+        return db;
+    }
     public static void runApp2(HashMap<String,String> keys) throws Exception {
         DatabaseSettings settings = getSettingsFromKeys(keys);
         String format = "json";
@@ -121,23 +139,10 @@ java -jar streamCodeGenerator.jar <param1>...<paramN>
             if (!Arrays.asList(formats).contains(format)) throw  new Exception("Unknown format "+ format);
         }
 
-        IDb db;
-        if (settings.getDataBaseType().equals(DatabaseTypeEnum.postgres)){
-            db = new PgDb();
-        } else if (settings.getDataBaseType().equals(DatabaseTypeEnum.mysql)){
-            db = new MysqDb();
-        }else{
-            throw new Exception("not supported database type");
-            //TODO N/A treban implementirat ostale baze
-        }
-
-//        PgDb db = new PgDb();
-
-        db.setSettings(settings);
+        IDb db = Factory(settings);
         db.connect();
 
         DatabaseModel dbm = new DatabaseModel();
-
 
         String schema = "";
 //        if (keys.containsKey("sch")) schema = keys.get("sch").trim();

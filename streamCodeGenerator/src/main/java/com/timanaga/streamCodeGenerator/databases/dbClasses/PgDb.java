@@ -35,11 +35,7 @@ public class PgDb extends ADb {
 	}
 
 
-	@Override
-	public DatabaseTypeEnum getDbType() {
-		return this.dbType;
-	}
-	
+
 	@Override
 	public DatabaseModel getModel() throws Exception{
 		if (this.settings == null) throw new Exception("Model cannot be generated because database settings are missing!");
