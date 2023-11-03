@@ -1,6 +1,0 @@
--D database
--l login
--p password
--e database engine [mysql/pg/mssql]
--s schema
--f export to file (optional)
