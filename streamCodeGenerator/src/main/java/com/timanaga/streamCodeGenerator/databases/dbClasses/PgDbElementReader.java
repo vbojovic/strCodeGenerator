@@ -547,30 +547,42 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
     }
 
 
-    public String getSequenceDDL(final String schema, final String seqName) {
-
-        String sql = "SELECT sequence_definition\n" +
-                "FROM information_schema.sequences\n" +
-                "WHERE table_schema = ?\n" +
-                "AND table_name = ?";
-
-        try (PreparedStatement statement = m_DataBase.getConnection().prepareStatement(sql)) {
-            statement.setString(1, schema);
-            statement.setString(2, seqName);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getString("sequence_definition");
-                }
-            }
-        } catch (Exception e) {
-//            e.printStackTrace();
-            //TODO not finished
-            return "N/A";
-        }
-
-        return "N/A";
-    }
+//    public String getSequenceDDL(final String schema, final String seqName) throws SQLException {
+//
+//        String sql = "SELECT sequence_definition\n" +
+//                "FROM information_schema.sequences\n" +
+//                "WHERE table_schema = ?\n" +
+//                "AND table_name = ?";
+//
+//        try (PreparedStatement statement = m_DataBase.getConnection().prepareStatement(sql)) {
+//            statement.setString(1, schema);
+//            statement.setString(2, seqName);
+//
+//            try (ResultSet resultSet = statement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    return resultSet.getString("sequence_definition");
+//                }
+//            }
+//        } catch (Exception e) {
+//            sql = "SELECT *\n" +
+//                    "FROM information_schema.sequences\n" +
+//                    "WHERE table_schema = ?\n" +
+//                    "AND table_name = ?";
+//            PreparedStatement statement = m_DataBase.getConnection().prepareStatement(sql);
+//            statement.setString(1, schema);
+//            statement.setString(2, seqName);
+//            try (ResultSet resultSet = statement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    return resultSet.getString("sequence_definition");
+//                }
+//            }
+////            e.printStackTrace();
+//            //TODO not finished
+//            return "N/A";
+//        }
+//
+//        return "N/A";
+//    }
 
     @Override
     public List<DatabaseSequence> readSequences(DatabasePath dbPath) throws Exception {
@@ -597,11 +609,11 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
             seq.setName(rows.getString("sequence_name"));
 
             seq.setComment(readComment(dbPath));
-            seq.setDDL(this.getSequenceDDL(dbPath.schema, dbPath.sequence));
+//            seq.setDDL(this.getSequenceDDL(dbPath.schema, dbPath.sequence));
 
             seq.setCycle((rows.getString("cycle_option")==null) ? false : true);
 
-            seq.setDDL(getSequenceDDL(dbPath.schema,dbPath.sequence));
+//            seq.setDDL(getSequenceDDL(dbPath.schema,dbPath.sequence));
             seq.setIncrement(rows.getLong("increment"));
             seq.setMaxvalue(rows.getLong("maximum_value"));
             seq.setMinvalue(rows.getLong("minimum_value"));

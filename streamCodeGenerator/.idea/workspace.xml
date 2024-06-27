@@ -1220,7 +1220,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/databases/dbClasses/PgDbElementReader.java</url>
-          <line>771</line>
+          <line>783</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1270,17 +1270,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/databases/dbClasses/PgDbElementReader.java</url>
-          <line>698</line>
+          <line>710</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/databases/dbClasses/PgDbElementReader.java</url>
-          <line>725</line>
+          <line>737</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/timanaga/streamCodeGenerator/databases/dbClasses/PgDbElementReader.java</url>
-          <line>864</line>
+          <line>876</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
