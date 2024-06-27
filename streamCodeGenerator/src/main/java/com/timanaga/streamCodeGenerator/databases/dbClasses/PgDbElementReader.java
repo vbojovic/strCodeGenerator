@@ -19,7 +19,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
         loadDataTypes();
 	}
     private void loadDataTypes() throws Exception {
-         this.converter = new DataFormatConverter("/pgDataTypes.txt");
+        this.converter = new DataFormatConverter("/pgDataTypes.txt");
     }
 
 
@@ -548,6 +548,7 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
 
 
     public String getSequenceDDL(final String schema, final String seqName) {
+
         String sql = "SELECT sequence_definition\n" +
                 "FROM information_schema.sequences\n" +
                 "WHERE table_schema = ?\n" +
@@ -563,7 +564,9 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            //TODO not finished
+            return "N/A";
         }
 
         return "N/A";
@@ -835,18 +838,32 @@ public class PgDbElementReader extends ADbElemetReader implements IDbElementRead
     }
 
     public String getIndexDDL(final DatabasePath path) throws Exception {
-        String sql =
-                "SELECT pg_get_indexdef(indexrelid) AS index_ddl " +
-                        "FROM pg_stat_user_indexes " +
-                        "WHERE tablename = 'tbl' " +
-                        "AND schemaname = 'sch' " +
-                        "AND indexname = 'ndxName'";
+        try {
+            String sql =
+                    "SELECT pg_get_indexdef(indexrelid) AS index_ddl " +
+                            "FROM pg_stat_user_indexes " +
+                            "WHERE tablename = 'tbl' " +
+                            "AND schemaname = '#sch#' " +
+                            "AND indexname = 'ndxName'";
 
-        sql = sql.replace("sch", path.schema)
-                .replace("tbl", path.table)
-                .replace("ndxName", path.index);
+            sql = sql.replace("#sch#", path.schema)
+                    .replace("tbl", path.table)
+                    .replace("ndxName", path.index);
 
-        return m_DataBase.sql2string(sql);
+            return m_DataBase.sql2string(sql);
+        } catch (Exception e){
+            String sql =
+                    "SELECT pg_get_indexdef(indexrelid) AS index_ddl " +
+                            "FROM pg_stat_user_indexes " +
+                            "WHERE relname = 'tbl' " +
+                            "AND schemaname = '#sch#' " +
+                            "AND indexrelname = 'ndxName'";
+
+            sql = sql.replace("#sch#", path.schema)
+                    .replace("tbl", path.table)
+                    .replace("ndxName", path.index);
+            return m_DataBase.sql2string(sql);
+        }
     }
 
 
