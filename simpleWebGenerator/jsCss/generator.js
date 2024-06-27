@@ -47,6 +47,7 @@ var Generator = (function () {
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'Pg/PHP/js', name: "PgPHP insert jTable", funcName: "PgPHPInsertJTable"});
 
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'html/js/bootstrap/angular', name: "Angular bootstrap JTable REST", funcName: "angularJTableRestBootstrap"});
+        _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'html/js/bootstrap/vuejs/jtable', name: "Vue bootstrap JTable REST", funcName: "vueJTableRestBootstrap"});
 
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tmp', lang: 'html/js/bootstrap', name: "Dashboard generator bootstrap JTable", funcName: "dashboardGeneratorBootstrapJTable"});
         _functions.push({singleFile: true, prefixFile: '', sufixFile: '', method: 'tStr', lang: 'html', name: "list form jTable divs", funcName: "ListFormJTableDivs"});
