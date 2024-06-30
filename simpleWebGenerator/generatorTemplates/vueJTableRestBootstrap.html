@@ -1,0 +1,234 @@
+<script type="text/html" id="user_tmpl">
+<!--    <button type="button" class="copy btn btn-success">1</button>
+    <button type="button" class="copy btn btn-success">2</button>-->
+    <pre>
+        <code>   
+            <ol>
+            <li> &lt;?php</li>
+            <li> //&lt;!-- ---------------------------- list.php -------------------&gt; </li>
+            <li>  
+                TODO ovo napravit do kraja tako da pejstan fajl kad san siguran da je gotovo
+            </li>
+            </ol>
+        </code>
+        <code>   
+            <ol>
+            <li> &lt;?php</li>
+            <li> //&lt;!-- ---------------------------- index.php -------------------&gt; </li>
+            <li>  
+                TODO ovo napravit do kraja tako da pejstan fajl kad san siguran da je gotovo
+            </li>
+            </ol>
+        </code>
+        <code>   
+            <ol>
+            <li> &lt;?php</li>
+            <li> //&lt;!-- ---------------------------- actions/delete.php -------------------&gt; </li>
+            <li>    $if (substr($a, -6) === \"_delete\") { </li>
+            <li>    $allOk = true;</li>
+            <li>    switch($a){</li>
+            <%
+                
+                for ( var i = 0; i < selectedTables.length; i++ ) { 
+                   var schemaName=selectedTables[i].schema; 
+                   var tableName=selectedTables[i].table; 
+                   var funcName = generator.getFunctionName(schemaName,tableName,false); 
+                   var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName);   
+                   var phpArgsPkey = genericHelper.joinArrayWithPRefixes(attribsInPkey, '$', ',');  
+                   var pkeyName = genericHelper.joinArrayWithPRefixes(attribsInPkey, '', ',');  
+                   var tableHasUserField =generator.getUserFieldNamesFromTable(schemaName,tableName).length;
+            %>
+                            <li>case "<%=schemaName%>_<%=tableName%>_delete":</li>
+                            
+            
+            <%      for ( var j = 0; j < attribsInPkey.length; j++ ) { 
+                        var fieldName = attribsInPkey[j];   
+                        var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); %>
+                        <li>    if (isset($_POST[&quot;<%=fieldName%>&quot;])){</li>
+                        <li>         $<%=fieldName%> = $_POST[&quot;<%=fieldName%>&quot;];</li>
+            <%                      var antiInjector = generator.genericDataType2PhpInject(fieldDataType,fieldName); %>
+                        <li>         $<%=fieldName%> = <%=antiInjector%>;</li> 
+                        <li>    }else{</li> 
+                        <li>        $allOk = false;</li> 
+                        <li>    }</li> 
+            <%      } %>     
+                                <li>    if ($allOk == true){</li>
+                                <li>        $data["Result"]="OK";</li>
+                                <li>        $this->svc->deleteById("<%=tableName%>","<%=pkeyName%>",<%=phpArgsPkey%>,<%=tableHasUserField%>);</li>
+                                <li>    }else{</li>
+                                <li>        SvcClass::getErrorMessage();</li>
+                                <li>    }</li> 
+                            <li>break;</li>
+            <%  } %> 
+            <li>    }</li>
+            <li>    echo json_encode($data);</li>
+
+            <li>}</li>
+            <li>}</li>
+    
+            <li>?&gt;</li>
+            </ol>
+    </code>
+
+<code>   
+        <ol>
+        <li> &lt;?php</li>
+        <li> //&lt;!-- ---------------------------- actions.php -------------------&gt; </li>
+        <li>$a=$_REQUEST[&#x27;a&#x27;];</li>
+
+        <%
+            code=[];
+            var tableNames=[];
+            
+            
+            for (var i = 0; i < selectedTables.length; i++) {
+                var schemaName=selectedTables[i].schema;
+                var tableName=selectedTables[i].table;
+                tableNames.push(tableName);
+            }
+            
+            var tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_list&#x27;');
+            code.push( "$lists=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_delete&#x27;');
+            code.push( "$deletes=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_switch&#x27;');
+            code.push( "$switches=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_search&#x27;');
+            code.push( "$searches=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_update&#x27;');
+            code.push( "$updates=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
+            code.push( "$inserts=array("+tmp.join(",")+");" );
+            
+            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_options&#x27;');
+            code.push( "$options=array("+tmp.join(",")+");" );
+            
+            
+            for (var i = 0; i < code.length; i++) {
+                %> <li><%= code[i] %></li><%
+            }
+          
+        %>
+        <li>if (in_array($a, array($lists,$updates,$switches,$searches,$inserts,$custom))) {</li>
+        <li>    require "actions/{$a}.php";</li>
+        <li>}</li>
+        
+        <li>if (in_array($a, $deletes)) {</li>
+            <li>    require "actions/delete.php";</li>
+            <li>}</li>
+        <li>if (in_array($a, $options)) {</li>
+            <li>    require "actions/options.php";</li>
+            <li>}</li>
+        <li> ?&gt;</li>
+        </ol>
+</code>
+    
+<code  lang="html php">
+    <ol>
+        <li>&lt;?php</li>
+        <li> //-- ---------------------------- actionsCreate.php -------------------&gt; </li>
+        <li>die();</li>
+        <%
+        code=[];
+        var tableNames=[];
+        
+        for (var i = 0; i < selectedTables.length; i++) {
+            var schemaName=selectedTables[i].schema;
+            var tableName=selectedTables[i].table;
+            tableNames.push(tableName);
+        }
+        
+        var tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_list&#x27;');
+        code.push( "$lists=array("+tmp.join(",")+");" );
+        
+        tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_delete&#x27;');
+        code.push( "$deletes=array("+tmp.join(",")+");" );
+        
+        tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_switch&#x27;');
+        code.push( "$switches=array("+tmp.join(",")+");" );
+        
+        tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_search&#x27;');
+        code.push( "$searches=array("+tmp.join(",")+");" );
+        
+        tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_update&#x27;');
+        code.push( "$updates=array("+tmp.join(",")+");" );
+        
+        tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
+        code.push( "$inserts=array("+tmp.join(",")+");" );
+        
+        code.push("foreach (array_merge($inserts,$updates,$searches,$switches,$lists) as $act){");
+        code.push("touch(\"actions/$act.php\");");
+        code.push("}");
+        
+        for (var i = 0; i < code.length; i++) {
+            %> <li><%= code[i] %></li><%
+        }
+        %>
+    </ol>
+</code>
+    
+<code>   
+        <ol>
+        <li> &lt;?php</li>
+        <li> //&lt;!-- ---------------------------- options.php -------------------&gt; </li>
+        <%
+            code=[];
+            code.push("if (in_array($a,$options)){");
+            code.push(" switch ($a){");
+            
+            for (var i = 0; i < selectedTables.length; i++) {
+                var schemaName=selectedTables[i].schema;
+                var tableName=selectedTables[i].table;
+                
+                var field = generator.getFirstVarcharField(schemaName,tableName);
+                if (field == null) continue;
+                var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
+                code.push("     case  \""+tableName+"_option\":");
+                
+                tmp = "         $res=$sqlClass->getListForCombo(\""+tableName+"\",\""+pkeyField+"\",\""+field+"\");";
+                tmp = genericHelper.toHtmlEntities(tmp);
+                code.push(tmp);
+                
+                
+                code.push("     break;");
+            }
+            
+            code.push(" }");
+            code.push("     die(json_encode($res));");
+            code.push("}");
+            for (var i = 0; i < code.length; i++) {
+                %> <li><%= code[i] %></li><%
+            }
+        %>
+
+        <li> ?&gt;</li>
+        </ol>
+</code>
+    
+<code>   
+        <ol>
+        <li> &lt;?php</li>
+        <li> //&lt;!-- ---------------------------- var.php -------------------&gt; </li>
+
+        <li>class Vars{</li>
+            <li>     public static $login="postgres";         </li>
+            <li>     public static $pass="sragne";         </li>
+            <li>     public static $server="127.0.0.1";        </li> 
+            <li>     public static $dbName="apoidia";         </li>
+            <li>     public static $tbPrefix="";         </li>
+            <li>     public static $port="5432";     </li>
+            <li>     public static $schema="public";     </li>
+            <li>}</li>
+        <li>?&gt;</li>
+        </ol>
+</code>
+
+
+
+</pre>
+</script>
