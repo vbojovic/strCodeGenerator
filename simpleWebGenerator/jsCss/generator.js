@@ -965,7 +965,7 @@ var Generator = (function () {
         var types = {};
         types.integer = "(int)%var%";
         types.varchar = "addslashes(%var%)";
-        types.bool = "(%var% == \'\' || %var% == null || %var% == \'0\' || %var% == false || strtolower(%var%) == \'f\' || strtolower(%var%) == \'false\')? FALSE : TRUE;";
+        types.bool = "(%var% == \'\' || %var% == null || %var% == \'0\' || %var% == false || strtolower(%var%) == \'f\' || strtolower(%var%) == \'false\')? FALSE : TRUE";
         types.date = "addslashes(%var%)";
         types.time = "addslashes(%var%)";
         types.timestamp = "addslashes(%var%)";
