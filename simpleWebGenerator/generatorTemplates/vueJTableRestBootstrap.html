@@ -2,6 +2,78 @@
 <!--    <button type="button" class="copy btn btn-success">1</button>
     <button type="button" class="copy btn btn-success">2</button>-->
     <pre>
+        <code>   
+            <ol>
+            <li> &lt;?php</li>
+            <li> //&lt;!-- ---------------------------- actions.php -------------------&gt; </li>
+            <li>$a=$_REQUEST[&#x27;a&#x27;];</li>
+            <%
+                code=[];
+                var tableNames=[];
+                for (var i = 0; i < selectedTables.length; i++) {
+                    var schemaName=selectedTables[i].schema;
+                    var tableName=selectedTables[i].table;
+                    tableNames.push(tableName);
+                }
+                
+                var tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_list&#x27;');
+                code.push( "$lists=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_delete&#x27;');
+                code.push( "$deletes=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_switch&#x27;');
+                code.push( "$switches=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_search&#x27;');
+                code.push( "$searches=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_update&#x27;');
+                code.push( "$updates=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
+                code.push( "$inserts=array("+tmp.join(",")+");" );
+                
+                tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_options&#x27;');
+                code.push( "$options=array("+tmp.join(",")+");" );
+                code.push("$custom=array();");
+                
+                for (var i = 0; i < code.length; i++) {
+                    %> <li><%= code[i] %></li><%
+                }
+            %>
+            <li>if ($svc-&gt;auth-&gt;isLoggedIn()){</li>
+                <li>    if (in_array($a, $inserts)) {</li>
+                <li>        require "actions/insert.php";</li>
+                <li>    } </li>
+                <li>    if (in_array($a, $updates)) {</li>
+                <li>        require "actions/update.php";</li>
+                <li>    }</li>
+                <li>    if (in_array($a, $deletes)) {</li>
+                <li>        require "actions/delete.php";</li>
+                <li>    }</li>
+                <li>    if (in_array($a, $switches)) {</li>
+                <li>        require "actions/switches.php";</li>
+                <li>    }</li>
+                <li>    if (in_array($a, $lists)) {</li>
+                <li>         require "actions/list.php";</li>
+                <li>    }</li>
+                <li>}</li>
+                <li>if (in_array($a, $custom)) {</li>
+                <li>    require "actions/custom.php";</li>
+                <li>}</li>
+                <li>if (in_array($a, $searches)) {</li>
+                <li>    require "actions/search.php";</li>
+                <li>}</li>
+                <li>if (in_array($a, $options)) {</li>
+                <li>    require "actions/options.php";</li>
+                <li>}</li>
+    
+     
+            <li> ?&gt;</li>
+            </ol>
+    </code>
+
         <code>
             <ol>   
                 <li> &lt;?php</li>
@@ -214,145 +286,108 @@
             <li>?&gt;</li>
             </ol>
     </code>
-
-<code>   
-        <ol>
-        <li> &lt;?php</li>
-        <li> //&lt;!-- ---------------------------- actions.php -------------------&gt; </li>
-        <li>$a=$_REQUEST[&#x27;a&#x27;];</li>
-
-        <%
-            code=[];
-            var tableNames=[];
-            
-            
-            for (var i = 0; i < selectedTables.length; i++) {
-                var schemaName=selectedTables[i].schema;
-                var tableName=selectedTables[i].table;
-                tableNames.push(tableName);
-            }
-            
-            var tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_list&#x27;');
-            code.push( "$lists=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_delete&#x27;');
-            code.push( "$deletes=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_switch&#x27;');
-            code.push( "$switches=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_search&#x27;');
-            code.push( "$searches=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_update&#x27;');
-            code.push( "$updates=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_insert&#x27;');
-            code.push( "$inserts=array("+tmp.join(",")+");" );
-            
-            tmp = genericHelper.glueArrayElements(tableNames, '&#x27;', '_options&#x27;');
-            code.push( "$options=array("+tmp.join(",")+");" );
-            code.push("$custom=array();")
-            
-            for (var i = 0; i < code.length; i++) {
-                %> <li><%= code[i] %></li><%
-            }
-          
-        %>
- 
-            <li>if ($svc->auth->isLoggedIn()){</li>
-            <li>    if (in_array($a, $inserts)) {</li>
-            <li>        require "actions/insert.php";</li>
-            <li>    } </li>
-            <li>    if (in_array($a, $updates)) {</li>
-            <li>        require "actions/update.php";</li>
-            <li>    }</li>
-            <li>    if (in_array($a, $deletes)) {</li>
-            <li>        require "actions/delete.php";</li>
-            <li>    }</li>
-            <li>    if (in_array($a, $switches)) {</li>
-            <li>        require "actions/switches.php";</li>
-            <li>    }</li>
-            <li>    if (in_array($a, $lists)) {</li>
-            <li>         require "actions/list.php";</li>
-            <li>    }</li>
-            <li>}</li>
-            <li>if (in_array($a, $custom)) {</li>
-            <li>    require "actions/custom.php";</li>
-            <li>}</li>
-            <li>if (in_array($a, $searches)) {</li>
-            <li>    require "actions/search.php";</li>
-            <li>}</li>
-            <li>if (in_array($a, $options)) {</li>
-            <li>    require "actions/options.php";</li>
-            <li>}</li>
-
- 
-        <li> ?&gt;</li>
-        </ol>
-</code>
-    
-<code>   
-        <ol>
-        <li>&lt;?php</li>
-        <li> //&lt;!-- ---------------------------- options.php -------------------&gt; </li>
-        <%
-            code=[];
-            code.push("if (in_array($a,$options) && substr($a, -8) === \"_options\"){");
-            code.push("$res[\"Result\"]=\"OK\";");
-            code.push(" switch ($a){");
-            
-            for (var i = 0; i < selectedTables.length; i++) {
-                var schemaName=selectedTables[i].schema;
-                var tableName=selectedTables[i].table;
-                if (!generator.isLookupTable(schemaName,tableName)) continue;
-                var field = generator.getFirstVarcharField(schemaName,tableName);
-                if (field == null) continue;
-                var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
-                code.push("     case  \""+tableName+"_options\":");
-                var isUserTable=generator.getUserFieldNamesFromTable(schemaName,tableName).length>0;
-                if (isUserTable){
-                    tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptionsWithUser(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\",\"user_id={$svc->getUserId()}\");";
-                } else {
-                    tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptions(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\");";
+        <code>   
+            <ol>
+            <li>&lt;?php</li>
+            <li> //&lt;!-- ---------------------------- options.php (large tables)-------------------&gt; </li>
+            <%
+                code=[];
+                code.push("if (in_array($a,$options) && substr($a, -8) === \"_options\"){");
+                code.push("$res[\"Result\"]=\"OK\";");
+                code.push(" switch ($a){");
+                
+                for (var i = 0; i < selectedTables.length; i++) {
+                    var schemaName=selectedTables[i].schema;
+                    var tableName=selectedTables[i].table;
+                    if (generator.isLookupTable(schemaName,tableName)) continue;
+                    var field = generator.getFirstVarcharField(schemaName,tableName);
+                    if (field == null) continue;
+                    var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
+                    code.push("     case  \""+tableName+"_options\":");
+                    var isUserTable=generator.getUserFieldNamesFromTable(schemaName,tableName).length>0;
+                    if (isUserTable){
+                        tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptionsWithUser(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\",\"user_id={$svc->getUserId()}\");";
+                    } else {
+                        tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptions(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\");";
+                    }
+                    tmp = genericHelper.toHtmlEntities(tmp);
+                    code.push(tmp);
+                    
+                    
+                    code.push("     break;");
                 }
-                tmp = genericHelper.toHtmlEntities(tmp);
-                code.push(tmp);
                 
-                
-                code.push("     break;");
-            }
-            
-            code.push(" }");
-            code.push("     die(json_encode($res));");
-            code.push("}");
-            for (var i = 0; i < code.length; i++) {
-                %> <li><%= code[i] %></li><%
-            }
-        %>
-
-        <li> ?&gt;</li>
-        </ol>
-</code>
+                code.push(" }");
+                code.push("     die(json_encode($res));");
+                code.push("}");
+                for (var i = 0; i < code.length; i++) {
+                    %> <li><%= code[i] %></li><%
+                }
+            %>
     
-<code>   
-        <ol>
-        <li> &lt;?php</li>
-        <li> //&lt;!-- ---------------------------- var.php -------------------&gt; </li>
+            <li> ?&gt;</li>
+            </ol>
+    </code>
 
-        <li>class Vars{</li>
-            <li>     public static $login="postgres";         </li>
-            <li>     public static $pass="sragne";         </li>
-            <li>     public static $server="127.0.0.1";        </li> 
-            <li>     public static $dbName="apoidia";         </li>
-            <li>     public static $tbPrefix="";         </li>
-            <li>     public static $port="5432";     </li>
-            <li>     public static $schema="public";     </li>
-            <li>}</li>
-        <li>?&gt;</li>
-        </ol>
-</code>
-
+        <code>   
+            <ol>
+            <li>&lt;?php</li>
+            <li> //&lt;!-- ---------------------------- options.php -------------------&gt; </li>
+            <%
+                code=[];
+                code.push("if (in_array($a,$options) && substr($a, -8) === \"_options\"){");
+                code.push("$res[\"Result\"]=\"OK\";");
+                code.push(" switch ($a){");
+                
+                for (var i = 0; i < selectedTables.length; i++) {
+                    var schemaName=selectedTables[i].schema;
+                    var tableName=selectedTables[i].table;
+                    if (!generator.isLookupTable(schemaName,tableName)) continue;
+                    var field = generator.getFirstVarcharField(schemaName,tableName);
+                    if (field == null) continue;
+                    var pkeyField = generator.getPkeyFieldNames(schemaName,tableName);
+                    code.push("     case  \""+tableName+"_options\":");
+                    var isUserTable=generator.getUserFieldNamesFromTable(schemaName,tableName).length>0;
+                    if (isUserTable){
+                        tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptionsWithUser(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\",\"user_id={$svc->getUserId()}\");";
+                    } else {
+                        tmp = "         $res[\"Options\"]=$svc->getJTableLookupOptions(\""+schemaName+"\",\""+tableName+"\",\""+field+"\",\""+pkeyField+"\");";
+                    }
+                    tmp = genericHelper.toHtmlEntities(tmp);
+                    code.push(tmp);
+                    
+                    
+                    code.push("     break;");
+                }
+                
+                code.push(" }");
+                code.push("     die(json_encode($res));");
+                code.push("}");
+                for (var i = 0; i < code.length; i++) {
+                    %> <li><%= code[i] %></li><%
+                }
+            %>
+    
+            <li> ?&gt;</li>
+            </ol>
+    </code>
+        <code>   
+            <ol>
+            <li> &lt;?php</li>
+            <li> //&lt;!-- ---------------------------- var.php -------------------&gt; </li>
+    
+            <li>class Vars{</li>
+                <li>     public static $login="postgres";         </li>
+                <li>     public static $pass="sragne";         </li>
+                <li>     public static $server="127.0.0.1";        </li> 
+                <li>     public static $dbName="apoidia";         </li>
+                <li>     public static $tbPrefix="";         </li>
+                <li>     public static $port="5432";     </li>
+                <li>     public static $schema="public";     </li>
+                <li>}</li>
+            <li>?&gt;</li>
+            </ol>
+    </code>
 
 
 </pre>
