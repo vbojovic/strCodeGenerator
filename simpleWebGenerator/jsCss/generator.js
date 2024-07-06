@@ -1154,7 +1154,6 @@ var Generator = (function () {
         return null;
     }
 
-
     /* //lookup tablicu definiram ka onu tablicu koja ima unique index na jednom ili 2 polja koji nisu ID i pri tome je duzina minus suma pkey i uniq manja od 2
      * @param {type} schemaName
      * @param {type} tableName
