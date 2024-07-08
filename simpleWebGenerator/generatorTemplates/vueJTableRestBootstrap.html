@@ -2,8 +2,9 @@
 <!--    <button type="button" class="copy btn btn-success">1</button>
     <button type="button" class="copy btn btn-success">2</button>-->
     <pre>
-        <code>
+        <code lang="html">
             <ol>
+                <li><!-- template.html --></li>
                 <li>&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;                                               </li>
                 <li>    &lt;meta charset=&quot;utf-8&quot;&gt;                                                                                                  </li>
                 <li>    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;                                                         </li>
@@ -11,35 +12,36 @@
                 <li>    &lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;                                                                          </li>
                 <li>    &lt;meta name=&quot;author&quot; content=&quot;&quot;&gt;                                                                               </li>
                 <li>    &lt;link href=&quot;js/jtable.2.4.0/themes/metro/green/jtable.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;  </li>
-                <li>    &lt;script src=&quot;../cssJs/jquery.js&quot;&gt;&lt;/script&gt;                                                                        </li>
+                <li>    &lt;script src=&quot;./js/jquery.js&quot;&gt;&lt;/script&gt;                                                                        </li>
                 <li>    &lt;script src=&quot;./js/jquery-ui-1.11.0/jquery-ui.min.js&quot;&gt;&lt;/script&gt;                                                    </li>
                 <li>    &lt;script src=&quot;js/jtable.2.4.0/jquery.jtable.js&quot;&gt;&lt;/script&gt;                                                          </li>
-                <li>--------------------------------------</li>
-                
-                
-
+            </ol>
+        </code>  
+        <code lang="hljs javascript js">
+            <ol
+                <li>//--------------------------------------    t.js    -------------------</li>
+                <li>var t={</li>
                 <% for ( var i = 0; i < selectedTables.length; i++ ) { 
                     var schemaName=selectedTables[i].schema;              
                     var tableName=selectedTables[i].table;                
-                    var funcName = generator.getFunctionName(schemaName,tableName,false); 
-                    var tableTitle = "LIST_TABLE_NAME_"+generator.getFunctionName(schemaName,tableName,true).toUpperCase(); 
+                    var funcName = generator.capitaliseFirstLetter(tableName); 
+                    var tableTitle = "List_T_"+tableName.toUpperCase(); 
 
-                    var actionName = generator.getFunctionName(schemaName,tableName,true);               
+                    var actionName = tableName;             
                     var allAttribs =generator.getTableFieldNamesArr(schemaName,tableName,false); 
                     var attribsInPkey=generator.getPkeyFieldNames(schemaName,tableName); %>
 
-                <li>     var <%=funcName%>JTableDefineAndShow=function(){</li>
-                <li>         $('#<%=funcName%>TableContainer').jtable({          </li>
-                <li>           title: LANG["<%=tableTitle%>"],               </li>
-                <li>           paging: true,               </li>
-                <li>           sorting: true,             </li>
-                <li>           defaultSorting: "<%=allAttribs[0]%> ASC",      </li>
+                <li>     <%=tableName%>:{</li>
+                <li>           title: L["<%=tableTitle%>"],</li>
+                <li>           paging: true,</li>
+                <li>           sorting: true,</li>
+                <li>           defaultSorting: "<%=allAttribs[0]%> ASC",</li>
                 <li>           openChildAsAccordion: true,   </li>
                 <li>           actions: {           </li>
-                <li>               listAction: "./main.php?a=<%=actionName%>_list_jTable",    </li>
-                <li>               deleteAction: "./main.php?a=<%=actionName%>_delete_jTable",    </li>
-                <li>               updateAction: "./main.php?a=<%=actionName%>_update_jTable",    </li>
-                <li>               createAction: "./main.php?a=<%=actionName%>_insert_jTable"      </li>
+                <li>               listAction: "./index.php?a=<%=actionName%>_list",    </li>
+                <li>               deleteAction: "./index.php?a=<%=actionName%>_delete",    </li>
+                <li>               updateAction: "./index.php?a=<%=actionName%>_update",    </li>
+                <li>               createAction: "./index.php?a=<%=actionName%>_insert"      </li>
                 <li>           },                             </li>
                 <li>           fields: {    </li>            
                     
@@ -48,13 +50,13 @@
                         for ( var j = 0; j < allAttribs.length; j++ ) { 
                             var fieldName = allAttribs[j]; 
                             var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); 
-                            var fieldId="FIELD_"+schemaName.toUpperCase()+"_"+tableName.toUpperCase()+"_"+fieldName.toUpperCase() ;
+                            var fieldId="f:"+tableName.toUpperCase()+"_"+fieldName.toUpperCase() ;
                             var isPartOfPkey =  $.inArray(fieldName, attribsInPkey) > -1; 
                             var isPartOfFKey = generator.isFieldPartOfFKey(schemaName,tableName, fieldName);
                             if (isPartOfPkey == true){
                                     %><li>               <%=fieldName%>:{ key : true , create: false, edit: false, list: false},</li><%
                             }else if (isPartOfFKey==false){
-                                    %><li>               <%=fieldName%>:{ title: LANG["<%=fieldId%>"] ,  <%
+                                    %><li>               <%=fieldName%>:{ title: L["<%=fieldId%>"] ,  <%
                                     switch (fieldDataType){
                                         case "varchar" :
                                             %> width:"20%"<%
@@ -66,7 +68,7 @@
                                             %> width:"20%"<%
                                         break;
                                         case "bool" :
-                                            %> width:"12%",type: "radiobutton", options : {"true": LANG["true"] , "false": LANG["false"] },<%
+                                            %> width:"12%",type: "radiobutton", options : {"true": L["true"] , "false": L["false"] },<%
                                         break;
                                         case "date" :
                                             %> width:"30%", type: "date", displayFormat: "yy-mm-dd"<%
@@ -81,13 +83,13 @@
                                     var srcTable = generator.getFKeySrcTableByField(schemaName,tableName,fieldName);
                                     var isSrcTableLookupTable =generator.isLookupTable(srcTable.schema,srcTable.table);
                                     var srcTableName = srcTable.schema.toUpperCase()+"_"+srcTable.table.toUpperCase();
-                                    var funcName2 = srcTable.schema.toLowerCase()+"_"+srcTable.table.toLowerCase();
+                                    var funcName2 = srcTable.table.toLowerCase();
                                     if (isSrcTableLookupTable == true) {
-                                        %><li>              <%=fieldName%>:{ title: LANG["<%=fieldId%>"] ,width : "20%" , options: "main.php?a=<%=funcName2%>_options_jTable"  },</li><% 
+                                        %><li>              <%=fieldName%>:{ title: L["<%=fieldId%>"] ,width : "20%" , options: "index.php?a=<%=funcName2%>_options"  },</li><% 
                                     }else{
                                         var firstVarcharField = generator.getFirstVarcharField(srcTable.schema,srcTable.table);
                                         if (firstVarcharField==null) firstVarcharField = generator.getTableFieldNamesArr(srcTable.schema,srcTable.table,true)[0];
-                                        %><li>              <%=fieldName%>:{title: LANG["<%=fieldId%>"], key: true,create: true, edit: true, list: true , options: "main.php?a=lookup_jTable&tableName=<%=srcTable.table%>&schemaName=<%=srcTable.schema%>&fieldName=<%=firstVarcharField%>&" },</li><% 
+                                        %><li>              <%=fieldName%>:{title: L["<%=fieldId%>"], key: true,create: true, edit: true, list: true , options: "index.php?a=lookup&tableName=<%=srcTable.table%>&schemaName=<%=srcTable.schema%>&fieldName=<%=firstVarcharField%>&" },</li><% 
                                     }
                                     
                             }
@@ -95,7 +97,7 @@
                         
                         var destTables = generator.getDestTableNames(schemaName,tableName);
                         for ( var j = 0; j < destTables.length; j++ ) { 
-                                var destTableName = destTables[j].schema.toUpperCase()+"_"+destTables[j].table.toUpperCase();
+                                var destTableName = destTables[j].table.toUpperCase();
                                 var destTable = destTables[j];
                                 var attribsInPkey = generator.getPkeyFieldNames(destTables[j].schema,destTables[j].table);
 
@@ -104,19 +106,19 @@
                                     var fKeyName= fkeysNames[f];
                                     var fkeyFieldNames = generator.getFKeyFieldNames(destTable.schema,destTable.table,fKeyName,false);
                 
-                                %>        <li>               <%=destTableName%>: { title: LANG["<%=destTableName%>"],width: "5%", sorting: false, edit: false, create: false, </li> 
+                                %>        <li>               <%=destTableName%>: { title: L["<%=destTableName%>"],width: "5%", sorting: false, edit: false, create: false, </li> 
                                         <li>                             display: function (tableData) {</li> 
-                                        <li>                                  var $img = $(&quot;&lt;img src='/img/<%=destTableName%>.png<%="'"%> title="+LANG[&quot;<%=destTableName%>&quot;]+" /&gt;&quot;);</li>
+                                        <li>                                  var $img = $(&quot;&lt;img src='/img/<%=destTableName%>.png<%="'"%> title="+L[&quot;<%=destTableName%>&quot;]+" /&gt;&quot;);</li>
                                         <li>                                  $img.click(function () {</li>
                                         <li>                                      $("#<%=funcName%>TableContainer").jtable("openChildTable",</li>
                                         <li>                                      $img.closest("tr"), //Parent row</li>
                                         <li>                                      {</li>
-                                        <li>                                          title: LANG["LIST_TABLE_NAME_<%=destTableName%>"],</li>
+                                        <li>                                          title: L["List_T_<%=destTableName%>"],</li>
                                         <li>                                          actions: {</li>
-                                        <li>                                              listAction: "main.php?a=<%=destTableName.toLowerCase()%>_list_jTable&keyName=<%=fkeyFieldNames[0]%>&<%=fkeyFieldNames[0]%>=" + tableData.record.<%=attribsInPkey[0]%>,</li>
-                                        <li>                                              deleteAction: "main.php?a=<%=destTableName.toLowerCase()%>_delete_jTable",</li>
-                                        <li>                                              updateAction: "main.php?a=<%=destTableName.toLowerCase()%>_update_jTable",</li>
-                                        <li>                                              createAction: "main.php?a=<%=destTableName.toLowerCase()%>_create_jTable"</li>
+                                        <li>                                              listAction: "index.php?a=<%=destTableName.toLowerCase()%>_list&keyName=<%=fkeyFieldNames[0]%>&<%=fkeyFieldNames[0]%>=" + tableData.record.<%=attribsInPkey[0]%>,</li>
+                                        <li>                                              deleteAction: "index.php?a=<%=destTableName.toLowerCase()%>_delete",</li>
+                                        <li>                                              updateAction: "index.php?a=<%=destTableName.toLowerCase()%>_update",</li>
+                                        <li>                                              createAction: "index.php?a=<%=destTableName.toLowerCase()%>_create"</li>
                                         <li>                             },</li>
                                         <li>                             fields: {</li>
                                         <%
@@ -124,23 +126,24 @@
                                                 
                                                 for (var z=0 ; z< destTableAttrs.length; z++){
                                                     var destFieldName = destTableAttrs[z];
-                                                    var destFieldId = "FIELD_"+destTable.schema.toUpperCase()+"_"+destTable.table.toUpperCase()+"_"+destFieldName.toUpperCase() ;
+                                                    var destFieldId = "f:"+destTable.table.toUpperCase()+"_"+destFieldName.toUpperCase() ;
                                                     var attribsInPkeyNested =  generator.getPkeyFieldNames(destTables[j].schema,destTables[j].table);
                                                     var isPartOfPkeyNested =  $.inArray(destFieldName, attribsInPkeyNested) > -1; 
                                                     var isFkInDestTable = generator.isAttribFKeyInDestTable(schemaName,tableName,destTable.schema, destTable.table, destFieldName);
-                                                    var lookupUrl = generator.getJTableLookupUrlForField(destTable.schema,destTable.table,destFieldName);
+                                                    var lookupUrl = "index.php?a=lookup&tableName="+destTable.table+"&schemaName="+destTable.schema+"&fieldName="+destFieldName+"&id=id";
+                                                    /*generator.getJTableLookupUrlForField(destTable.schema,destTable.table,destFieldName);*/
                                                     var linkExists = generator.areFieldsLinked(destTable.schema,destTable.table,destFieldName,schemaName,tableName,attribsInPkey[0]);
                                                     if (isPartOfPkeyNested == true){
                                                         %><li>                                  <%=destFieldName%>: { key: true,  create: false,  edit: false,   list: false   },    </li> <%
                                                     }else if (isFkInDestTable == true) {
                                                         %><li>                                  <%=destFieldName%>: { type: "hidden", defaultValue: tableData.record.<%=destFieldName%>},</li><%
                                                     }else if(lookupUrl != null && linkExists===false){
-                                                        %><li>                                  <%=destFieldName%>: { title: LANG["<%=destFieldId%>"]  , options: "<%=lookupUrl%>" },</li><%                                     
+                                                        %><li>                                  <%=destFieldName%>: { title: L["<%=destFieldId%>"]  , options: "<%=lookupUrl%>" },</li><%                                     
                                                     }else if(lookupUrl != null && linkExists===true){
                                                         %><li>                                  <%=destFieldName%>: { edit: false, list: false, create:false  },</li><%                                     
                                                     }else{
                                                         var destFieldDataType=generator.getFieldGenericDataType(destTable.schema,destTable.table,destFieldName); 
-                                            %><li>               <%=destFieldName%>:{ title: LANG["<%=destFieldId%>"] ,  <%
+                                            %><li>               <%=destFieldName%>:{ title: L["<%=destFieldId%>"] ,  <%
                                                             switch (destFieldDataType){
                                                                 case "varchar" :
                                                                     %> width:"20%"<%
@@ -152,7 +155,7 @@
                                                                     %> width:"20%"<%
                                                                 break;
                                                                 case "bool" :
-                                                                    %> width:"12%", type: "radiobutton", options : {"true": LANG["true"] , "false": LANG["false"] }<%
+                                                                    %> width:"12%", type: "radiobutton", options : {"true": L["true"] , "false": L["false"] }<%
                                                                 break;
                                                                 case "date" :
                                                                     %> width:"30%", type: "date", displayFormat: "yy-mm-dd"<%
@@ -184,12 +187,10 @@
                     
                 <li>           }    </li>       
                     
-                <li>         }); </li>
                 
-                <li>             $("#<%=funcName%>TableContainer").jtable("load");</li>
                         
                 <li>       } </li>    
-
+                <li>} </li>  
                 <% } %>    
             </ol>
         </code>
@@ -252,22 +253,20 @@
 
                             vars.push(tableName+"_MENU") ; 
                             vars.push("Title_"+tableName);    
-                            vars.push("LIST_TABLE_NAME_"+tableName);   
-                            
-                            vars.push(schemaName+"_"+tableName+"_LIST"); 
-                            vars.push(schemaName+"_"+tableName+"_LIST_DESCRIPTION"); 
+                            vars.push("List_T_"+tableName);   
+                            vars.push(tableName+"_LIST_DESC"); 
                     
                            var allAttribs =generator.getTableFieldNamesArr(schemaName.toLowerCase(),tableName.toLowerCase(),false);   
                            for ( var j = 0; j < allAttribs.length; j++ ) {  
                                  var fieldName = allAttribs[j].toUpperCase();  
-                                 var fieldId="f:"+tableName+"_"+fieldName ; 
+                                 var fieldId="f:"+tableName+"_"+fieldName ;
                                  vars.push(fieldId); 
                            }  
                            for ( var j = 0; j < vars.length; j++ ) {            
                               var  langVar = vars[j]; 
                               
                               var transl = genericHelper.capitalizeFirstAndDecapitalizeRest(langVar,"_");
-                                 %> <li>      <%=langVar%>:"<%=transl%>",</li><%
+                                 %> <li>      "<%=langVar%>":"<%=transl%>",</li><%
                            }  
                         } 
                       
@@ -372,7 +371,7 @@
                     for ( var i = 0; i < selectedTables.length; i++ ) { 
                        var schemaName=selectedTables[i].schema; 
                        var tableName=selectedTables[i].table; 
-                       var funcName = generator.getFunctionName(schemaName,tableName,false); 
+                       var funcName = generator.capitaliseFirstLetter(tableName); 
                        var attribsNonAutogenerated=generator.getTableFieldNamesArr(schemaName,tableName,true);  
                        var allAttribs = generator.getTableFieldNamesArr(schemaName,tableName,false);  
                        var phpArgs = genericHelper.joinArrayWithPRefixes(allAttribs, '$', ',');  
