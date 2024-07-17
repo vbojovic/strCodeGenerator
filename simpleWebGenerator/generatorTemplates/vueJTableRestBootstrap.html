@@ -49,6 +49,7 @@
                         
                         for ( var j = 0; j < allAttribs.length; j++ ) { 
                             var fieldName = allAttribs[j]; 
+                            if (fieldName === "user_id" || fieldName === "tstamp") continue;
                             var fieldDataType = generator.getFieldGenericDataType(schemaName,tableName,fieldName); 
                             var fieldId="f:"+tableName.toUpperCase()+"_"+fieldName.toUpperCase() ;
                             var isPartOfPkey =  $.inArray(fieldName, attribsInPkey) > -1; 
@@ -127,6 +128,7 @@
                                                 
                                                 for (var z=0 ; z< destTableAttrs.length; z++){
                                                     var destFieldName = destTableAttrs[z];
+                                                    if (destFieldName === "user_id" || destFieldName === "tstamp") continue;
                                                     var destFieldId = "f:"+destTable.table.toUpperCase()+"_"+destFieldName.toUpperCase() ;
                                                     var attribsInPkeyNested =  generator.getPkeyFieldNames(destTables[j].schema,destTables[j].table);
                                                     var isPartOfPkeyNested =  $.inArray(destFieldName, attribsInPkeyNested) > -1; 
