@@ -109,9 +109,9 @@
                 
                                 %>        <li>               <%=destTableName%>: { title: L["<%=destTableName%>"],width: "5%", sorting: false, edit: false, create: false, </li> 
                                         <li>                             display: function (tableData) {</li> 
-                                        <li>                                  var $img = $(&quot;&lt;img src='/img/<%=destTableName%>.png<%="'"%> title="+L[&quot;<%=destTableName%>&quot;]+" /&gt;&quot;);</li>
+                                        <li>                                  var $img = $(&quot;&lt;img src='./img/<%=destTableName%>.png<%="'"%> title="+L[&quot;<%=destTableName%>&quot;]+" /&gt;&quot;);</li>
                                         <li>                                  $img.click(function () {</li>
-                                        <li>                                      $("#<%=funcName%>TableContainer").jtable("openChildTable",</li>
+                                        <li>                                      $("#<%=funcName%>Container").jtable("openChildTable",</li>
                                         <li>                                      $img.closest("tr"), //Parent row</li>
                                         <li>                                      {</li>
                                         <li>                                          title: L["List_T_<%=destTableName%>"],</li>
