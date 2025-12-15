@@ -3,7 +3,7 @@ package com.timanaga.streamCodeGenerator.tests; /**
  */
 
 
-import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqlDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
 import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseModel;
 import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseSchema;
@@ -43,7 +43,7 @@ public class ModelTester {
 	}
 //	@Test
 	public void testMysqlInnerModelExportAll() throws Exception {
-		MysqDb db = new MysqDb();
+		MysqlDb db = new MysqlDb();
 		//db.setSettings(Helper.homeSettings());
 		db.setSettings(Helper.vmSettingsMysql());
 		//db.setSettings(Helper.zoharSettings());

@@ -13,7 +13,7 @@ import java.util.List;
 public class MysqlDbElementReader extends ADbElemetReader  {
 
 	/* Constructor */
-	public MysqlDbElementReader(MysqDb dataBase) throws Exception {
+	public MysqlDbElementReader(MysqlDb dataBase) throws Exception {
 		m_DataBase = dataBase;
         loadDataTypes();
 	}

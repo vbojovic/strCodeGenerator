@@ -2,7 +2,7 @@ package com.timanaga;
 
 //import com.manuga.streamCodeGenerator.helpers.Helper;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.IDb;
-import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqlDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.SqlServerDb;
 import com.timanaga.streamCodeGenerator.databases.dbModels.*;
@@ -120,7 +120,7 @@ java -jar streamCodeGenerator.jar <param1>...<paramN>
         if (settings.getDataBaseType().equals(DatabaseTypeEnum.postgres)){
             db = new PgDb();
         } else if (settings.getDataBaseType().equals(DatabaseTypeEnum.mysql)){
-            db = new MysqDb();
+            db = new MysqlDb();
         } else if (settings.getDataBaseType().equals(DatabaseTypeEnum.mssql)){
             db = new SqlServerDb();
         }else{

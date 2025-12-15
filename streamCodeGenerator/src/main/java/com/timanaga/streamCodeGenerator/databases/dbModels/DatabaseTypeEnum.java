@@ -9,8 +9,8 @@ public enum DatabaseTypeEnum {
 	sqlite(0),
 	mssql(1433),
 	interbase(0),
-	dbf(0);
-	
+	dbf(0),
+	cassandra(9042); //TODO moram port 9160 mozda?
 	private int m_port;
 
 	

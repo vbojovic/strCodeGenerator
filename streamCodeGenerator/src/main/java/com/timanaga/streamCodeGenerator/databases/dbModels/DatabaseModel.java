@@ -20,22 +20,7 @@ public class DatabaseModel {
 	private String name;
 	//private DatabaseSettings dbSettings;
 	private String DDL = "";
-	//private List<DatabasePath> targetSchemas = new ArrayList<DatabasePath>();
-	@SuppressWarnings("unchecked")
-	//public void loadTargetSchemas(String filePath) throws Exception{
-	//	if (!GenericHelper.fileOrDirectoryExists(filePath)) throw new Exception("File "+filePath+" doesn't exist");
-	//	this.targetSchemas = (List<DatabasePath>) GenericHelper.xml2object(filePath);
-	//	//this.filterSchemaNames = schemaNames;
-	//}
-	//public boolean isTargetSchema(DatabasePath obj) throws Exception{
-	//	if (obj.schema == null) throw new Exception("No schema set");
-	//	if (this.targetSchemas == null) return true;
-	//	if (this.targetSchemas.size()==0) return true;
-	//	for (DatabasePath sch : this.targetSchemas) {
-	//		if (sch.schema == obj.schema ) return true;
-	//	}
-	//	return   false;
-	//}
+
 	public void exportToXml(String pathToXml) throws Exception{
 		GenericHelper.object2xml(this, pathToXml);
 	}
@@ -104,47 +89,6 @@ public class DatabaseModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-    public void removeTableFromSchema (DatabasePath path){
-        for (DatabaseSchema sch : this.getSchemas()){
-            if (!sch.getSchemaName().equalsIgnoreCase(path.schema)) continue;
-            for (int i = 0 ; i < sch.getTables().size() ; i++){
-                DatabaseTable table = sch.getTables().get(i) ;
-                if (!table.getName().equalsIgnoreCase(path.table)) continue;
-                sch.getTables().remove(i);
-                return;
-            }
-        }
-    }
-	/*
-	public DatabaseSettings getDbSettings() {
-		return dbSettings;
-	}
-	public void setDbSettings(DatabaseSettings dbSettings) {
-		this.dbSettings = dbSettings;                                            a
-	}
-	*/
 
-	//public List<DatabasePath> getTargetSchemas() {
-	//	return targetSchemas;
-	//}
-	//public void setTargetSchemas(List<DatabasePath> targetSchemas) {
-	//	this.targetSchemas = targetSchemas;
-	//}
-	//public void addTargetSchemas(String targetSchemaName) {
-	//	DatabasePath t  = new DatabasePath();
-	//	t.schema = targetSchemaName;
-	//	this.targetSchemas.add(t);
-	//}
-    //
-	//private void clearNonTargetedSchemas(){
-    //    if (targetSchemas==null || targetSchemas.size()==0) return;
-    //    List<DatabaseSchema> schemas = new ArrayList<DatabaseSchema>();
-    //      for (DatabaseSchema sch : getSchemas()){
-    //          if (targetSchemas.contains(sch.getSchemaName()))  {
-    //              this.schemas.add(sch);
-    //          }
-    //      }
-    //    this.getSchemas().clear();
-    //    this.setSchemas(schemas);
-	//}
+
 }

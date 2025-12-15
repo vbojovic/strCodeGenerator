@@ -6,7 +6,7 @@ package com.timanaga.streamCodeGenerator.codeGen;
 import java.util.List;
 
 import com.timanaga.streamCodeGenerator.databases.dbClasses.IDb;
-import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqDb;
+import com.timanaga.streamCodeGenerator.databases.dbClasses.MysqlDb;
 import com.timanaga.streamCodeGenerator.databases.dbClasses.PgDb;
 import com.timanaga.streamCodeGenerator.databases.dbModels.DatabaseTypeEnum;
 
@@ -30,7 +30,7 @@ public class Db2xml {
 				break;
 				
 			case mysql:
-				dataBase = new MysqDb();
+				dataBase = new MysqlDb();
 				break;
 			/*case ora:
 				dataBase = new OraDb();
